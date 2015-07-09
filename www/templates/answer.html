@@ -1,0 +1,12 @@
+<ion-content class="padding">
+    <ion-list>
+        <ion-item>
+            <input style="width: 100%;" type="number" placeholder="Your number" id="answer-input" ng-model="data.input">
+            <button class="button button-positive button-clear" ng-click="add();">OK</button>
+        </ion-item>
+        <ion-item ng-repeat="attempt in attempts">
+            <h3>{{attempt.question}}</h3>
+            <p>{{attempt.answer}}</p>
+        </ion-item>
+    </ion-list>
+</ion-content>

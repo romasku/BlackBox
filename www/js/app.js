@@ -19,6 +19,34 @@ starter.run(function ($ionicPlatform) {
     });
 });
 
+starter.config(function($stateProvider, $urlRouterProvider){
+    $stateProvider
+        .state('game-tabs', {
+            url: '/game-tabs',
+            abstract: true,
+            templateUrl: 'templates/game-tabs.html'
+        })
+        .state('game-tabs.play', {
+            url: '/play',
+            views: {
+                'play-tab' : {
+                    templateUrl : 'templates/play.html',
+                    controller: 'PlayCtrl'
+                }
+            }
+        })
+        .state('game-tabs.answer', {
+            url: '/answer',
+            views: {
+                'answer-tab' : {
+                    templateUrl : 'templates/answer.html',
+                    controller: 'AnswerCtrl'
+                }
+            }
+        });
+    $urlRouterProvider.otherwise('/game-tabs/play');
+});
+
 starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup) {
     $scope.attempts = [];
     var fn;
@@ -30,7 +58,45 @@ starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup) {
         }
     );
     $scope.add = function () {
-        var input = document.getElementById('input');
+        var input = document.getElementById('play-input');
+        var val = parseInt(input.value);
+        input.value = '';
+        if (val >= 1e9) {
+            $ionicPopup.alert({
+                title: 'Incorrect number',
+                template: 'Please, enter a lower number'
+            });
+        }
+        else if (val < 0) {
+            $ionicPopup.alert({
+                title: 'Incorrect number',
+                template: 'Please, enter a greater number'
+            });
+        }
+        else if (isNaN(val)) {
+            $ionicPopup.alert({
+                title: 'Incorrect number',
+                template: 'Please, enter a valid number'
+            });
+        }
+        else {
+            $scope.attempts.unshift({question: val, answer: eval(fn + 'calc(' + val + ')')});
+        }
+    };
+});
+
+starter.controller('AnswerCtrl', function ($scope, $http, $ionicPopup) {
+    $scope.attempts = [];
+    var fn;
+    var url = '/';
+    if (ionic.Platform.isAndroid()) url = '/android_asset/www/';
+    $http.get(url + 'js/levels/1.js').then(
+        function (resp) {
+            fn = resp.data;
+        }
+    );
+    $scope.add = function () {
+        var input = document.getElementById('answer-input');
         var val = parseInt(input.value);
         input.value = '';
         if (val >= 1e9) {
