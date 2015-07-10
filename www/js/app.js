@@ -26,46 +26,39 @@ starter.config(function($stateProvider, $urlRouterProvider){
             abstract: true,
             templateUrl: 'templates/left-menu.html'
         })
-        .state('left-menu.game-tabs', {
-            url: '/game-tabs',
-            abstract: true,
+        .state('left-menu.play', {
+            cache: false,
+            url: '/play/:level',
             views: {
                 'main' : {
-                    templateUrl: 'templates/game-tabs.html'
-                }
-            }
-        })
-        .state('left-menu.game-tabs.play', {
-            url: '/play',
-            views: {
-                'play-tab' : {
                     templateUrl : 'templates/play.html',
                     controller: 'PlayCtrl'
                 }
             }
         })
-        .state('left-menu.game-tabs.answer', {
-            url: '/answer',
+        .state('left-menu.level-list', {
+            url: '/level-list',
             views: {
-                'answer-tab' : {
-                    templateUrl : 'templates/answer.html',
-                    controller: 'AnswerCtrl'
+                'main' : {
+                    templateUrl: 'templates/level-list.html',
+                    controller: 'LevelListCtrl'
                 }
             }
         });
-    $urlRouterProvider.otherwise('/left-menu/game-tabs/play');
+    $urlRouterProvider.otherwise('/left-menu/level-list');
 });
 
 starter.controller('SelectLevelCtrl', function($scope){
     $scope.levelCount = 15;
 });
 
-starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup) {
+starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state) {
     $scope.attempts = [];
     var fn;
     var url = '/';
     if (ionic.Platform.isAndroid()) url = '/android_asset/www/';
-    $http.get(url + 'js/levels/1.js').then(
+    $scope.level = $state.params.level;
+    $http.get(url + 'js/levels/' + $scope.level + '.js').then(
         function (resp) {
             fn = resp.data;
         }
@@ -134,4 +127,11 @@ starter.controller('AnswerCtrl', function ($scope, $http, $ionicPopup) {
             $scope.attempts.unshift({question: val, answer: eval(fn + 'calc(' + val + ')')});
         }
     };
+});
+
+starter.controller('LevelListCtrl', function($scope){
+    $scope.levelCount = 3;
+    $scope.levels = [];
+    for (var i = 1; i <= $scope.levelCount; i++)
+        $scope.levels.push(i);
 });
