@@ -21,12 +21,21 @@ starter.run(function ($ionicPlatform) {
 
 starter.config(function($stateProvider, $urlRouterProvider){
     $stateProvider
-        .state('game-tabs', {
+        .state('left-menu', {
+            url:'/left-menu',
+            abstract: true,
+            templateUrl: 'templates/left-menu.html'
+        })
+        .state('left-menu.game-tabs', {
             url: '/game-tabs',
             abstract: true,
-            templateUrl: 'templates/game-tabs.html'
+            views: {
+                'main' : {
+                    templateUrl: 'templates/game-tabs.html'
+                }
+            }
         })
-        .state('game-tabs.play', {
+        .state('left-menu.game-tabs.play', {
             url: '/play',
             views: {
                 'play-tab' : {
@@ -35,7 +44,7 @@ starter.config(function($stateProvider, $urlRouterProvider){
                 }
             }
         })
-        .state('game-tabs.answer', {
+        .state('left-menu.game-tabs.answer', {
             url: '/answer',
             views: {
                 'answer-tab' : {
@@ -44,7 +53,11 @@ starter.config(function($stateProvider, $urlRouterProvider){
                 }
             }
         });
-    $urlRouterProvider.otherwise('/game-tabs/play');
+    $urlRouterProvider.otherwise('/left-menu/game-tabs/play');
+});
+
+starter.controller('SelectLevelCtrl', function($scope){
+    $scope.levelCount = 15;
 });
 
 starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup) {
