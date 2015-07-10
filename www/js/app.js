@@ -96,12 +96,17 @@ starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state) {
 
     $scope.showPopup = function(title, task, num) {
         $scope.data = {};
+        var canceled = false;
         var myPopup = $ionicPopup.show({
-            template: '<p style="text-align: center;">'+task+'</p><input type="number" ng-model="data.ans">',
+            template: '<p style="text-align: center;">'+task+'</p><input type="number" ng-model="data.ans" autofocus>',
             title: title,
             scope: $scope,
             buttons: [
-                {text: 'Cancel'},
+                {text: 'Cancel',
+                onTap: function(e){
+                        canceled = true;
+                    }
+                },
                 {
                     text: '<b>Save</b>',
                     type: 'button-positive',
@@ -117,8 +122,14 @@ starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state) {
                 }
             ]
         }).then(function(res) {
-            $scope.answer(num+1, task, $scope.data.ans);
+            if (canceled) {
+                cordova.plugins.Keyboard.close();
+            }
+            else {
+                $scope.answer(num + 1, task, $scope.data.ans);
+            }
         });
+        cordova.plugins.Keyboard.show();
         //return '';
     };
 
@@ -127,10 +138,13 @@ starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state) {
         {
             var correctAns = eval($scope.fn + 'calc(' + ptask + ')');
             if (pans != correctAns) {
-                $ionicPopup.alert({
-                    title: 'Wrong answer',
-                    template: 'Correct answer was ' + correctAns
-                });
+                cordova.plugins.Keyboard.close();
+                setTimeout(function () {
+                    $ionicPopup.alert({
+                        title: 'Wrong answer',
+                        template: 'Correct answer was ' + correctAns
+                    });
+                }, 100);
                 return;
             }
         }
