@@ -3,7 +3,8 @@
     <ion-list>
         <ion-item>
             <input style="width: 100%;" type="number" placeholder="Your number" id="play-input" ng-model="data.input">
-            <button class="button button-positive button-clear" ng-click="add();">OK</button>
+            <button class="button button-positive button-clear" ng-click="add();">Ask</button>
+            <button class="button button-positive button-clear" ng-click="answer(0, '', '')">Answer</button>
         </ion-item>
         <ion-item ng-repeat="attempt in attempts">
             <h3>{{attempt.question}}</h3>

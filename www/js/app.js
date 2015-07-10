@@ -54,15 +54,15 @@ starter.controller('SelectLevelCtrl', function($scope){
 
 starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state) {
     $scope.attempts = [];
-    var fn;
     var url = '/';
     if (ionic.Platform.isAndroid()) url = '/android_asset/www/';
     $scope.level = $state.params.level;
     $http.get(url + 'js/levels/' + $scope.level + '.js').then(
         function (resp) {
-            fn = resp.data;
+            $scope.fn = resp.data;
         }
     );
+
     $scope.add = function () {
         var input = document.getElementById('play-input');
         var val = parseInt(input.value);
@@ -86,47 +86,67 @@ starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state) {
             });
         }
         else {
-            $scope.attempts.unshift({question: val, answer: eval(fn + 'calc(' + val + ')')});
+            $scope.attempts.unshift({question: val, answer: eval($scope.fn + 'calc(' + val + ')')});
         }
     };
-});
 
-starter.controller('AnswerCtrl', function ($scope, $http, $ionicPopup) {
-    $scope.attempts = [];
-    var fn;
-    var url = '/';
-    if (ionic.Platform.isAndroid()) url = '/android_asset/www/';
-    $http.get(url + 'js/levels/1.js').then(
-        function (resp) {
-            fn = resp.data;
+    $scope.rand = function() {
+        return Math.floor(Math.random() * 1e3);
+    };
+
+    $scope.showPopup = function(title, task, num) {
+        $scope.data = {};
+        var myPopup = $ionicPopup.show({
+            template: '<p style="text-align: center;">'+task+'</p><input type="number" ng-model="data.ans">',
+            title: title,
+            scope: $scope,
+            buttons: [
+                {text: 'Cancel'},
+                {
+                    text: '<b>Save</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                        if (!$scope.data.ans) {
+                            e.preventDefault();
+                        }
+                        else
+                        {
+                            return $scope.data.ans;
+                        }
+                    }
+                }
+            ]
+        }).then(function(res) {
+            $scope.answer(num+1, task, $scope.data.ans);
+        });
+        //return '';
+    };
+
+    $scope.answer = function(num, ptask, pans) {
+        if (ptask != '')
+        {
+            var correctAns = eval($scope.fn + 'calc(' + ptask + ')');
+            if (pans != correctAns) {
+                $ionicPopup.alert({
+                    title: 'Wrong answer',
+                    template: 'Correct answer was ' + correctAns
+                });
+                return;
+            }
         }
-    );
-    $scope.add = function () {
-        var input = document.getElementById('answer-input');
-        var val = parseInt(input.value);
-        input.value = '';
-        if (val >= 1e9) {
-            $ionicPopup.alert({
-                title: 'Incorrect number',
-                template: 'Please, enter a lower number'
-            });
-        }
-        else if (val < 0) {
-            $ionicPopup.alert({
-                title: 'Incorrect number',
-                template: 'Please, enter a greater number'
-            });
-        }
-        else if (isNaN(val)) {
-            $ionicPopup.alert({
-                title: 'Incorrect number',
-                template: 'Please, enter a valid number'
-            });
+        if (num < 3) {
+            var task = $scope.rand();
+            var ans = $scope.showPopup('Question 1', '' + task, num);
         }
         else {
-            $scope.attempts.unshift({question: val, answer: eval(fn + 'calc(' + val + ')')});
+            $ionicPopup.alert({
+                title: 'Congratulations!',
+                template: 'You successfully complete this level'
+            }).then(function() {
+                window.history.back();
+            });
         }
-    };
+    }
 });
 
 starter.controller('LevelListCtrl', function($scope){
