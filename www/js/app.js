@@ -10,6 +10,9 @@ starter.run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
+        if (window && window.plugins && window.plugins.orientationLock) {
+            window.plugins.orientationLock.lock("portrait");
+        }
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
@@ -153,12 +156,15 @@ starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state) {
             var ans = $scope.showPopup('Question 1', '' + task, num);
         }
         else {
-            $ionicPopup.alert({
-                title: 'Congratulations!',
-                template: 'You successfully complete this level'
-            }).then(function() {
-                window.history.back();
-            });
+            cordova.plugins.Keyboard.close();
+            setTimeout(function () {
+                $ionicPopup.alert({
+                    title: 'Congratulations!',
+                    template: '<p style="text-align: center;">You successfully completed this level!</p>'
+                }).then(function () {
+                    window.history.back();
+                });
+            }, 100);
         }
     }
 });
