@@ -99,19 +99,15 @@ starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state) {
 
     $scope.showPopup = function(title, task, num) {
         $scope.data = {};
-        var canceled = false;
+        var canceled = true;
         var myPopup = $ionicPopup.show({
             template: '<p style="text-align: center;">'+task+'</p><input type="number" ng-model="data.ans" autofocus>',
             title: title,
             scope: $scope,
             buttons: [
-                {text: 'Cancel',
-                onTap: function(e){
-                        canceled = true;
-                    }
-                },
+                {text: 'Cancel'},
                 {
-                    text: '<b>Save</b>',
+                    text: '<b>Answer</b>',
                     type: 'button-positive',
                     onTap: function(e) {
                         if (!$scope.data.ans) {
@@ -119,6 +115,7 @@ starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state) {
                         }
                         else
                         {
+                            canceled = false;
                             return $scope.data.ans;
                         }
                     }
@@ -126,13 +123,15 @@ starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state) {
             ]
         }).then(function(res) {
             if (canceled) {
-                cordova.plugins.Keyboard.close();
+                if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
+                    cordova.plugins.Keyboard.close();
             }
             else {
                 $scope.answer(num + 1, task, $scope.data.ans);
             }
         });
-        cordova.plugins.Keyboard.show();
+        if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
+            cordova.plugins.Keyboard.show();
         //return '';
     };
 
@@ -141,7 +140,8 @@ starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state) {
         {
             var correctAns = eval($scope.fn + 'calc(' + ptask + ')');
             if (pans != correctAns) {
-                cordova.plugins.Keyboard.close();
+                if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
+                    cordova.plugins.Keyboard.close();
                 setTimeout(function () {
                     $ionicPopup.alert({
                         title: 'Wrong answer',
@@ -153,10 +153,11 @@ starter.controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state) {
         }
         if (num < 3) {
             var task = $scope.rand();
-            var ans = $scope.showPopup('Question 1', '' + task, num);
+            var ans = $scope.showPopup('Question ' + (num + 1), '' + task, num);
         }
         else {
-            cordova.plugins.Keyboard.close();
+            if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
+                cordova.plugins.Keyboard.close();
             setTimeout(function () {
                 $ionicPopup.alert({
                     title: 'Congratulations!',
