@@ -1,4 +1,5 @@
-angular.module('starter.controllers.PlayCtrl', []).controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state) {
+angular.module('starter.controllers.PlayCtrl', [])
+    .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter) {
     $scope.attempts = [];
     var url = '/';
     if (ionic.Platform.isAndroid()) url = '/android_asset/www/';
@@ -9,26 +10,28 @@ angular.module('starter.controllers.PlayCtrl', []).controller('PlayCtrl', functi
         }
     );
 
+        var translate = $filter('translate');
+
     $scope.add = function () {
         var input = document.getElementById('play-input');
         var val = parseInt(input.value);
         input.value = '';
         if (val >= 1e9) {
             $ionicPopup.alert({
-                title: 'Incorrect number',
-                template: 'Please, enter a lower number'
+                title: translate('Incorrect_number'),
+                template: translate('Please_lower_number')
             });
         }
         else if (val < 0) {
             $ionicPopup.alert({
-                title: 'Incorrect number',
-                template: 'Please, enter a greater number'
+                title: translate('Incorrect_number'),
+                template: translate('Please_greater_number')
             });
         }
         else if (isNaN(val)) {
             $ionicPopup.alert({
-                title: 'Incorrect number',
-                template: 'Please, enter a valid number'
+                title:  translate('Incorrect_number'),
+                template: translate('Please_valid_number')
             });
         }
         else {
@@ -48,9 +51,9 @@ angular.module('starter.controllers.PlayCtrl', []).controller('PlayCtrl', functi
             title: title,
             scope: $scope,
             buttons: [
-                {text: 'Cancel'},
+                {text: translate('Cancel')},
                 {
-                    text: '<b>Answer</b>',
+                    text: '<b>' + translate('Answer') + '</b>',
                     type: 'button-positive',
                     onTap: function(e) {
                         if (!$scope.data.ans) {
@@ -87,8 +90,8 @@ angular.module('starter.controllers.PlayCtrl', []).controller('PlayCtrl', functi
                     cordova.plugins.Keyboard.close();
                 setTimeout(function () {
                     $ionicPopup.alert({
-                        title: 'Wrong answer',
-                        template: 'Correct answer was ' + correctAns
+                        title: translate('Wrong_answer'),
+                        template: translate('Correct_answer_was') + ' ' + correctAns
                     });
                 }, 100);
                 return;
@@ -96,15 +99,15 @@ angular.module('starter.controllers.PlayCtrl', []).controller('PlayCtrl', functi
         }
         if (num < 3) {
             var task = $scope.rand();
-            var ans = $scope.showPopup('Question ' + (num + 1), '' + task, num);
+            var ans = $scope.showPopup(translate('Question') + ' ' + (num + 1), '' + task, num);
         }
         else {
             if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
                 cordova.plugins.Keyboard.close();
             setTimeout(function () {
                 $ionicPopup.alert({
-                    title: 'Congratulations!',
-                    template: '<p style="text-align: center;">You successfully completed this level!</p>'
+                    title: translate('Congratulations') + '!',
+                    template: '<p style="text-align: center;">' + translate('Level_complete') + '!</p>'
                 }).then(function () {
                     window.history.back();
                 });

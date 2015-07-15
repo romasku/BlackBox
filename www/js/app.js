@@ -4,9 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-var starter = angular.module('starter', ['ionic', 'starter.controllers']);
+var starter = angular.module('starter', ['ionic', 'starter.controllers', 'starter.translations']);
 
-starter.run(function ($ionicPlatform) {
+starter.run(function ($ionicPlatform, $translate) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -18,6 +18,11 @@ starter.run(function ($ionicPlatform) {
         }
         if (window.StatusBar) {
             StatusBar.styleDefault();
+        }
+        if (typeof navigator.globalization !== "undefined") {
+            navigator.globalization.getPreferredLanguage(function(language) {
+                $translate.use((language.value).split("-")[0]).then();
+            }, null);
         }
     });
 });
