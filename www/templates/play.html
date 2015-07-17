@@ -1,15 +1,19 @@
 <ion-view view-title="{{'Level' | translate}} {{level}}">
-<ion-content class="padding">
-    <ion-list>
-        <ion-item>
-            <input style="width: 100%;" type="number" placeholder="{{'Your_number' | translate}}" id="play-input" ng-model="data.input">
-            <button class="button button-positive button-clear" ng-click="add();">{{'Ask' | translate}}</button>
-            <button class="button button-positive button-clear" ng-click="answer(0, '', '')">{{'Answer' | translate}}</button>
-        </ion-item>
-        <ion-item ng-repeat="attempt in attempts">
-            <h3>{{attempt.question}}</h3>
-            <p>{{attempt.answer}}</p>
-        </ion-item>
-    </ion-list>
-</ion-content>
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item>
+                <input style="width: 100%;" type="number" placeholder="{{'Your_number' | translate}}" id="play-input"
+                       ng-model="data.input">
+                <button class="button button-positive button-clear" ng-click="add();">{{'Ask' | translate}}</button>
+                <button class="button button-positive button-clear" ng-click="answer(0, '', '')">
+                    {{'Answer' | translate}}
+                </button>
+            </ion-item>
+            <ion-item ng-repeat="attempt in attempts">
+                <h3>{{attempt.question}}</h3>
+
+                <p>{{attempt.answer}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
 </ion-view>

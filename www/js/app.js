@@ -20,17 +20,17 @@ starter.run(function ($ionicPlatform, $translate) {
             StatusBar.styleDefault();
         }
         if (typeof navigator.globalization !== "undefined") {
-            navigator.globalization.getPreferredLanguage(function(language) {
+            navigator.globalization.getPreferredLanguage(function (language) {
                 $translate.use((language.value).split("-")[0]).then();
             }, null);
         }
     });
 });
 
-starter.config(function($stateProvider, $urlRouterProvider){
+starter.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('left-menu', {
-            url:'/left-menu',
+            url: '/left-menu',
             abstract: true,
             templateUrl: 'templates/left-menu.html'
         })
@@ -38,8 +38,8 @@ starter.config(function($stateProvider, $urlRouterProvider){
             cache: false,
             url: '/play/:level',
             views: {
-                'main' : {
-                    templateUrl : 'templates/play.html',
+                'main': {
+                    templateUrl: 'templates/play.html',
                     controller: 'PlayCtrl'
                 }
             }
@@ -47,16 +47,16 @@ starter.config(function($stateProvider, $urlRouterProvider){
         .state('left-menu.level-list', {
             url: '/level-list',
             views: {
-                'main' : {
+                'main': {
                     templateUrl: 'templates/level-list.html',
                     controller: 'LevelListCtrl'
                 }
             }
         })
-        .state('left-menu.main-menu',{
+        .state('left-menu.main-menu', {
             url: '/main-menu',
             views: {
-                'main' : {
+                'main': {
                     templateUrl: 'templates/main-menu.html'
                 }
             }

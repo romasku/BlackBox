@@ -1,4 +1,4 @@
-angular.module('starter.translations.en', ['pascalprecht.translate']).config(function($translateProvider) {
+angular.module('starter.translations.en', ['pascalprecht.translate']).config(function ($translateProvider) {
     $translateProvider.translations('en', {
         Level: 'Level',
         Question: 'Question',
