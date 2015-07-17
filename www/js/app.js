@@ -52,6 +52,14 @@ starter.config(function($stateProvider, $urlRouterProvider){
                     controller: 'LevelListCtrl'
                 }
             }
+        })
+        .state('left-menu.main-menu',{
+            url: '/main-menu',
+            views: {
+                'main' : {
+                    templateUrl: 'templates/main-menu.html'
+                }
+            }
         });
-    $urlRouterProvider.otherwise('/left-menu/level-list');
+    $urlRouterProvider.otherwise('/left-menu/main-menu');
 });
