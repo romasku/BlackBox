@@ -1,8 +1,9 @@
 BlackBox-ionic
-===============
+==============
 
 Initialization
 --------------
+
 1. Install JDK 8
 
 2. Install Android SDK
@@ -22,6 +23,7 @@ $ ./init.sh
 
 Note: for Windows it's recommended to use git bash.
 
+
 Running
 -------
 
@@ -34,3 +36,34 @@ Desktop:
 ```bash
 $ ionic serve
 ```
+
+
+Build with Docker
+-----------------
+
+Prepare Docker environment with Android SDK and NodeJS:
+
+```bash
+$ docker build -t blackbox-ionic-build-env ./docker-build-env/
+```
+
+Build BlackBox-ionic:
+
+```bash
+$ docker run \
+    -it --rm \
+    --volume "$(pwd):/mnt/BlackBox-ionic" \
+    --volume "/tmp/BlackBox-ionic-tmp:/tmp" \
+    --workdir "/mnt/BlackBox-ionic" \
+    --user "$(id -u)" \
+    --env "HOME=/tmp" \
+    --env "GRADLE_USER_HOME=/tmp/gradle" \
+    blackbox-ionic-build-env \
+    sh -c "sh init.sh ; ionic build android"
+```
+
+
+APK
+---
+
+APK files should appear in `./platforms/android/build/outputs/apk/` folder.
