@@ -47,6 +47,20 @@ Prepare Docker environment with Android SDK and NodeJS:
 $ docker build -t blackbox-ionic-build-env ./docker-build-env/
 ```
 
+Prepare cache to reuse some stuff on rebuild.
+
+```bash
+# Prepare cache folder
+$ mkdir -p /tmp/BlackBox-ionic-tmp
+
+# Cache cordova plugins
+$ grep 'cordova_plugin_add_git ' init.sh | \
+    sed -r 's/[^ ]+ (.*)/\1/' | \
+    xargs -n1 -I '{}' \
+        sh -c 'git clone --depth=1 '{}' /tmp/BlackBox-ionic-tmp/$(basename "{}")' \
+    || true
+```
+
 Build BlackBox-ionic:
 
 ```bash
@@ -59,7 +73,7 @@ $ docker run \
     --env "HOME=/tmp" \
     --env "GRADLE_USER_HOME=/tmp/gradle" \
     blackbox-ionic-build-env \
-    sh -c "sh init.sh ; ionic build android"
+    sh -c "bash init.sh && ionic build android"
 ```
 
 
