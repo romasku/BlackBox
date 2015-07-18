@@ -57,7 +57,7 @@ $ mkdir -p /tmp/BlackBox-ionic-tmp
 $ grep 'cordova_plugin_add_git ' init.sh | \
     sed -r 's/[^ ]+ (.*)/\1/' | \
     xargs -n1 -I '{}' \
-        sh -c 'git clone --depth=1 '{}' /tmp/BlackBox-ionic-tmp/$(basename "{}")' \
+        sh -c 'git clone --depth=1 "{}" /tmp/BlackBox-ionic-tmp/$(basename "{}")' \
     || true
 ```
 
