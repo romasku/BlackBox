@@ -1,9 +1,37 @@
 angular.module('starter.controllers.PlayCtrl', [])
-    .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter) {
+    .factory('$localstorage', ['$window', function($window) {
+        return {
+            set: function(key, value) {
+                $window.localStorage[key] = value;
+            },
+            get: function(key, defaultValue) {
+                return $window.localStorage[key] || defaultValue;
+            },
+            setObject: function(key, value) {
+                $window.localStorage[key] = JSON.stringify(value);
+            },
+            getObject: function(key) {
+                return JSON.parse($window.localStorage[key] || '{}');
+            }
+        }
+    }])
+
+    .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $localstorage) {
+        $scope.level = $state.params.level;
+        //$window.localStorage.clear();
+        if (isNaN($localstorage.getObject($scope.level).level)) {
+            $localstorage.setObject($scope.level, {
+                level: $scope.level,
+                isCompleted: false,
+                moves: 0,
+                stars: 0
+            });
+        }
+        $scope.stats = $localstorage.getObject($scope.level);
+
         $scope.attempts = [];
         var url = '/';
         if (ionic.Platform.isAndroid()) url = '/android_asset/www/';
-        $scope.level = $state.params.level;
         $http.get(url + 'js/levels/' + $scope.level + '.js').then(
             function (resp) {
                 var fn = resp.data;
@@ -48,6 +76,10 @@ angular.module('starter.controllers.PlayCtrl', [])
             }
             else {
                 $scope.attempts.unshift({question: val, answer: $scope.calc(val)});
+                if (!$scope.stats.isCompleted) {
+                    $scope.stats.moves++;
+                    $localstorage.setObject($scope.level,$scope.stats);
+                }
             }
         };
 
@@ -114,6 +146,8 @@ angular.module('starter.controllers.PlayCtrl', [])
             else {
                 if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
                     cordova.plugins.Keyboard.close();
+                $scope.stats.isCompleted = true;
+                $localstorage.setObject($scope.level,$scope.stats);
                 setTimeout(function () {
                     $ionicPopup.alert({
                         title: translate('Congratulations') + '!',

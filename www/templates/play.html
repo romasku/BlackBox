@@ -2,17 +2,25 @@
     <ion-content class="padding">
         <ion-list>
             <ion-item>
-                <input style="width: 100%;" type="number" placeholder="{{'Your_number' | translate}}" id="play-input"
-                       ng-model="model.input">
-                <button class="button button-positive button-clear" ng-click="add();">{{'Ask' | translate}}</button>
-                <button class="button button-positive button-clear" ng-click="answer(0, '', '')">
-                    {{'Answer' | translate}}
-                </button>
+                <input style="width: 100%; font-size: 1rem" type="number" placeholder="{{'Your_number' | translate}}" id="play-input"
+                       ng-model="model.input"><br>
+                <div class="button-bar">
+                    <button class="button button-positive button-outline" ng-click="add();">{{'Ask' | translate}}</button>
+                    <button class="button button-positive button-outline" ng-click="answer(0, '', '')">
+                        {{'Answer' | translate}}
+                    </button>
+                </div><br>
+                <h4 style="font-size: 1rem" class="text-center">{{'Attempts_done' | translate}} {{stats.moves}}</h4>
             </ion-item>
             <ion-item ng-repeat="attempt in attempts">
-                <h3>{{attempt.question}}</h3>
-
-                <p>{{attempt.answer}}</p>
+                <table style="width: 100%;">
+                    <tbody>
+                    <tr>
+                        <td class="text-center" style="width: 50%;">{{attempt.question}}</td>
+                        <td class="text-center" style="width: 50%;">{{attempt.answer}}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </ion-item>
         </ion-list>
     </ion-content>

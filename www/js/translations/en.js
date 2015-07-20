@@ -19,6 +19,7 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Congratulations: 'Congratulations',
         Level_complete: 'You successfully completed this level',
         Play: 'Play',
-        Quit: 'Quit'
+        Quit: 'Quit',
+        Attempts_done: 'Attempts done:'
     });
 });
