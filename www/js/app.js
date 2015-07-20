@@ -29,12 +29,12 @@ starter.run(function ($ionicPlatform, $translate) {
 
 starter.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-        .state('left-menu', {
-            url: '/left-menu',
+        .state('header', {
+            url: '/header',
             abstract: true,
-            templateUrl: 'templates/left-menu.html'
+            templateUrl: 'templates/header.html'
         })
-        .state('left-menu.play', {
+        .state('header.play', {
             cache: false,
             url: '/play/:level',
             views: {
@@ -44,7 +44,7 @@ starter.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
-        .state('left-menu.level-list', {
+        .state('header.level-list', {
             url: '/level-list',
             views: {
                 'main': {
@@ -53,7 +53,7 @@ starter.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
-        .state('left-menu.main-menu', {
+        .state('header.main-menu', {
             url: '/main-menu',
             views: {
                 'main': {
@@ -61,5 +61,5 @@ starter.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         });
-    $urlRouterProvider.otherwise('/left-menu/main-menu');
+    $urlRouterProvider.otherwise('/header/main-menu');
 });

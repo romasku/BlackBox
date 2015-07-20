@@ -18,6 +18,7 @@ angular.module('starter.translations.ua', ['pascalprecht.translate']).config(fun
         Correct_answer_was: 'Вірна відповідь була',
         Congratulations: 'Вітаємо',
         Level_complete: 'Ви успішно завершили цей рівень',
-        Play: 'Грати'
+        Play: 'Грати',
+        Quit: 'Вихід'
     });
 });
