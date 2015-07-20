@@ -12,10 +12,12 @@ angular.module('starter.controllers.PlayCtrl', [])
 
         var translate = $filter('translate');
 
+        $scope.model = {};
+        $scope.model.input = "";
+
         $scope.add = function () {
-            var input = document.getElementById('play-input');
-            var val = parseInt(input.value);
-            input.value = '';
+            var val = parseInt($scope.model.input);
+            $scope.model.input = '';
             if (val >= 1e9) {
                 $ionicPopup.alert({
                     title: translate('Incorrect_number'),

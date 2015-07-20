@@ -35,7 +35,6 @@ starter.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: 'templates/header.html'
         })
         .state('header.play', {
-            cache: false,
             url: '/play/:level',
             views: {
                 'main': {
