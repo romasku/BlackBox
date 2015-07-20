@@ -6,9 +6,19 @@ angular.module('starter.controllers.PlayCtrl', [])
         $scope.level = $state.params.level;
         $http.get(url + 'js/levels/' + $scope.level + '.js').then(
             function (resp) {
-                $scope.fn = resp.data;
+                var fn = resp.data;
+                while(1) {
+                    var fn2 = fn.replace('RAND', '' + Math.floor(Math.random() * 1e9));
+                    if (fn2 == fn) break;
+                    fn = fn2;
+                }
+                $scope.fn = fn;
             }
         );
+
+        $scope.calc = function (val) {
+            return eval($scope.fn + 'calc(' + val + ')');
+        };
 
         var translate = $filter('translate');
 
@@ -37,7 +47,7 @@ angular.module('starter.controllers.PlayCtrl', [])
                 });
             }
             else {
-                $scope.attempts.unshift({question: val, answer: eval($scope.fn + 'calc(' + val + ')')});
+                $scope.attempts.unshift({question: val, answer: $scope.calc(val)});
             }
         };
 
@@ -84,7 +94,7 @@ angular.module('starter.controllers.PlayCtrl', [])
 
         $scope.answer = function (num, ptask, pans) {
             if (ptask != '') {
-                var correctAns = eval($scope.fn + 'calc(' + ptask + ')');
+                var correctAns = $scope.calc(ptask);
                 if (pans != correctAns) {
                     if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
                         cordova.plugins.Keyboard.close();
