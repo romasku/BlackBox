@@ -1,9 +1,21 @@
 <ion-view view-title="{{'Select_level' | translate}}">
     <ion-content class="padding">
-        <ion-list>
-            <ion-item ng-repeat="i in levels" href="#/header/play/{{i}}">
-                {{'Level' | translate}} {{i}}
+        <div class="button-bar" ng-repeat="i in levels" ng-init="j = $index">
+            <ion-item style="width: 33.3%" href="#/header/play/{{i.col1}}">
+                <h2 style="font-size: 1.3rem">{{'Level' | translate}} {{i.col1}}
+                <i class="icon ion-android-checkbox-outline-blank"></i></h2>
+                <h2>{{'Attempts_done' | translate}} {{stats[j].col1.moves}}</h2>
             </ion-item>
-        </ion-list>
+            <ion-item style="width: 33.3%" href="#/header/play/{{i.col2}}">
+                <h2 style="font-size: 1.3rem">{{'Level' | translate}} {{i.col2}}
+                    <i class="icon ion-android-checkbox-outline"></i></h2>
+                <h2>{{'Attempts_done' | translate}} {{stats[j].col2.moves}}</h2>
+            </ion-item>
+            <ion-item style="width: 33.3%" href="#/header/play/{{i.col3}}">
+                <h2 style="font-size: 1.3rem">{{'Level' | translate}} {{i.col3}}
+                    <i class="icon ion-android-checkbox-outline"></i></h2>
+                <h2>{{'Attempts_done' | translate}} {{stats[j].col3.moves}}</h2>
+            </ion-item>
+        </div>
     </ion-content>
 </ion-view>
