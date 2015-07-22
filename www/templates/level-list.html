@@ -1,17 +1,11 @@
 <ion-view view-title="{{'Select_level' | translate}}">
     <ion-content class="padding">
-        <div class="button-bar" ng-repeat="i in levels" ng-init="j = $index">
-            <ion-item style="width: 34%; font-size: 0.9rem" href="#/header/play/{{i.col1}}">
-                {{'Level' | translate}} {{i.col1}}
-                <i class="icon ion-android-checkbox-outline-blank"></i>
-            </ion-item>
-            <ion-item style="width: 34%; font-size: 0.9rem" href="#/header/play/{{i.col2}}">
-                {{'Level' | translate}} {{i.col2}}
-                <i class="icon ion-android-checkbox-outline"></i>
-            </ion-item>
-            <ion-item style="width: 34%; font-size: 0.9rem" href="#/header/play/{{i.col3}}">
-                {{'Level' | translate}} {{i.col3}}
-                <i class="icon ion-android-checkbox-outline"></i>
+        <div class="button-bar" ng-repeat="i in [] | range: levelCount / levelsInLine">
+            <ion-item ng-repeat="t in [] | range: levelsInLine" ng-init="j = i * levelsInLine + t"
+                      class="item-icon-right" style="width: 100%;" href="#/header/play/{{levels[j].level}}">
+                {{'Level' | translate}} {{levels[j].level}}
+                <i ng-if="levels[j].isCompleted" class="icon ion-android-checkbox-outline"></i>
+                <i ng-if="!levels[j].isCompleted" class="icon ion-android-checkbox-outline-blank"></i>
             </ion-item>
         </div>
     </ion-content>

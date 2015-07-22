@@ -1,33 +1,9 @@
-angular.module('starter.controllers.PlayCtrl', [])
-    .factory('$localstorage', ['$window', function($window) {
-        return {
-            set: function(key, value) {
-                $window.localStorage[key] = value;
-            },
-            get: function(key, defaultValue) {
-                return $window.localStorage[key] || defaultValue;
-            },
-            setObject: function(key, value) {
-                $window.localStorage[key] = JSON.stringify(value);
-            },
-            getObject: function(key) {
-                return JSON.parse($window.localStorage[key] || '{}');
-            }
-        }
-    }])
+angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'])
 
-    .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $localstorage) {
+    .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory) {
         $scope.level = $state.params.level;
-        //$window.localStorage.clear();
-        if (isNaN($localstorage.getObject($scope.level).level)) {
-            $localstorage.setObject($scope.level, {
-                level: $scope.level,
-                isCompleted: false,
-                moves: 0,
-                stars: 0
-            });
-        }
-        $scope.stats = $localstorage.getObject($scope.level);
+
+        $scope.stats = $LevelFactory.getLevel($scope.level);
 
         $scope.attempts = [];
         var url = '/';
@@ -35,7 +11,7 @@ angular.module('starter.controllers.PlayCtrl', [])
         $http.get(url + 'js/levels/' + $scope.level + '.js').then(
             function (resp) {
                 var fn = resp.data;
-                while(1) {
+                while (1) {
                     var fn2 = fn.replace('RAND', '' + Math.floor(Math.random() * 1e9));
                     if (fn2 == fn) break;
                     fn = fn2;
@@ -78,7 +54,7 @@ angular.module('starter.controllers.PlayCtrl', [])
                 $scope.attempts.unshift({question: val, answer: $scope.calc(val)});
                 if (!$scope.stats.isCompleted) {
                     $scope.stats.moves++;
-                    $localstorage.setObject($scope.level,$scope.stats);
+                    $LevelFactory.setLevel($scope.stats);
                 }
             }
         };
@@ -147,7 +123,7 @@ angular.module('starter.controllers.PlayCtrl', [])
                 if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
                     cordova.plugins.Keyboard.close();
                 $scope.stats.isCompleted = true;
-                $localstorage.setObject($scope.level,$scope.stats);
+                $LevelFactory.setLevel($scope.stats);
                 setTimeout(function () {
                     $ionicPopup.alert({
                         title: translate('Congratulations') + '!',

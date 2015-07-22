@@ -2,14 +2,18 @@
     <ion-content class="padding">
         <ion-list>
             <ion-item>
-                <input style="width: 100%; font-size: 1rem" type="number" placeholder="{{'Your_number' | translate}}" id="play-input"
+                <input style="width: 100%; font-size: 1rem" type="number" placeholder="{{'Your_number' | translate}}"
+                       id="play-input"
                        ng-model="model.input"><br>
+
                 <div class="button-bar">
-                    <button class="button button-positive button-outline" ng-click="add();">{{'Ask' | translate}}</button>
+                    <button class="button button-positive button-outline" ng-click="add();">{{'Ask' | translate}}
+                    </button>
                     <button class="button button-positive button-outline" ng-click="answer(0, '', '')">
                         {{'Answer' | translate}}
                     </button>
-                </div><br>
+                </div>
+                <br>
                 <h4 style="font-size: 1rem" class="text-center">{{'Attempts_done' | translate}} {{stats.moves}}</h4>
             </ion-item>
             <ion-item ng-repeat="attempt in attempts">

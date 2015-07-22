@@ -27,6 +27,15 @@ starter.run(function ($ionicPlatform, $translate) {
     });
 });
 
+starter.filter('range', function () {
+    return function (input, total) {
+        total = parseInt(total);
+        for (var i = 0; i < total; i++)
+            input.push(i);
+        return input;
+    };
+});
+
 starter.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('header', {
