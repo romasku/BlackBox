@@ -71,6 +71,15 @@ starter.config(function ($stateProvider, $urlRouterProvider) {
             }
 
         })
+        .state('header.settings', {
+            url: '/settings',
+            views: {
+                'main': {
+                    templateUrl: 'templates/settings.html',
+                    controller: 'SettingsCtrl'
+                }
+            }
+        })
         .state('header.main-menu', {
             url: '/main-menu',
             views: {

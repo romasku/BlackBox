@@ -24,6 +24,12 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Select_chapter: 'Select chapter',
         Chapter_1: 'First chapter',
         Chapter_2: 'Second chapter',
-        Chapter_3: 'Third chapter'
+        Chapter_3: 'Third chapter',
+        Music: 'Music',
+        Sound: 'Sound',
+        Reset: 'Reset progress',
+        Disable_ads: 'Disable ads',
+        How_to_play: 'How to play',
+        About: 'About'
     });
 });

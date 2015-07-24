@@ -28,5 +28,17 @@ angular.module('starter.factories.LevelFactory', [])
             $window.localStorage[level.level] = JSON.stringify(level);
         };
 
+        factory.clear = function (levelCount) {
+            for (var i = 0; i < levelCount; i++) {
+                var level = {
+                    level: i + 1,
+                    isCompleted: false,
+                    moves: 0,
+                    stars: 0
+                };
+                factory.setLevel(level);
+            }
+        };
+
         return factory;
     }]);

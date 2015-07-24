@@ -24,6 +24,12 @@ angular.module('starter.translations.ru', ['pascalprecht.translate']).config(fun
         Select_chapter: 'Выбор главы',
         Chapter_1: 'Первая глава',
         Chapter_2: 'Вторая глава',
-        Chapter_3: 'Третья глава'
+        Chapter_3: 'Третья глава',
+        Music: 'Музыка',
+        Sound: 'Звук',
+        Reset: 'Сбросить прогресс',
+        Disable_ads: 'Отключить рекламу',
+        How_to_play: 'Как играть',
+        About: 'О нас'
     });
 });
