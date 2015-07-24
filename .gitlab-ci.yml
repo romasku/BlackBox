@@ -22,14 +22,14 @@ release:
             --env "HOME=/tmp"
             --env "GRADLE_USER_HOME=/tmp/gradle"
             blackbox-ionic-build-env
-            sh -c "bash init.sh && ionic build android"
+            sh -c "bash init.sh && ionic browser add crosswalk && ionic build android"
 
         # Deploy
         - SHARE_ROOT=/www/share/BlackBox-ionic_d283a397ed9973eb770fd6ca61f680e49c
         - CURRENT_SHARE_ROOT=$SHARE_ROOT/`date +%F_%R`
 
         - mkdir $CURRENT_SHARE_ROOT
-        - cp ./platforms/android/build/outputs/apk/android-debug.apk $CURRENT_SHARE_ROOT
+        - cp ./platforms/android/build/outputs/apk/android-armv7-debug.apk $CURRENT_SHARE_ROOT
 
         # Remove old builds (older than 10 builds ago)
         - rm -rf `ls $CURRENT_SHARE_ROOT | head -n -10`
