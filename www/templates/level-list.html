@@ -1,12 +1,16 @@
 <ion-view view-title="{{'Select_level' | translate}}">
-    <ion-content class="padding">
-        <div class="button-bar" ng-repeat="i in [] | range: levelCount / levelsInLine">
-            <ion-item ng-repeat="t in [] | range: levelsInLine" ng-init="j = i * levelsInLine + t"
+    <ion-content class="padding" scroll = "false" >
+    <ion-slide-box class="levelscreen">
+        <ion-slide ng-repeat="l in [] | range: levelCount / levelsOnScreen">
+        <div class="button-bar" ng-repeat="i in [] | range: levelsOnScreen / levelsInLine">
+            <ion-item ng-repeat="t in [] | range: levelsInLine" ng-init="j = l * levelsOnScreen + i * levelsInLine + t"
                       class="item-icon-right level" href="#/header/play/{{levels[j].level}}">
                 {{'Level' | translate}} {{levels[j].level}}
                 <i ng-if="levels[j].isCompleted" class="icon ion-android-checkbox-outline"></i>
                 <i ng-if="!levels[j].isCompleted" class="icon ion-android-checkbox-outline-blank"></i>
             </ion-item>
         </div>
+        </ion-slide>
+    </ion-slide-box>
     </ion-content>
 </ion-view>
