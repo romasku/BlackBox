@@ -32,7 +32,7 @@ release:
         - cp ./platforms/android/build/outputs/apk/android-armv7-debug.apk $CURRENT_SHARE_ROOT
 
         # Remove old builds (older than 10 builds ago)
-        - rm -rf `ls $CURRENT_SHARE_ROOT | head -n -10`
+        - cd $CURRENT_SHARE_ROOT && rm -rf `ls $CURRENT_SHARE_ROOT | head -n 10`
 
     type: deploy
     tags: 
