@@ -3,6 +3,15 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
     .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory) {
         $scope.level = $state.params.level;
 
+        $scope.input = document.getElementById("play-input");
+
+        $scope.showKeyboard = function () {
+            if (window.cordova && cordova.plugins && cordova.plugins.Focus)
+                cordova.plugins.Focus.focus($scope.input);
+        };
+
+        setTimeout($scope.showKeyboard, 400);
+
         $scope.stats = $LevelFactory.getLevel($scope.level);
 
         $scope.attempts = [];
@@ -29,26 +38,26 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         $scope.model = {};
         $scope.model.input = "";
 
+        $scope.showError = function(msg) {
+            $ionicPopup.alert({
+                title: translate('Incorrect_number'),
+                template: translate(msg)
+            }).then(function() {
+                setTimeout($scope.showKeyboard, 400);
+            });
+        };
+
         $scope.add = function () {
             var val = parseInt($scope.model.input);
             $scope.model.input = '';
             if (val >= 1e9) {
-                $ionicPopup.alert({
-                    title: translate('Incorrect_number'),
-                    template: translate('Please_lower_number')
-                });
+                $scope.showError('Please_lower_number');
             }
             else if (val < 0) {
-                $ionicPopup.alert({
-                    title: translate('Incorrect_number'),
-                    template: translate('Please_greater_number')
-                });
+                $scope.showError('Please_greater_number');
             }
             else if (isNaN(val)) {
-                $ionicPopup.alert({
-                    title: translate('Incorrect_number'),
-                    template: translate('Please_valid_number')
-                });
+                $scope.showError('Please_valid_number');
             }
             else {
                 $scope.attempts.unshift({question: val, answer: $scope.calc(val)});
@@ -57,6 +66,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                     $LevelFactory.setLevel($scope.stats);
                 }
             }
+            $scope.showKeyboard();
         };
 
         $scope.rand = function () {
@@ -110,6 +120,8 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                         $ionicPopup.alert({
                             title: translate('Wrong_answer'),
                             template: translate('Correct_answer_was') + ' ' + correctAns
+                        }).then(function () {
+                            setTimeout($scope.showKeyboard, 400);
                         });
                     }, 100);
                     return;

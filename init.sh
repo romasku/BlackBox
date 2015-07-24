@@ -21,3 +21,4 @@ function cordova_plugin_add_git() {
 
 cordova_plugin_add_git "https://github.com/cogitor/PhoneGap-OrientationLock.git"
 cordova_plugin_add_git "https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git"
+cordova_plugin_add_git "https://github.com/supermina999/cordova-focus.git"
