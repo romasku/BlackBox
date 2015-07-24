@@ -38,11 +38,11 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         $scope.model = {};
         $scope.model.input = "";
 
-        $scope.showError = function(msg) {
+        $scope.showError = function (msg) {
             $ionicPopup.alert({
                 title: translate('Incorrect_number'),
                 template: translate(msg)
-            }).then(function() {
+            }).then(function () {
                 setTimeout($scope.showKeyboard, 400);
             });
         };

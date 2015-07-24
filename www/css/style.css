@@ -1,37 +1,39 @@
 .chapters {
- margin-top: 20vh;
- height: 40%;
- }
- .chapters a {
-  position: absolute;
-  right : 20%;
- 	border-width: 2px;
- 	border-color: black;
-  border-radius: 30px;
-  background-color: mediumblue;
-  height: 100%;
-  width: 60%;
- }
- .chapters h1 {
- 	position: absolute;
-  top : 5vh;
-  margin-left: -4%;
-  width: 100%;
-  color: #fff;
-  font-size: 60px;
-  text-align: center;
- }
- .chapters.chapters-green a {
-   	background-color : green;
- }
- .chapters.chapters-blue a {
-   	background-color : blue;
-  }
- .chapters.chapters-red  a {
-   	background-color : red;
- }
- .level {
- 	width: 100%;
- 	margin : 0.5%; 
- 	border-radius : 20px;
- }
+    margin-top: 20vh;
+    height: 50%;
+}
+
+.chapters a {
+    position: absolute;
+    right: 20%;
+    height: 80%;
+    width: 60%;
+}
+
+.chapters h1 {
+    position: absolute;
+    top: 5vh;
+    margin-left: -4%;
+    width: 100%;
+    color: #fff;
+    font-size: 60px;
+    text-align: center;
+}
+
+.chapters.chapters-green a {
+    background-color: green;
+}
+
+.chapters.chapters-blue a {
+    background-color: blue;
+}
+
+.chapters.chapters-red a {
+    background-color: red;
+}
+
+.level {
+    width: 100%;
+    margin: 0.5%;
+    border-radius: 20px;
+}
