@@ -3,12 +3,10 @@
     <ion-slide-box class="levelscreen">
         <ion-slide ng-repeat="l in [] | range: levelCount / levelsOnScreen">
         <div class="button-bar" ng-repeat="i in [] | range: levelsOnScreen / levelsInLine">
-            <ion-item ng-repeat="t in [] | range: levelsInLine" ng-init="j = l * levelsOnScreen + i * levelsInLine + t"
-                      class="item-icon-right level" href="#/header/play/{{levels[j].level}}">
-                {{'Level' | translate}} {{levels[j].level}}
-                <i ng-if="levels[j].isCompleted" class="icon ion-android-checkbox-outline"></i>
-                <i ng-if="!levels[j].isCompleted" class="icon ion-android-checkbox-outline-blank"></i>
-            </ion-item>
+            <a ng-repeat="t in [] | range: levelsInLine" ng-init="j = l * levelsOnScreen + i * levelsInLine + t"
+                      class="button button-positive" href="#/header/play/{{levels[j].level}}">
+                {{levels[j].level}}
+            </a>
         </div>
         </ion-slide>
     </ion-slide-box>

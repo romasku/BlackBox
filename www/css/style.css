@@ -32,18 +32,12 @@
     background-color: red;
 }
 
-.level {
-    width: 100%;
-    margin : 1%; 
-    border-width: 5px;
-    border-radius : 20px;
-    border-color: lightgreen;
-    background-color: green; 
-    line-height: 10vh;
-    font-weight: 700;
-    font-size: 20px;
-}
-
 .levelscreen {
     height: 100%;
+}
+.levelscreen .button{
+    line-height: 16vh;
+    font-weight: 700;
+    font-size: 32px;
+    margin: 0;
 }
