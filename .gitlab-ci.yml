@@ -33,6 +33,9 @@ release:
 
         # Remove old builds (older than 10 builds ago)
         - cd $CURRENT_SHARE_ROOT && rm -rf `ls $CURRENT_SHARE_ROOT | head -n 10`
+	- cd $CURRENT_SHARE_ROOT && ls
+	- cd $CURRENT_SHARE_ROOT && ls | head -n 10
+	- cd $CURRENT_SHARE_ROOT && (ls | head -n 10)
 
     type: deploy
     tags: 
