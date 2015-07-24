@@ -20,6 +20,10 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Level_complete: 'You successfully completed this level',
         Play: 'Play',
         Quit: 'Quit',
-        Attempts_done: 'Attempts done:'
+        Attempts_done: 'Attempts done:',
+        Select_chapter: 'Select chapter',
+        Chapter_1: 'First chapter',
+        Chapter_2: 'Second chapter',
+        Chapter_3: 'Third chapter'
     });
 });

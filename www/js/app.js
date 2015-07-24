@@ -61,6 +61,16 @@ starter.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+        .state('header.chapter-list', {
+            url : '/chapter-list',
+            views : {
+                'main': {
+                    templateUrl: 'templates/chapter-list.html',
+                    controller: 'LevelListCtrl'
+                }
+            }
+
+        })
         .state('header.main-menu', {
             url: '/main-menu',
             views: {

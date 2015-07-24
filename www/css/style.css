@@ -1,0 +1,33 @@
+.chapters {
+ height: 100%;
+ }
+ .chapters a {
+ 	border-width: 0px;
+ 	border-left-width: 2px;
+ 	border-right-width: 2px;
+ 	border-color: black;
+  	height: 100%;
+  	width: 100%;
+ }
+ .chapters h1 {
+ 	position: absolute;
+    top: 40%;
+    width: 100%;
+    color: #fff;
+    font-size: 60px;
+    text-align: center;
+ }
+ .chapters.chapters-green a {
+   	background-color : green;
+ }
+ .chapters.chapters-blue a {
+   	background-color : blue;
+  }
+ .chapters.chapters-red  a {
+   	background-color : red;
+ }
+ .level {
+ 	width: 100%;
+ 	margin : 0.5%; 
+ 	border-radius : 20px;
+ }
