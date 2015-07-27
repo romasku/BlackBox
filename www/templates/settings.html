@@ -1,29 +1,29 @@
 <ion-view view-title="{{'Settings' | translate}}">
     <ion-content class="padding">
-        <div class="button-bar">
-            <ion-item class="item-toggle" style="width:50%">
+        <div class="button-bar" style="padding-right:2px; margin-bottom:12px;">
+            <ion-item class="item-toggle" style="width:100%" >
                 <span class="input-label">{{'Music' | translate}}</span>
-                <label class="toggle toggle-positive">
+                <label class="toggle toggle-positive" >
                     <input type="checkbox">
-                    <div class="track">
+                    <div class="track" >
                         <div class="handle"></div>
                     </div>
                 </label>
             </ion-item>
-            <ion-item class="item-toggle" style="width:50%">
+            <ion-item class="item-toggle" style="width:100%" >
                 <span class="input-label">{{'Sound' | translate}}</span>
                 <label class="toggle toggle-positive">
                     <input type="checkbox">
-                    <div class="track">
-                        <div class="handle"></div>
+                    <div class="track" >
+                        <div class="handle" ></div>
                     </div>
                 </label>
             </ion-item>
         </div>
-        <ion-item class="item-divider item-positive">
+        <ion-item class="item-divider item-positive" style="width:100%; border-radius :2px 2px 0 0">
             {{'Language' | translate}}
         </ion-item>
-        <ion-item class="item item-icon-right" style="width: 100%" ng-repeat="language in languages"
+        <ion-item class="item item-icon-right" style="width: 100%;" ng-repeat="language in languages"
                   ng-click="setLanguage(language.abb);">
             {{language.name}}
             <i ng-if="isCurrent(language.abb)" class="icon positive ion-ios-checkmark"></i>

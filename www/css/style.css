@@ -36,8 +36,13 @@
     height: 100%;
 }
 .levelscreen .button{
+    border-radius: 5px;
     line-height: 16vh;
     font-weight: 700;
     font-size: 32px;
     margin: 0;
+}
+
+.toggle {
+    margin-top: 2px;
 }
