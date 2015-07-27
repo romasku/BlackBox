@@ -37,10 +37,25 @@
 }
 .levelscreen .button{
     border-radius: 5px;
-    line-height: 16vh;
+    line-height: 4.6em;
+    height: 100%;
+    width: 100%;
     font-weight: 700;
-    font-size: 32px;
     margin: 0;
+}
+.levelscreen table{
+    width: 100%;
+    text-align: center; 
+    min-height: 95%;
+    max-height: 95%;
+}
+.levelscreen td{
+    padding: 10px;
+}
+.levelscreen a{
+}
+.levelsreen i{
+    font-size: 0.1rem;
 }
 
 .toggle {
