@@ -20,7 +20,7 @@ angular.module('starter.translations.ua', ['pascalprecht.translate']).config(fun
         Level_complete: 'Ви успішно завершили цей рівень',
         Play: 'Грати',
         Quit: 'Вихід',
-        Attempts_done: 'Спроб зроблено:',
+        Attempts_done: 'Спроб зроблено',
         Select_chapter: 'Вибір глави',
         Chapter_1: 'Перша глава',
         Chapter_2: 'Друга глава',
@@ -30,6 +30,10 @@ angular.module('starter.translations.ua', ['pascalprecht.translate']).config(fun
         Reset: 'Скинути прогрес',
         Disable_ads: 'Відключити рекламу',
         How_to_play: 'Як грати',
-        About: 'Про нас'
+        About: 'Про нас',
+        Language: 'Мова',
+        Penalty: 'Штраф',
+        Points: 'Бали',
+        Stars: 'Зірки'
     });
 });

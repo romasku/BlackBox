@@ -28,9 +28,37 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 $scope.fn = fn;
             }
         );
+        $http.get(url + 'js/levels/levelsData.json').success(
+            function (data) {
+                var levelsData = data;
+                $scope.levelsData = levelsData;
+            }
+        );
 
         $scope.calc = function (val) {
             return eval($scope.fn + 'calc(' + val + ')');
+        };
+
+        $scope.countStars = function (userData) {
+            var good = $scope.levelsData[$scope.level - 1].good;
+            var exellent = $scope.levelsData[$scope.level - 1].exellent;
+            if (userData.moves <= exellent) return 3;
+            if (userData.moves <= good) return 2;
+            return 1;
+        };
+
+        $scope.countPenalty = function (num) {
+            var complexity = $scope.levelsData[$scope.level - 1].complexity;
+            return (11 - complexity) * (4 - num);
+        };
+
+        $scope.countPoints = function (userData) {
+            var ans = 0;
+            if (userData.stars == 3) ans = 100 - userData.penalty;
+            else if (userData.stars == 2) ans = 75 - userData.penalty;
+            else ans = 50 - userData.penalty;
+            if (ans < 0) ans = 0;
+            return ans;
         };
 
         var translate = $filter('translate');
@@ -116,6 +144,10 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 if (pans != correctAns) {
                     if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
                         cordova.plugins.Keyboard.close();
+                    if (!$scope.stats.isCompleted) {
+                        $scope.stats.penalty += $scope.countPenalty(num);
+                        $LevelFactory.setLevel($scope.stats);
+                    }
                     setTimeout(function () {
                         $ionicPopup.alert({
                             title: translate('Wrong_answer'),
@@ -135,11 +167,13 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
                     cordova.plugins.Keyboard.close();
                 $scope.stats.isCompleted = true;
+                $scope.stats.stars = $scope.countStars($scope.stats);
+                $scope.stats.points = $scope.countPoints($scope.stats);
                 $LevelFactory.setLevel($scope.stats);
                 setTimeout(function () {
                     $ionicPopup.alert({
                         title: translate('Congratulations') + '!',
-                        template: '<p style="text-align: center;">' + translate('Level_complete') + '!</p>'
+                        template: '<p style="text-align: center;">' + translate('Level_complete') + '!</p><p style="text-align: center;">' + translate('Stars') + ': ' + $scope.stats.stars + '<br>' + translate('Points') + ': ' + $scope.stats.points + '</p>'
                     }).then(function () {
                         window.history.back();
                     });

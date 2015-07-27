@@ -6,8 +6,12 @@
                     <tr ng-repeat="i in [] | range: levelsOnScreen / levelsInLine">
                         <td ng-repeat="t in [] | range: levelsInLine"
                             ng-init="j = l * levelsOnScreen + i * levelsInLine + t">
-                            <a class="button button-positive" style="height: 80%; width: 80%;" href="#/header/play/{{levels[j].level}}">
-                                {{levels[j].level}}
+                            <a class="button button-positive" style="height: 80%; width: 80%; font-size: 1rem;"
+                               href="#/header/play/{{levels[j].level}}">
+                                {{levels[j].level}}<br>
+                                <i ng-repeat="star in [] | range: levels[j].stars" class="icon ion-android-star"> </i>
+                                <i style="font-size: 0.1rem" ng-repeat="star in [] | range: 3-levels[j].stars"
+                                   class="icon ion-android-star-outline"> </i>
                             </a>
                         </td>
                     </tr>

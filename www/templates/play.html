@@ -14,7 +14,8 @@
                     </button>
                 </div>
                 <br>
-                <h4 style="font-size: 1rem" class="text-center">{{'Attempts_done' | translate}} {{stats.moves}}</h4>
+                <h4 style="font-size: 1rem" class="text-center">{{'Attempts_done' | translate}}: {{stats.moves}}</h4>
+                <h4 style="font-size: 1rem" class="text-center">{{'Penalty' | translate}}: {{stats.penalty}}</h4>
             </ion-item>
             <ion-item style="width: 100%;" ng-repeat="attempt in attempts">
                 <table style="width: 100%;">

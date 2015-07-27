@@ -20,7 +20,7 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Level_complete: 'You successfully completed this level',
         Play: 'Play',
         Quit: 'Quit',
-        Attempts_done: 'Attempts done:',
+        Attempts_done: 'Attempts done',
         Select_chapter: 'Select chapter',
         Chapter_1: 'First chapter',
         Chapter_2: 'Second chapter',
@@ -30,6 +30,10 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Reset: 'Reset progress',
         Disable_ads: 'Disable ads',
         How_to_play: 'How to play',
-        About: 'About'
+        About: 'About',
+        Language: 'Language',
+        Penalty: 'Penalty',
+        Points: 'Points',
+        Stars: 'Stars'
     });
 });

@@ -1,5 +1,5 @@
 angular.module('starter.factories.LevelFactory', [])
-    .factory('$LevelFactory', ['$window', function ($window) {
+    .factory('$LevelFactory', ['$window', '$http', function ($window, $http) {
         var factory = {};
         factory.levels = [];
 
@@ -11,7 +11,9 @@ angular.module('starter.factories.LevelFactory', [])
                         level: i + 1,
                         isCompleted: false,
                         moves: 0,
-                        stars: 0
+                        penalty: 0,
+                        stars: 0,
+                        points: 0
                     };
                     $window.localStorage[level.level] = JSON.stringify(level);
                 }
@@ -34,7 +36,9 @@ angular.module('starter.factories.LevelFactory', [])
                     level: i + 1,
                     isCompleted: false,
                     moves: 0,
-                    stars: 0
+                    penalty: 0,
+                    stars: 0,
+                    points: 0
                 };
                 factory.setLevel(level);
             }

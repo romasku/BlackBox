@@ -20,7 +20,7 @@ angular.module('starter.translations.ru', ['pascalprecht.translate']).config(fun
         Level_complete: 'Вы успешно завершили этот уровень',
         Play: 'Играть',
         Quit: 'Выход',
-        Attempts_done: 'Попыток сделано:',
+        Attempts_done: 'Попыток сделано',
         Select_chapter: 'Выбор главы',
         Chapter_1: 'Первая глава',
         Chapter_2: 'Вторая глава',
@@ -30,6 +30,10 @@ angular.module('starter.translations.ru', ['pascalprecht.translate']).config(fun
         Reset: 'Сбросить прогресс',
         Disable_ads: 'Отключить рекламу',
         How_to_play: 'Как играть',
-        About: 'О нас'
+        About: 'О нас',
+        Language: 'Язык',
+        Penalty: 'Штраф',
+        Points: 'Очки',
+        Stars: 'Звёзды'
     });
 });

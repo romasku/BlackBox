@@ -1,0 +1,56 @@
+[
+  {
+    "level": 1,
+    "chapter": 1,
+    "numInChapter": 1,
+    "author": "Stas",
+    "complexity": 1,
+    "exellent": 3,
+    "good": 5
+  },
+  {
+    "level": 2,
+    "chapter": 1,
+    "numInChapter": 2,
+    "author": "Stas",
+    "complexity": 1,
+    "exellent": 3,
+    "good": 5
+  },
+  {
+    "level": 3,
+    "chapter": 1,
+    "numInChapter": 3,
+    "author": "Stas",
+    "complexity": 1,
+    "exellent": 3,
+    "good": 5
+  },
+  {
+    "level": 4,
+    "chapter": 1,
+    "numInChapter": 4,
+    "author": "Stas",
+    "complexity": 2,
+    "exellent": 5,
+    "good": 10
+  },
+  {
+    "level": 5,
+    "chapter": 1,
+    "numInChapter": 5,
+    "author": "Liza",
+    "complexity": 2,
+    "exellent": 5,
+    "good": 10
+  },
+  {
+    "level": 6,
+    "chapter": 1,
+    "numInChapter": 6,
+    "author": "Liza",
+    "complexity": 5,
+    "exellent": 20,
+    "good": 30
+  }
+]

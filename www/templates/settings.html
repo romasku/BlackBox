@@ -1,19 +1,33 @@
 <ion-view view-title="{{'Settings' | translate}}">
     <ion-content class="padding">
         <div class="button-bar">
-            <ion-item class="item-checkbox item-checkbox-right" style="width:50%">
+            <ion-item class="item-toggle" style="width:50%">
                 <span class="input-label">{{'Music' | translate}}</span>
-                <label class="checkbox">
+                <label class="toggle toggle-positive">
                     <input type="checkbox">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
                 </label>
             </ion-item>
-            <ion-item class="item-checkbox item-checkbox-right" style="width:50%">
-                <label class="checkbox">
-                    <input type="checkbox">
-                </label>
+            <ion-item class="item-toggle" style="width:50%">
                 <span class="input-label">{{'Sound' | translate}}</span>
+                <label class="toggle toggle-positive">
+                    <input type="checkbox">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
             </ion-item>
         </div>
+        <ion-item class="item-divider item-positive">
+            {{'Language' | translate}}
+        </ion-item>
+        <ion-item class="item item-icon-right" style="width: 100%" ng-repeat="language in languages"
+                  ng-click="setLanguage(language.abb);">
+            {{language.name}}
+            <i ng-if="isCurrent(language.abb)" class="icon positive ion-ios-checkmark"></i>
+        </ion-item>
         <button class="button button-positive button-block" ng-click="reset();">
             {{'Reset' | translate}}
         </button>
