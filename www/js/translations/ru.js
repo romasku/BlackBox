@@ -34,6 +34,14 @@ angular.module('starter.translations.ru', ['pascalprecht.translate']).config(fun
         Language: 'Язык',
         Penalty: 'Штраф',
         Points: 'Очки',
-        Stars: 'Звёзды'
+        Stars: 'Звёзды',
+        Multiplayer: 'Мультиплеер',
+        Change_name: 'Сменить ник',
+        Enter_new_username: 'Введите новый ник',
+        Find_oponent: 'Подбор соперника',
+        Looking_for_oponent: 'Поиск соперника',
+        Oponent_guessing: 'Соперник угадывает',
+        Oponent_answering: 'Соперник отвечает',
+        Oponent_won: 'Соперник победил'
     });
 });

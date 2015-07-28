@@ -34,6 +34,14 @@ angular.module('starter.translations.ua', ['pascalprecht.translate']).config(fun
         Language: 'Мова',
         Penalty: 'Штраф',
         Points: 'Бали',
-        Stars: 'Зірки'
+        Stars: 'Зірки',
+        Multiplayer: 'Мультіплеер',
+        hange_name: 'Змінити нік',
+        Enter_new_username: 'Введіть новий нік',
+        Find_oponent: 'Підбір суперника',
+        Looking_for_oponent: 'Пошук суперника',
+        Oponent_guessing: 'Суперник вгадує',
+        Oponent_answering: 'Суперник віповідає',
+        Oponent_won: 'Суперник переміг'
     });
 });

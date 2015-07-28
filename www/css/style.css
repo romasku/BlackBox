@@ -66,3 +66,34 @@
 .toggle {
     margin-top: 2px;
 }
+.spinner svg{
+    margin-top:25vh;
+    width: 15vh;
+    height: 15vh;
+}
+.progress-text{
+    position: absolute;
+    width: 95.4%;
+    text-align: center;
+    margin : 0;
+    padding: 0;
+    padding-top: 7vh;
+    font-size: 5vh;
+}
+.hidden {
+    visibility: hidden;
+}
+.button-accept {
+    top:15vh;
+    vertical-align: none;
+    width: 100%;
+}
+.oponent-state{
+    position: absolute;
+    font-size: 1.2em;
+    margin:8px;
+    bottom: 0;
+}
+.warning{
+    color : red;
+}

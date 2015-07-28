@@ -34,6 +34,15 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Language: 'Language',
         Penalty: 'Penalty',
         Points: 'Points',
-        Stars: 'Stars'
+        Stars: 'Stars',
+        Multiplayer: 'Multiplayer',
+        Change_name: 'Change name',
+        Enter_new_username: 'Enter new username',
+        Find_oponent: 'Find oponent',
+        Looking_for_oponent: 'Looking for oponent',
+        Oponent_guessing: 'Oponent guessing',
+        Oponent_answering: 'Oponent_answering',
+        Oponent_won: 'Oponent won'
+
     });
 });

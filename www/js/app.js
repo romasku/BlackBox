@@ -52,6 +52,15 @@ starter.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+        .state('header.multiplayer', {
+            url: '/multiplayer?level&log&time_won',
+            views: {
+                'main': {
+                    templateUrl: 'templates/multiplayer.html',
+                    controller: 'MultiPlayCtrl'
+                }
+            }
+        })
         .state('header.level-list', {
             url: '/level-list',
             views: {
@@ -61,15 +70,22 @@ starter.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+          .state('header.oponent-search', {
+            url : '/oponent-search',
+            views : {
+                'main': {
+                    templateUrl: 'templates/oponent-search.html',
+                    controller: "SearchCtrl"
+                }
+            }
+        })
         .state('header.chapter-list', {
             url : '/chapter-list',
             views : {
                 'main': {
-                    templateUrl: 'templates/chapter-list.html',
-                    controller: 'LevelListCtrl'
+                    templateUrl: 'templates/chapter-list.html'
                 }
             }
-
         })
         .state('header.settings', {
             url: '/settings',
@@ -84,7 +100,8 @@ starter.config(function ($stateProvider, $urlRouterProvider) {
             url: '/main-menu',
             views: {
                 'main': {
-                    templateUrl: 'templates/main-menu.html'
+                    templateUrl: 'templates/main-menu.html',
+                    controller: 'MainCtrl'
                 }
             }
         });
