@@ -43,12 +43,6 @@ angular.module('starter.factories.LevelFactory', [])
                 factory.setLevel(level);
             }
         };
-        factory.set = function(key, value) {
-            $window.localStorage[key] = value;
-        };
-        factory.get = function(key, defaultValue) {
-            return $window.localStorage[key] || defaultValue;
-        };
 
         return factory;
     }]);

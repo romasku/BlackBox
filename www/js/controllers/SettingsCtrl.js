@@ -1,6 +1,6 @@
 angular.module('starter.controllers.SettingsCtrl', ['starter.factories.LevelFactory'])
 
-    .controller('SettingsCtrl', function ($scope, $LevelFactory, $translate, $ionicPopup, $filter, $http) {
+    .controller('SettingsCtrl', function ($scope, $LevelFactory, $translate, $ionicPopup, $window, $filter, $http) {
         $scope.reset = function () {
             $LevelFactory.clear(18);
             window.history.back();
@@ -20,13 +20,13 @@ angular.module('starter.controllers.SettingsCtrl', ['starter.factories.LevelFact
         }
         $scope.setName = function(name) {
             $http.get("http://blackboxgame.ddns.net:8888/set_name", {params : {
-                id : $LevelFactory.get("id",null),
+                id : $window.localStorage["id"],
                 username : name
             }})
             .success(function(data){
                 console.log(data);
             })
-            $LevelFactory.set("name",name);
+            $window.localStorage["name"] = name;
         }
         var translateText = $filter('translate');
 
@@ -35,7 +35,7 @@ angular.module('starter.controllers.SettingsCtrl', ['starter.factories.LevelFact
             var canceled = true;
             console.log(title);
             var myPopup = $ionicPopup.show({
-                template: '<input type="text" ng-model="data.ans" placeholder = "' + $LevelFactory.get("name",null) + '" autofocus>',
+                template: '<input type="text" ng-model="data.ans" placeholder = "' + $window.localStorage["name"] + '" autofocus>',
                 title: translateText(title),
                 scope: $scope,
                 buttons: [

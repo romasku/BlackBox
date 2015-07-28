@@ -37,7 +37,6 @@ starter.filter('range', function () {
 });
 
 starter.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
-    $httpProvider.defaults.useXDomain = true;
     $stateProvider
         .state('header', {
             url: '/header',

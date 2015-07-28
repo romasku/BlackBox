@@ -1,18 +1,18 @@
 angular.module('starter.controllers.MainCtrl', ['starter.factories.LevelFactory'])
 
     .controller('MainCtrl', function ($scope, $http, $LevelFactory, $window) {
-    	if (!$LevelFactory.get("id",null)) {
+    	if (!$window.localStorage["id"]) {
     		$http.get("http://blackboxgame.ddns.net:8888/register")
     			.success(function(data){
-    				$LevelFactory.set("id",data);
+    				$window.localStorage["id"] = data;
     			});
     	}
-    	if (!$LevelFactory.get("name",null)) {
+    	if (!$window.localStorage["name"]) {
     		$http.get("http://blackboxgame.ddns.net:8888/get_username", {params : {id :$LevelFactory.get("id",null)}})
     			.success(function(data){
-    				$LevelFactory.set("name",data);
+    				window.localStorage["name"] = data;
     			});
     	}
-    	console.log($LevelFactory.get("id",null));
+    	console.log($window.localStorage["name"]);
     });
       

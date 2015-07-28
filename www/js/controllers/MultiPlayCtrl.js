@@ -1,6 +1,6 @@
 angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFactory'])
 
-    .controller('MultiPlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $timeout) {
+    .controller('MultiPlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $window, $timeout) {
         $scope.level = $state.params.level;
         var log =$state.params.log;
         var pr = 0;
@@ -32,7 +32,7 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
         }
         $scope.submitReplay = function() {
             $http.get("http://blackboxgame.ddns.net:8888/upload_replay", {params:{
-                players_id : $LevelFactory.get("id",null),
+                players_id : $window.localStorage["id"],
                 time_won : $scope.time_won,
                 log : $scope.log,
                 game_id : $scope.level 
