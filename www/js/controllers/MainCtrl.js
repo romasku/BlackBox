@@ -15,3 +15,4 @@ angular.module('starter.controllers.MainCtrl', ['starter.factories.LevelFactory'
     	}
     	console.log($LevelFactory.get("id",null));
     });
+      

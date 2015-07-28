@@ -42,7 +42,9 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Looking_for_oponent: 'Looking for oponent',
         Oponent_guessing: 'Oponent guessing',
         Oponent_answering: 'Oponent_answering',
-        Oponent_won: 'Oponent won'
+        Oponent_won: 'Oponent won',
+        Won : 'You won',
+        Lose : "You lose"
 
     });
 });

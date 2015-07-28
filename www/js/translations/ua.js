@@ -42,6 +42,8 @@ angular.module('starter.translations.ua', ['pascalprecht.translate']).config(fun
         Looking_for_oponent: 'Пошук суперника',
         Oponent_guessing: 'Суперник вгадує',
         Oponent_answering: 'Суперник віповідає',
-        Oponent_won: 'Суперник переміг'
+        Oponent_won: 'Суперник переміг',
+        Won : 'Ти переміг',
+        Lose : "Ти програв"
     });
 });

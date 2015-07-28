@@ -52,7 +52,6 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
 
         $timeout($scope.showKeyboard, 400);
 
-        $scope.stats = $LevelFactory.getLevel($scope.level);
 
         $scope.attempts = [];
         var url = '/';
@@ -129,10 +128,6 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
             }
             else {
                 $scope.attempts.unshift({question: val, answer: $scope.calc(val)});
-                if (!$scope.stats.isCompleted) {
-                    $scope.stats.moves++;
-                    $LevelFactory.setLevel($scope.stats);
-                }
             }
             $scope.showKeyboard();
         };
@@ -194,10 +189,6 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
                     $scope.newState();
                     if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
                         cordova.plugins.Keyboard.close();
-                    if (!$scope.stats.isCompleted) {
-                        $scope.stats.penalty += $scope.countPenalty(num);
-                        $LevelFactory.setLevel($scope.stats);
-                    }
                     setTimeout(function () {
                         $ionicPopup.alert({
                             title: translate('Wrong_answer'),
@@ -219,14 +210,12 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
                 $scope.submitReplay();
                 if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
                     cordova.plugins.Keyboard.close();
-                $scope.stats.isCompleted = true;
-                $scope.stats.stars = $scope.countStars($scope.stats);
-                $scope.stats.points = $scope.countPoints($scope.stats);
-                $LevelFactory.setLevel($scope.stats);
+                var msg = "Lose";
+                if ($scope.time_won < $state.params.time_won) msg = "Won";
                 setTimeout(function () {
                     $ionicPopup.alert({
                         title: translate('Congratulations') + '!',
-                        template: '<p style="text-align: center;">' + translate('Level_complete') + '!</p><p style="text-align: center;">' + translate('Stars') + ': ' + $scope.stats.stars + '<br>' + translate('Points') + ': ' + $scope.stats.points + '</p>'
+                        template: '<p style="text-align: center;">' + translate(msg) + '!</p>'
                     }).then(function () {
                         window.history.back();
                     });
