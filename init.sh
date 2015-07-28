@@ -7,6 +7,7 @@ ionic platforms add android
 
 cordova plugin add cordova-plugin-splashscreen
 cordova plugin add com.ionic.keyboard
+cordova plugin add cordova-plugin-whitelist
 
 # This workaround is for Docker environment
 function cordova_plugin_add_git() {
