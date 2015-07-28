@@ -8,7 +8,7 @@ angular.module('starter.controllers.MainCtrl', ['starter.factories.LevelFactory'
     			});
     	}
     	if (!$window.localStorage["name"]) {
-    		$http.get("http://blackboxgame.ddns.net:8888/get_username", {params : {id :$LevelFactory.get("id",null)}})
+    		$http.get("http://blackboxgame.ddns.net:8888/get_username", {params : {id :$window.localStorage["id"]}})
     			.success(function(data){
     				window.localStorage["name"] = data;
     			});
