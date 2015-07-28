@@ -1,0 +1,35 @@
+<ion-view view-title="{{'Multiplayer' | translate}}">
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item>
+                <input style="width: 100%; font-size: 1rem" type="number" placeholder="{{'Your_number' | translate}}"
+                       id="play-input"
+                       ng-model="model.input"><br>
+
+                <div class="button-bar">
+                    <button class="button button-positive button-outline" ng-click="add();">{{'Ask' | translate}}
+                    </button>
+                    <button class="button button-positive button-outline" ng-click="answer(0, '', '')">
+                        {{'Answer' | translate}}
+                    </button>
+                </div>
+                <br>
+                <h4 style="font-size: 1rem" class="text-center">{{'Attempts_done' | translate}}: {{stats.moves}}</h4>
+                <h4 style="font-size: 1rem" class="text-center">{{'Penalty' | translate}}: {{stats.penalty}}</h4>
+            </ion-item>
+            <ion-item style="width: 100%;" ng-repeat="attempt in attempts">
+                <table style="width: 100%;">
+                    <tbody>
+                    <tr>
+                        <td class="text-center" style="width: 50%;">{{attempt.question}}</td>
+                        <td class="text-center" style="width: 50%;">{{attempt.answer}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+    <p class="oponent-state" id="oponent_state">
+    {{opState | translate}}
+    </p>
+</ion-view>

@@ -1,0 +1,14 @@
+<ion-view view-title="{{'Find_oponent' | translate}}">
+    <ion-content scroll="false" class="padding" style="background-color: white; text-align:center;">
+    <ion-spinner id="spinner"></ion-spinner>
+    <p class="progress-text" id="search_text">
+        {{'Looking_for_oponent' | translate}}
+    </p>
+    <p class="progress-text hidden" id="oponent_name">
+        {{oponent-name}}
+    </p>
+    <a class="button button-accept button-positive hidden" id="button_accept" href="#/header/multiplayer?level={{levelnum}}&amp;log={{log}}&amp;time_won={{time_won}}">
+        {{'Play' | translate}}
+    </a>
+    </ion-content>
+</ion-view>
