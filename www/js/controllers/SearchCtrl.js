@@ -3,7 +3,6 @@ angular.module('starter.controllers.SearchCtrl', ['starter.factories.LevelFactor
     .controller('SearchCtrl', function ($scope, $LevelFactory, $http) {
     	$http.get("http://blackboxgame.ddns.net:8888/find_replay")
     	.success(function(data) {
-        	console.log(data);
         	$http.get("http://blackboxgame.ddns.net:8888/get_username", {params : {id : data["players_id"]}})
         	.success(function(name) {
         		var search_text = angular.element(document.getElementById("search_text"));
@@ -11,7 +10,6 @@ angular.module('starter.controllers.SearchCtrl', ['starter.factories.LevelFactor
         		var spinner = angular.element(document.getElementById("spinner"));
         		spinner.css("visibility","hidden");
         		var oponent_name = angular.element(document.getElementById("oponent_name"));
-        		console.log(name);
         		oponent_name.html(name);
         		oponent_name.css("visibility","visible");
         		var button_accept = angular.element(document.getElementById("button_accept"));

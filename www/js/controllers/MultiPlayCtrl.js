@@ -38,7 +38,6 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
                 game_id : $scope.level 
             }})
             .success(function(data){
-                console.log("Submited!\n" + data);
             });
         }
         $timeout($scope.setOpWon,$state.params.time_won);
@@ -176,10 +175,8 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
         $scope.newState = function() {
             var time = (new Date()).getTime();
             time = time - $scope.timeBeg;
-            console.log(time);
             $scope.log += time;
             $scope.log += 'a';
-            console.log($scope.log);
         }
         $scope.answer = function (num, ptask, pans) {
             if (ptask == '') $scope.newState();
