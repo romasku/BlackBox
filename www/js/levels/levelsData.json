@@ -52,5 +52,41 @@
     "complexity": 5,
     "exellent": 20,
     "good": 30
+  },
+  {
+    "level": 7,
+    "chapter": 1,
+    "numInChapter": 7,
+    "author": "Roma",
+    "complexity": 5,
+    "exellent": 20,
+    "good": 30
+  },
+  {
+    "level": 8,
+    "chapter": 1,
+    "numInChapter": 8,
+    "author": "Roma",
+    "complexity": 5,
+    "exellent": 20,
+    "good": 30
+  },
+  {
+    "level": 9,
+    "chapter": 1,
+    "numInChapter": 9,
+    "author": "Roma",
+    "complexity": 5,
+    "exellent": 20,
+    "good": 30
+  },
+  {
+    "level": 10,
+    "chapter": 1,
+    "numInChapter": 10,
+    "author": "Roma",
+    "complexity": 5,
+    "exellent": 20,
+    "good": 30
   }
 ]

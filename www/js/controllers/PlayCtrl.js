@@ -13,6 +13,15 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         setTimeout($scope.showKeyboard, 400);
 
         $scope.stats = $LevelFactory.getLevel($scope.level);
+        if (!$scope.stats) {
+            $scope.stats = {
+                isCompleted : false,
+                moves : 0,
+                penalty: 0,
+                stars: 0,
+                points: 0
+            }
+        }
 
         $scope.attempts = [];
         var url = '/';
@@ -114,7 +123,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                         text: '<b>' + translate('Answer') + '</b>',
                         type: 'button-positive',
                         onTap: function (e) {
-                            if (!$scope.data.ans) {
+                            if (!$scope.data.ans && $scope.data.ans !== 0) {
                                 e.preventDefault();
                             }
                             else {
@@ -169,6 +178,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 $scope.stats.isCompleted = true;
                 $scope.stats.stars = $scope.countStars($scope.stats);
                 $scope.stats.points = $scope.countPoints($scope.stats);
+                console.log($scope.stats);
                 $LevelFactory.setLevel($scope.stats);
                 setTimeout(function () {
                     $ionicPopup.alert({

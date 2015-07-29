@@ -148,7 +148,7 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
                         text: '<b>' + translate('Answer') + '</b>',
                         type: 'button-positive',
                         onTap: function (e) {
-                            if (!$scope.data.ans) {
+                            if (!$scope.data.ans && $scope.data.ans !== 0) {
                                 e.preventDefault();
                             }
                             else {
