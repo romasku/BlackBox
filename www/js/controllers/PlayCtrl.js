@@ -115,14 +115,17 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             $scope.data.calc = val;
             $scope.addSign = function (sign) {
                 $scope.data.calc += sign;
+                if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
+                    cordova.plugins.Keyboard.show();
             }
             $scope.calculate = function () {
                 $scope.data.calc = eval($scope.data.calc);
+                if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
+                    cordova.plugins.Keyboard.show();
             };
             $scope.signs = ['+','-','*','/'];
             var myPopup = $ionicPopup.show({
-                template: '<input type="text" ng-model="data.calc" autofocus> <br>' +
-                '<div class="button-bar">' +
+                template: '<input type="tel" ng-model="data.calc" autofocus> <br> <div class="button-bar">' +
                 '<button ng-repeat="sign in signs" class="button button-positive button-outline" ng-click="addSign(sign);"> {{sign}} </button>' +
                 '</div>' +
                 '<button class="button button-positive" style="width: 100%" ng-click="calculate();">=</button>',
