@@ -38,13 +38,13 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Multiplayer: 'Multiplayer',
         Change_name: 'Change name',
         Enter_new_username: 'Enter new username',
-        Find_oponent: 'Find oponent',
-        Looking_for_oponent: 'Looking for oponent',
-        Oponent_guessing: 'Oponent guessing',
-        Oponent_answering: 'Oponent_answering',
-        Oponent_won: 'Oponent won',
+        Find_opponent: 'Find opponent',
+        Looking_for_opponent: 'Looking for opponent',
+        Opponent_guessing: 'Opponent guessing',
+        Opponent_answering: 'Opponent_answering',
+        Opponent_won: 'Opponent won',
         Won : 'You won',
-        Lose : "You lose"
-
+        Lose : "You lose",
+        Calculator: "Calculator"
     });
 });

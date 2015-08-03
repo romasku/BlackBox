@@ -28,6 +28,9 @@
             {{language.name}}
             <i ng-if="isCurrent(language.abb)" class="icon positive ion-ios-checkmark"></i>
         </ion-item>
+        <ion-item class="button button-positive button-block" ng-click="showPopup('Enter_new_username');">
+            {{'Change_name' | translate}}
+        </ion-item>
         <button class="button button-positive button-block" ng-click="reset();">
             {{'Reset' | translate}}
         </button>
@@ -39,9 +42,6 @@
         </ion-item>
         <ion-item class="button button-positive button-block">
             {{'About' | translate}}
-        </ion-item>
-        <ion-item class="button button-positive button-block" ng-click="showPopup('Enter_new_username');">
-            {{'Change_name' | translate}}
         </ion-item>
     </ion-content>
 </ion-view>

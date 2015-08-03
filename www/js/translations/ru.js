@@ -38,12 +38,13 @@ angular.module('starter.translations.ru', ['pascalprecht.translate']).config(fun
         Multiplayer: 'Мультиплеер',
         Change_name: 'Сменить ник',
         Enter_new_username: 'Введите новый ник',
-        Find_oponent: 'Подбор соперника',
-        Looking_for_oponent: 'Поиск соперника',
-        Oponent_guessing: 'Соперник угадывает',
-        Oponent_answering: 'Соперник отвечает',
-        Oponent_won: 'Соперник победил',
+        Find_opponent: 'Подбор соперника',
+        Looking_for_opponent: 'Поиск соперника',
+        Opponent_guessing: 'Соперник угадывает',
+        Opponent_answering: 'Соперник отвечает',
+        Opponent_won: 'Соперник победил',
         Won : 'Ты победил',
-        Lose : "Ты проиграл"
+        Lose : "Ты проиграл",
+        Calculator: "Калькулятор"
     });
 });

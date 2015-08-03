@@ -15,8 +15,8 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         $scope.stats = $LevelFactory.getLevel($scope.level);
         if (!$scope.stats) {
             $scope.stats = {
-                isCompleted : false,
-                moves : 0,
+                isCompleted: false,
+                moves: 0,
                 penalty: 0,
                 stars: 0,
                 points: 0
@@ -110,11 +110,43 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             return Math.floor(Math.random() * 1e3);
         };
 
+        $scope.showCalc = function (val) {
+            $scope.data = {};
+            $scope.data.calc = val;
+            $scope.addSign = function (sign) {
+                $scope.data.calc += sign;
+            }
+            $scope.calculate = function () {
+                $scope.data.calc = eval($scope.data.calc);
+            };
+            $scope.signs = ['+','-','*','/'];
+            var myPopup = $ionicPopup.show({
+                template: '<input type="text" ng-model="data.calc" autofocus> <br>' +
+                '<div class="button-bar">' +
+                '<button ng-repeat="sign in signs" class="button button-positive button-outline" ng-click="addSign(sign);"> {{sign}} </button>' +
+                '</div>' +
+                '<button class="button button-positive" style="width: 100%" ng-click="calculate();">=</button>',
+                title: translate('Calculator'),
+                scope: $scope,
+                buttons: [
+                    {text: 'OK'}
+                ]
+            }).then(function (res) {
+                $scope.data.ans = $scope.data.calc;
+                if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
+                    cordova.plugins.Keyboard.close();
+            });
+            if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
+                cordova.plugins.Keyboard.show();
+        };
+
         $scope.showPopup = function (title, task, num) {
             $scope.data = {};
+            $scope.task = task;
             var canceled = true;
             var myPopup = $ionicPopup.show({
-                template: '<p style="text-align: center;">' + task + '</p><input type="number" ng-model="data.ans" autofocus>',
+                template: '<p style="text-align: center;">' + task + '</p><div class="button-bar"><input type="number" style="width: 90%; font-size: 1rem;" ng-model="data.ans" autofocus>' +
+                '<button class="button button-positive button-outline" ng-click="showCalc(task);"> <i class="icon ion-calculator"></i></button></div>',
                 title: title,
                 scope: $scope,
                 buttons: [

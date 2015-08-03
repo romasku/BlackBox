@@ -70,11 +70,11 @@ starter.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                 }
             }
         })
-          .state('header.oponent-search', {
-            url : '/oponent-search',
+          .state('header.opponent-search', {
+            url : '/opponent-search',
             views : {
                 'main': {
-                    templateUrl: 'templates/oponent-search.html',
+                    templateUrl: 'templates/opponent-search.html',
                     controller: "SearchCtrl"
                 }
             }

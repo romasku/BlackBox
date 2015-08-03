@@ -6,16 +6,16 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
         var pr = 0;
         $scope.log = "";
         $scope.timeWon = -1;
-        $scope.opState = "Oponent_guessing";
+        $scope.opState = "Opponent_guessing";
         $scope.timeBeg = (new Date()).getTime();
         $scope.changeOpState = function() {
-            if ($scope.opState == "Oponent_guessing") {
-                $scope.opState = "Oponent_answering";
-                angular.element(document.getElementById("oponent_state")).addClass("warning");
+            if ($scope.opState == "Opponent_guessing") {
+                $scope.opState = "Opponent_answering";
+                angular.element(document.getElementById("opponent_state")).addClass("warning");
             }
             else { 
-                $scope.opState = "Oponent_guessing";
-                angular.element(document.getElementById("oponent_state")).removeClass("warning");
+                $scope.opState = "Opponent_guessing";
+                angular.element(document.getElementById("opponent_state")).removeClass("warning");
             }
         }
         for (var i = 0; i<log.length; i++)
@@ -28,7 +28,7 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
             }
         }
         $scope.setOpWon = function(){
-            $scope.opState ="Oponent_won";
+            $scope.opState ="Opponent_won";
         }
         $scope.submitReplay = function() {
             $http.get("http://blackboxgame.ddns.net:8888/upload_replay", {params:{

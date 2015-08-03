@@ -2,10 +2,15 @@
     <ion-content class="padding">
         <ion-list>
             <ion-item>
-                <input style="width: 100%; font-size: 1rem" type="number" placeholder="{{'Your_number' | translate}}"
-                       id="play-input"
-                       ng-model="model.input"><br>
-
+                <div class="button-bar">
+                    <input style="width: 90%; font-size: 1rem" type="number"
+                           placeholder="{{'Your_number' | translate}}"
+                           id="play-input"
+                           ng-model="model.input">
+                    <button class="button button-positive button-outline" ng-click="showCalc('');">
+                        <i class="icon ion-calculator"></i>
+                    </button>
+                </div><br>
                 <div class="button-bar">
                     <button class="button button-positive button-outline" ng-click="add();">{{'Ask' | translate}}
                     </button>

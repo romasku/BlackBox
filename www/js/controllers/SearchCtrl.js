@@ -9,9 +9,9 @@ angular.module('starter.controllers.SearchCtrl', ['starter.factories.LevelFactor
         		search_text.css("visibility","hidden");
         		var spinner = angular.element(document.getElementById("spinner"));
         		spinner.css("visibility","hidden");
-        		var oponent_name = angular.element(document.getElementById("oponent_name"));
-        		oponent_name.html(name);
-        		oponent_name.css("visibility","visible");
+        		var opponent_name = angular.element(document.getElementById("opponent_name"));
+        		opponent_name.html(name);
+        		opponent_name.css("visibility","visible");
         		var button_accept = angular.element(document.getElementById("button_accept"));
         		button_accept.css("visibility","visible");
         		$scope.levelnum = data["game_id"];
