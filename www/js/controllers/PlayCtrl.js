@@ -111,10 +111,13 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         };
 
         $scope.showCalc = function (val) {
+            if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
+                cordova.plugins.Keyboard.show();
             $scope.data = {};
             $scope.data.calc = val;
             $scope.addSign = function (sign) {
-                $scope.data.calc += sign;
+                if (sign == 'C') $scope.data.calc = '';
+                else $scope.data.calc += sign;
                 if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
                     cordova.plugins.Keyboard.show();
             }
@@ -123,10 +126,11 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
                     cordova.plugins.Keyboard.show();
             };
-            $scope.signs = ['+','-','*','/'];
+            $scope.lines = 2;
+            $scope.signs = [['+','%'],['-','('],['*',')'],['/','C']];
             var myPopup = $ionicPopup.show({
-                template: '<input type="tel" ng-model="data.calc" autofocus> <br> <div class="button-bar">' +
-                '<button ng-repeat="sign in signs" class="button button-positive button-outline" ng-click="addSign(sign);"> {{sign}} </button>' +
+                template: '<input type="tel" ng-model="data.calc" autofocus> <br> <div class="button-bar" ng-repeat="line in [] | range: lines">' +
+                '<button ng-repeat="sign in signs" class="button button-positive button-outline" ng-click="addSign(sign[line]);"> {{sign[line]}} </button>' +
                 '</div>' +
                 '<button class="button button-positive" style="width: 100%" ng-click="calculate();">=</button>',
                 title: translate('Calculator'),

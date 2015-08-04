@@ -95,5 +95,8 @@
     bottom: 0;
 }
 .warning{
-    color : red;
+    color: red;
+}
+.popup{
+    width: 300px !important;
 }
