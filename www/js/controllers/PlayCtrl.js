@@ -111,20 +111,20 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         };
 
         $scope.showCalc = function (val) {
-            if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
-                cordova.plugins.Keyboard.show();
+            if (window.cordova && cordova.plugins && cordova.plugins.Focus)
+                cordova.plugins.Focus.focus($scope.input);
             $scope.data = {};
             $scope.data.calc = val;
             $scope.addSign = function (sign) {
                 if (sign == 'C') $scope.data.calc = '';
                 else $scope.data.calc += sign;
-                if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
-                    cordova.plugins.Keyboard.show();
+                if (window.cordova && cordova.plugins && cordova.plugins.Focus)
+                    cordova.plugins.Focus.focus($scope.input);
             }
             $scope.calculate = function () {
                 $scope.data.calc = eval($scope.data.calc);
-                if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
-                    cordova.plugins.Keyboard.show();
+                if (window.cordova && cordova.plugins && cordova.plugins.Focus)
+                    cordova.plugins.Focus.focus($scope.input);
             };
             $scope.lines = 2;
             $scope.signs = [['+','%'],['-','('],['*',')'],['/','C']];
@@ -143,8 +143,8 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
                     cordova.plugins.Keyboard.close();
             });
-            if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
-                cordova.plugins.Keyboard.show();
+            if (window.cordova && cordova.plugins && cordova.plugins.Focus)
+                cordova.plugins.Focus.focus($scope.input);
         };
 
         $scope.showPopup = function (title, task, num) {
