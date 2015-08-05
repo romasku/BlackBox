@@ -11,7 +11,7 @@ angular.module('starter.controllers.SettingsCtrl', ['starter.factories.LevelFact
                         isConnected=false;
                     });
         $scope.reset = function () {
-            $LevelFactory.clear(18);
+            $LevelFactory.clear(24);
             window.history.back();
         }
         $scope.languages = [{abb: 'en', name: 'English'}, {abb: 'ru', name: 'Русский'}, {
