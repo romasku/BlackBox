@@ -106,18 +106,20 @@
     width: 100%;
     height: 40%;
     text-align: center;
-    background: #FFFFFF
+    border-collapse: collapse;    
 }
 .keyboard td {
     width: 33%;
     border-style: solid;
     vertical-align: middle;
-    border-width: 2px 2px 2px 2px; 
+    border-width: 5px 5px 0px 5px;
+    border-color: #387ef5; 
+    background: #FFFFFF;
     font-size: 4em;
     font-weight: 200;
 }
 .button-activated {
-    background: #387ef5;
+    background: #387ef5 !important;
     color: #FFFFFF;
 }
 .keyboard-showing{

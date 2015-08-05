@@ -136,18 +136,14 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             $scope.addSign = function (sign) {
                 if (sign == 'C') $scope.data.calc = '';
                 else $scope.data.calc += sign;
-                if (window.cordova && cordova.plugins && cordova.plugins.Focus)
-                    cordova.plugins.Focus.focus($scope.input);
             }
             $scope.calculate = function () {
                 $scope.data.calc = eval($scope.data.calc);
-                if (window.cordova && cordova.plugins && cordova.plugins.Focus)
-                    cordova.plugins.Focus.focus($scope.input);
             };
             $scope.lines = 2;
             $scope.signs = [['+','%'],['-','('],['*',')'],['/','C']];
             var myPopup = $ionicPopup.show({
-                template: '<input type="tel" ng-model="data.calc" autofocus> <br> <div class="button-bar" ng-repeat="line in [] | range: lines">' +
+                template: '<input type="tel" ng-model="data.calc"> <br> <div class="button-bar" ng-repeat="line in [] | range: lines">' +
                 '<button ng-repeat="sign in signs" class="button button-positive button-outline" ng-click="addSign(sign[line]);"> {{sign[line]}} </button>' +
                 '</div>' +
                 '<button id="button_calc" class="button button-positive" style="width: 100%" ng-click="calculate();">=</button>',
@@ -173,7 +169,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             $scope.task = task;
             var canceled = true;
             var myPopup = $ionicPopup.show({
-                template: '<p style="text-align: center;">' + task + '</p><div class="button-bar"><input type="number" style="width: 90%; font-size: 1rem;" ng-model="data.ans" autofocus>' +
+                template: '<p style="text-align: center;">' + task + '</p><div class="button-bar"><input type="number" style="width: 90%; font-size: 1rem;" ng-model="data.ans">' +
                 '<button class="button button-positive button-outline" ng-click="showCalc(task);"> <i class="icon ion-calculator"></i></button></div>',
                 title: title,
                 scope: $scope,
@@ -210,6 +206,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 $scope.data.ans = parseInt(value);
             }
             $Keyboard.getValue = function(){
+                if (!$scope.data.ans) $scope.data.ans="";
                 return $scope.data.ans.toString();
             }
             $timeout(function() {$Keyboard.button=angular.element(document.getElementsByClassName("button_ok")[0]);}, 400);

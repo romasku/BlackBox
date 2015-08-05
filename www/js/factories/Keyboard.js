@@ -55,8 +55,7 @@ angular.module('starter.factories.Keyboard', [])
             },200);
             if (char == "del") {
                 var value=factory.getValue();
-                value = (value - value%10)/10;
-                if (value==0) value="";
+                value = value.substr(0,value.length-1);
                 factory.setValue(value);
             }
             else if (char == 'ok') factory.submit();
