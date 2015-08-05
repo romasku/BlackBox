@@ -12,7 +12,7 @@
                     </button>
                 </div><br>
                 <div class="button-bar">
-                    <button class="button button-positive button-outline" ng-click="add();">{{'Ask' | translate}}
+                    <button id="button_ask" class="button button-positive button-outline" ng-click="add();">{{'Ask' | translate}}
                     </button>
                     <button class="button button-positive button-outline" ng-click="answer(0, '', '')">
                         {{'Answer' | translate}}
@@ -22,7 +22,7 @@
                 <h4 style="font-size: 1rem" class="text-center">{{'Attempts_done' | translate}}: {{stats.moves}}</h4>
                 <h4 style="font-size: 1rem" class="text-center">{{'Penalty' | translate}}: {{stats.penalty}}</h4>
             </ion-item>
-            <ion-item style="width: 100%;" ng-repeat="attempt in attempts">
+            <ion-item style="width: 100%;" ng-repeat="attempt in attempts" >
                 <table style="width: 100%;">
                     <tbody>
                     <tr>

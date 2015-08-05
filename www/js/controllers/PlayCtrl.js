@@ -1,13 +1,23 @@
-angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'])
+angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory', 'starter.factories.Keyboard'])
 
-    .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory) {
+    .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $Keyboard, $timeout) {
         $scope.level = $state.params.level;
-
+        $scope.model = {};
+        $scope.model.input = "";
         $scope.input = document.getElementById("play-input");
+        $scope.Keyboard = $Keyboard;
 
         $scope.showKeyboard = function () {
-            if (window.cordova && cordova.plugins && cordova.plugins.Focus)
-                cordova.plugins.Focus.focus($scope.input);
+            console.log("showKeyboard");
+            $Keyboard.setValue = function (value){
+                console.log(value);
+                $scope.model.input = parseInt(value);
+            }
+            $Keyboard.getValue = function () {
+                return $scope.model.input.toString();
+            }
+            $Keyboard.button = angular.element(document.getElementById("button_ask"));
+            $Keyboard.show($scope);
         };
 
         setTimeout($scope.showKeyboard, 400);
@@ -72,8 +82,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
 
         var translate = $filter('translate');
 
-        $scope.model = {};
-        $scope.model.input = "";
+       
 
         $scope.showError = function (msg) {
             $ionicPopup.alert({
@@ -111,8 +120,17 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         };
 
         $scope.showCalc = function (val) {
-            if (window.cordova && cordova.plugins && cordova.plugins.Focus)
-                cordova.plugins.Focus.focus($scope.input);
+            var keyboardSave = {};
+            keyboardSave.getValue=$Keyboard.getValue;
+            keyboardSave.setValue=$Keyboard.setValue;
+            keyboardSave.button=$Keyboard.button;
+            $Keyboard.getValue = function(){
+                return $scope.data.calc;
+            }
+            $Keyboard.setValue = function(value){
+                $scope.data.calc=value;
+            }
+            $timeout(function() {$Keyboard.button=angular.element(document.getElementById("button_calc"));}, 400);
             $scope.data = {};
             $scope.data.calc = val;
             $scope.addSign = function (sign) {
@@ -132,19 +150,22 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 template: '<input type="tel" ng-model="data.calc" autofocus> <br> <div class="button-bar" ng-repeat="line in [] | range: lines">' +
                 '<button ng-repeat="sign in signs" class="button button-positive button-outline" ng-click="addSign(sign[line]);"> {{sign[line]}} </button>' +
                 '</div>' +
-                '<button class="button button-positive" style="width: 100%" ng-click="calculate();">=</button>',
+                '<button id="button_calc" class="button button-positive" style="width: 100%" ng-click="calculate();">=</button>',
                 title: translate('Calculator'),
                 scope: $scope,
                 buttons: [
-                    {text: 'OK'}
+                    {
+                        type: 'button_ok',
+                        text: 'OK'
+                    }
                 ]
             }).then(function (res) {
                 $scope.data.ans = $scope.data.calc;
-                if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
-                    cordova.plugins.Keyboard.close();
+                $Keyboard.getValue=keyboardSave.getValue;
+                $Keyboard.setValue=keyboardSave.setValue;
+                $Keyboard.button=keyboardSave.button;
             });
-            if (window.cordova && cordova.plugins && cordova.plugins.Focus)
-                cordova.plugins.Focus.focus($scope.input);
+            
         };
 
         $scope.showPopup = function (title, task, num) {
@@ -160,7 +181,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                     {text: translate('Cancel')},
                     {
                         text: '<b>' + translate('Answer') + '</b>',
-                        type: 'button-positive',
+                        type: 'button-positive button_ok',
                         onTap: function (e) {
                             if (!$scope.data.ans && $scope.data.ans !== 0) {
                                 e.preventDefault();
@@ -174,24 +195,28 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 ]
             }).then(function (res) {
                 if (canceled) {
-                    if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
-                        cordova.plugins.Keyboard.close();
+                    $Keyboard.hide();
+                    $scope.showKeyboard();
                 }
                 else {
                     $scope.answer(num + 1, task, $scope.data.ans);
                 }
             });
-            if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
-                cordova.plugins.Keyboard.show();
             //return '';
         };
 
         $scope.answer = function (num, ptask, pans) {
+            $Keyboard.setValue = function(value){
+                $scope.data.ans = parseInt(value);
+            }
+            $Keyboard.getValue = function(){
+                return $scope.data.ans.toString();
+            }
+            $timeout(function() {$Keyboard.button=angular.element(document.getElementsByClassName("button_ok")[0]);}, 400);
             if (ptask != '') {
                 var correctAns = $scope.calc(ptask);
                 if (pans != correctAns) {
-                    if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
-                        cordova.plugins.Keyboard.close();
+                    $Keyboard.hide();
                     if (!$scope.stats.isCompleted) {
                         $scope.stats.penalty += $scope.countPenalty(num);
                         $LevelFactory.setLevel($scope.stats);
@@ -212,8 +237,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 var ans = $scope.showPopup(translate('Question') + ' ' + (num + 1), '' + task, num);
             }
             else {
-                if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
-                    cordova.plugins.Keyboard.close();
+                $Keyboard.hide();
                 $scope.stats.isCompleted = true;
                 $scope.stats.stars = $scope.countStars($scope.stats);
                 $scope.stats.points = $scope.countPoints($scope.stats);
