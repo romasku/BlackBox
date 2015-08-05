@@ -2,7 +2,7 @@ angular.module('starter.controllers.SettingsCtrl', ['starter.factories.LevelFact
 
     .controller('SettingsCtrl', function ($scope, $LevelFactory, $translate, $ionicPopup, $window, $filter, $http) {
         $scope.reset = function () {
-            $LevelFactory.clear(18);
+            $LevelFactory.clear(24);
             window.history.back();
         }
 

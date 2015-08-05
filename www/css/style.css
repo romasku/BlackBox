@@ -42,7 +42,7 @@
 }
 .levelscreen .button{
     border-radius: 5px;
-    line-height: 4.6em;
+    line-height: 2.3em;
     height: 100%;
     width: 100%;
     font-weight: 700;
@@ -50,7 +50,7 @@
 }
 .levelscreen table{
     width: 100%;
-    text-align: center; 
+    text-align: center;
     min-height: 95%;
     max-height: 95%;
 }
