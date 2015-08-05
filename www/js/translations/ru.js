@@ -45,6 +45,9 @@ angular.module('starter.translations.ru', ['pascalprecht.translate']).config(fun
         Opponent_won: 'Соперник победил',
         Won : 'Ты победил',
         Lose : "Ты проиграл",
-        Calculator: "Калькулятор"
+        Calculator: "Калькулятор",
+        No_connection: "Нет соединения",
+        No_connection_text: "Проверте подключение к сети или попробуйте позже"
+
     });
 });

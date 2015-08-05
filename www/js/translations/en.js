@@ -45,6 +45,8 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Opponent_won: 'Opponent won',
         Won : 'You won',
         Lose : "You lose",
-        Calculator: "Calculator"
+        Calculator: "Calculator",
+        No_connection: "No connection",
+        No_connection_text: "Check your internet connection or try later"
     });
 });
