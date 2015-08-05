@@ -1,6 +1,6 @@
 angular.module('starter.controllers.LevelListCtrl', ['starter.factories.LevelFactory'])
 
-    .controller('LevelListCtrl', function ($scope, $LevelFactory) {
+    .controller('LevelListCtrl', function ($scope, $LevelFactory, $Keyboard) {
         $scope.levelCount = 24;
         $scope.levelsInLine = 3;
         $scope.levelsOnScreen = 12;

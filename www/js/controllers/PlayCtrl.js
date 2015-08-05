@@ -5,6 +5,9 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         $scope.model = {};
         $scope.model.input = "";
         $scope.input = document.getElementById("play-input");
+        $scope.input.onfocus = function () {
+            $scope.input.blur();
+        };
         $scope.Keyboard = $Keyboard;
 
         $scope.showKeyboard = function () {
@@ -120,6 +123,9 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         };
 
         $scope.showCalc = function (val) {
+            $timeout(function() {document.getElementById("calc-input").onfocus = function() {
+                document.getElementById("calc-input").blur();
+            }}, 400);
             var keyboardSave = {};
             keyboardSave.getValue=$Keyboard.getValue;
             keyboardSave.setValue=$Keyboard.setValue;
@@ -143,7 +149,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             $scope.lines = 2;
             $scope.signs = [['+','%'],['-','('],['*',')'],['/','C']];
             var myPopup = $ionicPopup.show({
-                template: '<input type="tel" ng-model="data.calc"> <br> <div class="button-bar" ng-repeat="line in [] | range: lines">' +
+                template: '<input id="calc-input" type="tel" ng-model="data.calc"> <br> <div class="button-bar" ng-repeat="line in [] | range: lines">' +
                 '<button ng-repeat="sign in signs" class="button button-positive button-outline" ng-click="addSign(sign[line]);"> {{sign[line]}} </button>' +
                 '</div>' +
                 '<button id="button_calc" class="button button-positive" style="width: 100%" ng-click="calculate();">=</button>',
@@ -169,7 +175,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             $scope.task = task;
             var canceled = true;
             var myPopup = $ionicPopup.show({
-                template: '<p style="text-align: center;">' + task + '</p><div class="button-bar"><input type="number" style="width: 90%; font-size: 1rem;" ng-model="data.ans">' +
+                template: '<p style="text-align: center;">' + task + '</p><div class="button-bar"><input id="popup-input" type="number" style="width: 90%; font-size: 1rem;" ng-model="data.ans">' +
                 '<button class="button button-positive button-outline" ng-click="showCalc(task);"> <i class="icon ion-calculator"></i></button></div>',
                 title: title,
                 scope: $scope,
@@ -210,6 +216,9 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 return $scope.data.ans.toString();
             }
             $timeout(function() {$Keyboard.button=angular.element(document.getElementsByClassName("button_ok")[0]);}, 400);
+            $timeout(function() {document.getElementById("popup-input").onfocus = function() {
+                document.getElementById("popup-input").blur();
+            }}, 400);
             if (ptask != '') {
                 var correctAns = $scope.calc(ptask);
                 if (pans != correctAns) {

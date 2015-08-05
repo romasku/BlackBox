@@ -42,6 +42,7 @@ angular.module('starter.factories.Keyboard', [])
             var body = document.getElementsByTagName("body");
             body = body[0];
             body = angular.element(body);
+            console.log(body);
             body.removeClass("keyboard-showing");
             var keyboard = angular.element(document.getElementById("keyboard"));
             keyboard.remove();

@@ -115,10 +115,10 @@
     border-width: 5px 5px 0px 5px;
     border-color: #387ef5; 
     background: #FFFFFF;
-    font-size: 4em;
+    font-size: 3em;
     font-weight: 200;
 }
-.button-activated {
+.keyboard td.activated {
     background: #387ef5 !important;
     color: #FFFFFF;
 }
@@ -131,8 +131,12 @@
 .keyboard-showing .popup-container {
     height: 60% !important;
 }
+.keyboard-showing .game {
+    height: 55% !important;
+}
 .button_ok{
-
+}
+.game{
 }
 
 
