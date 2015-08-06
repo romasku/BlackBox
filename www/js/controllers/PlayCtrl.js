@@ -99,6 +99,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
 
 
         $scope.showError = function (msg) {
+            $Keyboard.hide();
             $ionicPopup.alert({
                 title: translate('Incorrect_number'),
                 template: translate(msg)
@@ -130,7 +131,6 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                     $LevelFactory.setLevel($scope.stats);
                 }
             }
-            $scope.showKeyboard();
         };
 
         $scope.rand = function () {
@@ -141,10 +141,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             $timeout(function() {document.getElementById("calc-input").onfocus = function() {
                 document.getElementById("calc-input").blur();
             }}, 400);
-            var keyboardSave = {};
-            keyboardSave.getValue=$Keyboard.getValue;
-            keyboardSave.setValue=$Keyboard.setValue;
-            keyboardSave.button=$Keyboard.button;
+            var keyboardSave = $Keyboard.save();
             $Keyboard.getValue = function(){
                 return $scope.data.calc;
             }
@@ -178,9 +175,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 ]
             }).then(function (res) {
                 $scope.data.ans = $scope.data.calc;
-                $Keyboard.getValue=keyboardSave.getValue;
-                $Keyboard.setValue=keyboardSave.setValue;
-                $Keyboard.button=keyboardSave.button;
+                $Keyboard.load(keyboardSave);
             });
 
         };

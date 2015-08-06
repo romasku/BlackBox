@@ -70,5 +70,20 @@ angular.module('starter.factories.Keyboard', [])
                 factory.setValue(value);
             }
         }
+        factory.save = function(){
+            var state = {};
+            state.getValue = factory.getValue;
+            state.setValue = factory.setValue;
+            state.submit = factory.submit;
+            state.button = factory.button;
+            return state;
+        }
+        factory.load = function(state){
+            factory.getValue = state.getValue;
+            factory.setValue = state.setValue;
+            factory.submit = state.submit;
+            factory.button = state.button;
+            return ""; //to be sure that was loaded before new changes
+        }
         return factory;
     }]);
