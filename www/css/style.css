@@ -35,10 +35,12 @@
 .levelscreen {
     height: 100%;
 }
-.levelscreen ion-slide{
+
+.levelscreen ion-slide {
     padding: 10px;
     padding-bottom: 20px;
 }
+
 .levelscreen .button{
     border-radius: 5px;
     line-height: 2.1em;
@@ -47,31 +49,39 @@
     font-weight: 700;
     margin: 0;
 }
+
 .levelscreen table{
     width: 100%;
     text-align: center;
     min-height: 95%;
     max-height: 95%;
 }
+
 .levelscreen td{
     padding: 10px;
 }
+
 .levelscreen a{
 }
+
 .levelsreen i{
     font-size: 0.1rem;
 }
+
 .attempt{
     margin: 0 -1px 0 -1px;
 }
+
 .toggle {
     margin-top: 2px;
 }
+
 .spinner svg{
     margin-top:25vh;
     width: 15vh;
     height: 15vh;
 }
+
 .progress-text{
     position: absolute;
     width: 95.4%;
@@ -81,26 +91,32 @@
     padding-top: 7vh;
     font-size: 5vh;
 }
+
 .hidden {
     visibility: hidden;
 }
+
 .button-accept {
     top:15vh;
     vertical-align: none;
     width: 100%;
 }
+
 .opponent-state{
     position: absolute;
     font-size: 1.2em;
     margin:8px;
     bottom: 40vh;
 }
+
 .warning{
     color: red;
 }
+
 .popup{
-    width: 300px !important;
+    width: 80% !important;
 }
+
 .keyboard{
     position: absolute;
     bottom: 0;
@@ -109,6 +125,7 @@
     text-align: center;
     border-collapse: separate;    
 }
+
 .keyboard td {
     width: 33%;
     border-style: solid;
@@ -121,38 +138,49 @@
     font-size: 3em;
     font-weight: 200;
 }
+
 .keyboard td:last-child{
     border-right: 0px;
 }
+
 .keyboard td.activated {
     background: #387ef5 !important;
     color: #FFFFFF;
 }
+
 .keyboard-showing{
     pointer-events: all !important;
 }
+
 .keyboard-showing .backdrop {
     height: 60% !important;
 }
+
 .keyboard-showing .popup-container {
     height: 60% !important;
 }
+
 .keyboard-showing .game {
     bottom : 40vh;
 }
+
 .button_ok{
 }
+
 .game{
 }
+
 .leaderboard div{
     background: #BFF1FF;
 }
+
 .leaderboard table{
     width: 80%;
     margin: auto; 
     border-collapse: separate;
     border-spacing: 0 8px;
 }
+
 .leaderboard td{
     background: #00FF00;
     font-size: 1.5em;
@@ -163,27 +191,34 @@
     transition: all;
     transition-duration: 0.5s;
 }
+
 .leaderboard td:first-child{
     border-radius: 100px 0 0 100px;
     border-width: 0 1px 0 0;
     text-align: right;
 }
+
 .leaderboard td:last-child{
     border-radius: 0 100px 100px 0;
     border-width: 0 0 0 1px;
 }
+
 .leaderboard tr:nth-child(-n+12) td{
     background: #80FF00;
 }
+
 .leaderboard tr:nth-child(-n+9) td{
     background: #FF0;
 }
+
 .leaderboard tr:nth-child(-n+6) td{
     background: #FF8000;
 }
+
 .leaderboard tr:nth-child(-n+3) td{
     background: #F00;
 }
+
 .is-updating{
     color: rgba(0,0,0,0);
 }
