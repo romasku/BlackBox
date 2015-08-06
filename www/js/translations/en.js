@@ -41,7 +41,7 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Find_opponent: 'Find opponent',
         Looking_for_opponent: 'Looking for opponent',
         Opponent_guessing: 'Opponent guessing',
-        Opponent_answering: 'Opponent_answering',
+        Opponent_answering: 'Opponent answering',
         Opponent_won: 'Opponent won',
         Won : 'You won',
         Lose : "You lose",

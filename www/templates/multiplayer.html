@@ -1,13 +1,19 @@
 <ion-view view-title="{{'Multiplayer' | translate}}">
-    <ion-content class="padding">
+    <ion-content class="padding game">
         <ion-list>
             <ion-item>
-                <input style="width: 100%; font-size: 1rem" type="number" placeholder="{{'Your_number' | translate}}"
-                       id="play-input"
-                       ng-model="model.input"><br>
+                <div class="button-bar">
+                    <input style="width: 90%; font-size: 1rem" type="number"
+                           placeholder="{{'Your_number' | translate}}"
+                           id="play-input"
+                           ng-model="model.input">
+                    <button class="button button-positive button-outline" ng-click="showCalc('');">
+                        <i class="icon ion-calculator"></i>
+                    </button>
+                </div><br>
 
                 <div class="button-bar">
-                    <button class="button button-positive button-outline" ng-click="add();">{{'Ask' | translate}}
+                    <button id="button_ask" class="button button-positive button-outline" ng-click="add();">{{'Ask' | translate}}
                     </button>
                     <button class="button button-positive button-outline" ng-click="answer(0, '', '')">
                         {{'Answer' | translate}}
@@ -29,9 +35,7 @@
             </ion-item>
         </ion-list>
     </ion-content>
-    <ion-footer-bar >
     <p class="opponent-state" id="opponent_state">
     {{opState | translate}}
     </p>
-    </ion-footer-bar>
 </ion-view>

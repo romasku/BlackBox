@@ -1,6 +1,6 @@
-angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory', 'starter.factories.Keyboard'])
+angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory', 'starter.factories.Keyboard', 'starter.factories.Calculator'])
 
-    .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $Keyboard, $timeout, $translate) {
+    .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $Keyboard, $timeout, $translate, $Calculator) {
         $scope.level = $state.params.level;
         $scope.language = $translate.use();
         $scope.phrases = [];
@@ -10,6 +10,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         $scope.input.onfocus = function () {
             $scope.input.blur();
         };
+        
         $scope.Keyboard = $Keyboard;
 
         $scope.showKeyboard = function () {
@@ -137,48 +138,13 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             return Math.floor(Math.random() * 1e3);
         };
 
-        $scope.showCalc = function (val) {
-            $timeout(function() {document.getElementById("calc-input").onfocus = function() {
-                document.getElementById("calc-input").blur();
-            }}, 400);
-            var keyboardSave = $Keyboard.save();
-            $Keyboard.getValue = function(){
-                return $scope.data.calc;
-            }
-            $Keyboard.setValue = function(value){
-                $scope.data.calc=value;
-            }
-            $timeout(function() {$Keyboard.button=angular.element(document.getElementById("button_calc"));}, 400);
-            $scope.data = {};
-            $scope.data.calc = val;
-            $scope.addSign = function (sign) {
-                if (sign == 'C') $scope.data.calc = '';
-                else $scope.data.calc += sign;
-            }
-            $scope.calculate = function () {
-                $scope.data.calc = eval($scope.data.calc);
-            };
-            $scope.lines = 2;
-            $scope.signs = [['+','%'],['-','('],['*',')'],['/','C']];
-            var myPopup = $ionicPopup.show({
-                template: '<input id="calc-input" type="tel" ng-model="data.calc"> <br> <div class="button-bar" ng-repeat="line in [] | range: lines">' +
-                '<button ng-repeat="sign in signs" class="button button-positive button-outline" ng-click="addSign(sign[line]);"> {{sign[line]}} </button>' +
-                '</div>' +
-                '<button id="button_calc" class="button button-positive" style="width: 100%" ng-click="calculate();">=</button>',
-                title: translate('Calculator'),
-                scope: $scope,
-                buttons: [
-                    {
-                        type: 'button_ok',
-                        text: 'OK'
-                    }
-                ]
-            }).then(function (res) {
-                $scope.data.ans = $scope.data.calc;
-                $Keyboard.load(keyboardSave);
-            });
-
-        };
+        //init calc
+        $Calculator.scope = $scope;
+        $Calculator.Keyboard = $Keyboard;
+        $Calculator.setResult = function(val){
+            $scope.data.ans = val;
+        }
+        $scope.showCalc = $Calculator.show;
 
         $scope.showPopup = function (title, task, num) {
             $scope.data = {};
