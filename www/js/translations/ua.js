@@ -48,6 +48,7 @@ angular.module('starter.translations.ua', ['pascalprecht.translate']).config(fun
         Calculator: "Калькулятор",
         No_connection: "Немає зв'язку",
         No_connection_text: "Перевірте підключення до Інтернету або спробуте пізніше",
-        Leaderboard: "Лідери"
+        Leaderboard: "Лідери",
+        Go: "На старт! Увага! Марш!"
     });
 });

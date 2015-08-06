@@ -1,9 +1,13 @@
 angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory', 'starter.factories.Keyboard'])
 
     .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $Keyboard, $timeout, $translate) {
+        var translate = $filter('translate');
+
         $scope.level = $state.params.level;
         $scope.language = $translate.use();
         $scope.phrases = [];
+        $scope.phrases.push(translate('Go'));
+        $scope.numPhrase = 0;
         $scope.model = {};
         $scope.model.input = "";
         $scope.input = document.getElementById("play-input");
@@ -95,8 +99,6 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             return Math.floor(Math.random() * 20);
         }
 
-        var translate = $filter('translate');
-
 
         $scope.showError = function (msg) {
             $Keyboard.hide();
@@ -112,7 +114,9 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             if ($scope.language == 'en') $scope.phrases = $scope.allPhrases.en;
             else if ($scope.language == 'ru') $scope.phrases = $scope.allPhrases.ru;
             else $scope.phrases = $scope.allPhrases.ua;
+            $scope.prevNum = $scope.numPhrase;
             $scope.numPhrase = $scope.getNumPhrase();
+            if ($scope.numPhrase == $scope.prevNum) $scope.numPhrase = ($scope.numPhrase+1)%20;
             var val = parseInt($scope.model.input);
             $scope.model.input = '';
             if (val >= 1e9) {
