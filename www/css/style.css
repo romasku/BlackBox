@@ -105,7 +105,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 40%;
+    height: 40vh;
     text-align: center;
     border-collapse: separate;    
 }
@@ -121,6 +121,9 @@
     font-size: 3em;
     font-weight: 200;
 }
+.keyboard td:last-child{
+    border-right: 0px;
+}
 .keyboard td.activated {
     background: #387ef5 !important;
     color: #FFFFFF;
@@ -135,7 +138,7 @@
     height: 60% !important;
 }
 .keyboard-showing .game {
-    height: 50% !important;
+    bottom : 40vh;
 }
 .button_ok{
 }
