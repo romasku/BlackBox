@@ -1,7 +1,9 @@
 angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory', 'starter.factories.Keyboard'])
 
-    .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $Keyboard, $timeout) {
+    .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $Keyboard, $timeout, $translate) {
         $scope.level = $state.params.level;
+        $scope.language = $translate.use();
+        $scope.phrases = [];
         $scope.model = {};
         $scope.model.input = "";
         $scope.input = document.getElementById("play-input");
@@ -50,10 +52,16 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 $scope.fn = fn;
             }
         );
-        $http.get(url + 'js/levels/levelsData.json').success(
+        $http.get(url + 'js/data/levelsData.json').success(
             function (data) {
                 var levelsData = data;
                 $scope.levelsData = levelsData;
+            }
+        );
+        $http.get(url + 'js/data/phrases.json').success(
+            function (data) {
+                var allPhrases = data;
+                $scope.allPhrases = allPhrases;
             }
         );
 
@@ -83,9 +91,12 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             return ans;
         };
 
+        $scope.getNumPhrase = function () {
+            return Math.floor(Math.random() * 20);
+        }
+
         var translate = $filter('translate');
 
-       
 
         $scope.showError = function (msg) {
             $ionicPopup.alert({
@@ -97,6 +108,10 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         };
 
         $scope.add = function () {
+            if ($scope.language == 'en') $scope.phrases = $scope.allPhrases.en;
+            else if ($scope.language == 'ru') $scope.phrases = $scope.allPhrases.ru;
+            else $scope.phrases = $scope.allPhrases.ua;
+            $scope.numPhrase = $scope.getNumPhrase();
             var val = parseInt($scope.model.input);
             $scope.model.input = '';
             if (val >= 1e9) {
@@ -167,7 +182,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 $Keyboard.setValue=keyboardSave.setValue;
                 $Keyboard.button=keyboardSave.button;
             });
-            
+
         };
 
         $scope.showPopup = function (title, task, num) {
