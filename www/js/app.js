@@ -87,6 +87,15 @@ starter.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
                 }
             }
         })
+        .state('header.leaderboard', {
+            url : '/leaderboard',
+            views : {
+                'main': {
+                    templateUrl: 'templates/leaderboard.html',
+                    controller: "LeaderboardCtrl"
+                }
+            }
+        })
         .state('header.settings', {
             url: '/settings',
             views: {

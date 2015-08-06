@@ -141,5 +141,48 @@
 }
 .game{
 }
+.leaderboard div{
+    background: #BFF1FF;
+}
+.leaderboard table{
+    width: 80%;
+    margin: auto; 
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+.leaderboard td{
+    background: #00FF00;
+    font-size: 1.5em;
+    padding: 0.5em;
+    width: 50%;
+    margin: 0.2em;
+    border-style: solid;
+    transition: all;
+    transition-duration: 0.5s;
+}
+.leaderboard td:first-child{
+    border-radius: 100px 0 0 100px;
+    border-width: 0 1px 0 0;
+    text-align: right;
+}
+.leaderboard td:last-child{
+    border-radius: 0 100px 100px 0;
+    border-width: 0 0 0 1px;
+}
+.leaderboard tr:nth-child(-n+12) td{
+    background: #80FF00;
+}
+.leaderboard tr:nth-child(-n+9) td{
+    background: #FF0;
+}
+.leaderboard tr:nth-child(-n+6) td{
+    background: #FF8000;
+}
+.leaderboard tr:nth-child(-n+3) td{
+    background: #F00;
+}
+.is-updating{
+    color: rgba(0,0,0,0);
+}
 
 
