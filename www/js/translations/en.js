@@ -48,6 +48,7 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Calculator: "Calculator",
         No_connection: "No connection",
         No_connection_text: "Check your internet connection or try later",
-        Leaderboard: "Leaderboard"
+        Leaderboard: "Leaderboard",
+        Go: "Ready! Steady! Go!"
     });
 });

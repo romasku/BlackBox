@@ -101,7 +101,6 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         }
 
 
-
         $scope.showError = function (msg) {
             $Keyboard.hide();
             $ionicPopup.alert({

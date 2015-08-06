@@ -41,7 +41,7 @@
     padding-bottom: 20px;
 }
 
-.levelscreen .button{
+.levelscreen .button {
     border-radius: 5px;
     line-height: 2.1em;
     height: 100%;
@@ -50,25 +50,25 @@
     margin: 0;
 }
 
-.levelscreen table{
+.levelscreen table {
     width: 100%;
     text-align: center;
     min-height: 95%;
     max-height: 95%;
 }
 
-.levelscreen td{
+.levelscreen td {
     padding: 10px;
 }
 
-.levelscreen a{
+.levelscreen a {
 }
 
-.levelsreen i{
+.levelsreen i {
     font-size: 0.1rem;
 }
 
-.attempt{
+.attempt {
     margin: 0 -1px 0 -1px;
 }
 
@@ -76,17 +76,17 @@
     margin-top: 2px;
 }
 
-.spinner svg{
-    margin-top:25vh;
+.spinner svg {
+    margin-top: 25vh;
     width: 15vh;
     height: 15vh;
 }
 
-.progress-text{
+.progress-text {
     position: absolute;
     width: 95.4%;
     text-align: center;
-    margin : 0;
+    margin: 0;
     padding: 0;
     padding-top: 7vh;
     font-size: 5vh;
@@ -97,33 +97,33 @@
 }
 
 .button-accept {
-    top:15vh;
+    top: 15vh;
     vertical-align: none;
     width: 100%;
 }
 
-.opponent-state{
+.opponent-state {
     position: absolute;
     font-size: 1.2em;
-    margin:8px;
-    bottom: 40vh;
+    margin: 8px;
+    bottom: 0;
 }
 
-.warning{
+.warning {
     color: red;
 }
 
-.popup{
+.popup {
     width: 80% !important;
 }
 
-.keyboard{
+.keyboard {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 40vh;
     text-align: center;
-    border-collapse: separate;    
+    border-collapse: separate;
 }
 
 .keyboard td {
@@ -133,13 +133,13 @@
     border-width: 1px 1px 0px 0px;
     margin: 0px;
     padding: 0px;
-    border-color: #387ef5; 
+    border-color: #387ef5;
     background: #FFFFFF;
     font-size: 3em;
     font-weight: 200;
 }
 
-.keyboard td:last-child{
+.keyboard td:last-child {
     border-right: 0px;
 }
 
@@ -148,7 +148,7 @@
     color: #FFFFFF;
 }
 
-.keyboard-showing{
+.keyboard-showing {
     pointer-events: all !important;
 }
 
@@ -161,27 +161,27 @@
 }
 
 .keyboard-showing .game {
-    bottom : 40vh;
+    bottom: 40vh;
 }
 
-.button_ok{
+.button_ok {
 }
 
-.game{
+.game {
 }
 
-.leaderboard div{
+.leaderboard div {
     background: #BFF1FF;
 }
 
-.leaderboard table{
+.leaderboard table {
     width: 80%;
-    margin: auto; 
+    margin: auto;
     border-collapse: separate;
     border-spacing: 0 8px;
 }
 
-.leaderboard td{
+.leaderboard td {
     background: #00FF00;
     font-size: 1.5em;
     padding: 0.5em;
@@ -192,35 +192,38 @@
     transition-duration: 0.5s;
 }
 
-.leaderboard td:first-child{
+.leaderboard td:first-child {
     border-radius: 100px 0 0 100px;
     border-width: 0 1px 0 0;
     text-align: right;
 }
 
-.leaderboard td:last-child{
+.leaderboard td:last-child {
     border-radius: 0 100px 100px 0;
     border-width: 0 0 0 1px;
 }
 
-.leaderboard tr:nth-child(-n+12) td{
+.leaderboard tr:nth-child(-n+12) td {
     background: #80FF00;
 }
 
-.leaderboard tr:nth-child(-n+9) td{
+.leaderboard tr:nth-child(-n+9) td {
     background: #FF0;
 }
 
-.leaderboard tr:nth-child(-n+6) td{
+.leaderboard tr:nth-child(-n+6) td {
     background: #FF8000;
 }
 
-.leaderboard tr:nth-child(-n+3) td{
+.leaderboard tr:nth-child(-n+3) td {
     background: #F00;
 }
 
-.is-updating{
-    color: rgba(0,0,0,0);
+.is-updating {
+    color: rgba(0, 0, 0, 0);
 }
 
-
+.phrase {
+    font-size: 1rem;
+    padding: 0.5em;
+}
