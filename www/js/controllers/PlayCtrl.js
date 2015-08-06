@@ -1,6 +1,6 @@
-angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory', 'starter.factories.Keyboard', 'starter.factories.Calculator'])
+angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory', 'starter.factories.Keyboard', 'starter.factories.Calculator', 'starter.factories.Help'])
 
-    .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $Keyboard, $timeout, $translate, $Calculator) {
+    .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $Keyboard, $timeout, $translate, $Calculator, $Help) {
         var translate = $filter('translate');
 
         $scope.level = $state.params.level;
@@ -142,13 +142,18 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             return Math.floor(Math.random() * 1e3);
         };
 
+        $scope.points = $Help.points;
+
         //init calc
         $Calculator.scope = $scope;
         $Calculator.Keyboard = $Keyboard;
-        $Calculator.setResult = function(val){
+        $Calculator.setResult = function(val) {
             $scope.data.ans = val;
         }
         $scope.showCalc = $Calculator.show;
+
+        $Help.scope = $scope;
+        $scope.showHelp = $Help.show;
 
         $scope.showPopup = function (title, task, num) {
             $scope.data = {};
@@ -224,9 +229,12 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             }
             else {
                 $Keyboard.hide();
-                $scope.stats.isCompleted = true;
-                $scope.stats.stars = $scope.countStars($scope.stats);
-                $scope.stats.points = $scope.countPoints($scope.stats);
+                if (!$scope.stats.isCompleted){
+                    $scope.stats.isCompleted = true;
+                    $scope.stats.stars = $scope.countStars($scope.stats);
+                    $scope.stats.points = $scope.countPoints($scope.stats);
+                    $Help.addPoints($scope.stats.points);
+                }
                 console.log($scope.stats);
                 $LevelFactory.setLevel($scope.stats);
                 setTimeout(function () {

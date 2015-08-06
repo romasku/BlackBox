@@ -49,6 +49,14 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         No_connection: "No connection",
         No_connection_text: "Check your internet connection or try later",
         Leaderboard: "Leaderboard",
-        Go: "Ready! Steady! Go!"
+        Go: "Ready! Steady! Go!",
+        Help: "Help",
+        Help_text: "Any difficulties with completing this level? You can use a hint!",
+        Get_small_hint: 'Small',
+        Get_big_hint: 'Big',
+        Get_answer: 'Get answer!',
+        Not_enough: 'Not enough points? You can get more!',
+        Buy: 'Buy',
+        Ad: 'Ad*'
     });
 });

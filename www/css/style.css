@@ -106,7 +106,7 @@
     position: absolute;
     font-size: 1.2em;
     margin: 8px;
-    bottom: 0;
+    bottom: 40vh;
 }
 
 .warning {
@@ -114,7 +114,7 @@
 }
 
 .popup {
-    width: 80% !important;
+    width: 90% !important;
 }
 
 .keyboard {
@@ -226,4 +226,12 @@
 .phrase {
     font-size: 1rem;
     padding: 0.5em;
+}
+
+.button-full {
+    width: 100%;
+}
+
+.button-hint {
+    font-size: 1rem;
 }

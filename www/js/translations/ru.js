@@ -49,6 +49,14 @@ angular.module('starter.translations.ru', ['pascalprecht.translate']).config(fun
         No_connection: "Нет соединения",
         No_connection_text: "Проверьте подключение к сети или попробуйте позже",
         Leaderboard: "Лидеры",
-        Go: "На старт! Внимание! Марш!"
+        Go: "На старт! Внимание! Марш!",
+        Help: "Помощь",
+        Help_text: "Возникли трудности с прохождением этого уровня? Вы можете использовать подсказку!",
+        Get_small_hint: 'Маленькая',
+        Get_big_hint: 'Большая',
+        Get_answer: 'Узнать ответ!',
+        Not_enough: 'Не хватает очков? Можно получить ещё!',
+        Buy: 'Купить',
+        Ad: 'Реклама*'
     });
 });

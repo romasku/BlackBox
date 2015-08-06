@@ -1,6 +1,6 @@
-angular.module('starter.controllers.SettingsCtrl', ['starter.factories.LevelFactory'])
+angular.module('starter.controllers.SettingsCtrl', ['starter.factories.LevelFactory', 'starter.factories.Help'])
 
-    .controller('SettingsCtrl', function ($scope, $LevelFactory, $translate, $ionicPopup, $window, $filter, $http) {
+    .controller('SettingsCtrl', function ($scope, $LevelFactory, $translate, $ionicPopup, $window, $filter, $http, $Help) {
         var isConnected=false;
         $http.get("http://blackboxgame.ddns.net:8888/get_username", {params : {id :$window.localStorage["id"]}})
             .success(function(data){
@@ -12,6 +12,7 @@ angular.module('starter.controllers.SettingsCtrl', ['starter.factories.LevelFact
                     });
         $scope.reset = function () {
             $LevelFactory.clear(24);
+            $Help.clear();
             window.history.back();
         }
         $scope.languages = [{abb: 'en', name: 'English'}, {abb: 'ru', name: 'Русский'}, {

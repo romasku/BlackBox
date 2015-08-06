@@ -49,6 +49,14 @@ angular.module('starter.translations.ua', ['pascalprecht.translate']).config(fun
         No_connection: "Немає зв'язку",
         No_connection_text: "Перевірте підключення до Інтернету або спробуте пізніше",
         Leaderboard: "Лідери",
-        Go: "На старт! Увага! Марш!"
+        Go: "На старт! Увага! Марш!",
+        Help: "Допомога",
+        Help_text: "Виникли труднощі з завершенням цього рівня? Ви можете використати підказку!",
+        Get_small_hint: 'Маленька',
+        Get_big_hint: 'Велика',
+        Get_answer: 'Дізнатися відповідь!',
+        Not_enough: 'Бракує очок? Можна отримати ще!',
+        Buy: 'Купити',
+        Ad: 'Реклама*'
     });
 });
