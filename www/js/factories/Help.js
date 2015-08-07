@@ -1,10 +1,21 @@
 angular.module('starter.factories.Help', [])
     .factory('$Help', ['$window', '$compile', '$timeout', '$ionicPopup','$filter',
         function ($window, $compile, $timeout, $ionicPopup, $filter) {
-            //Must be set: [setResult]
             var factory = {};
 
             factory.points;
+            factory.template = '<p>{{\'Help_text\' | translate}}</p>' 
+                    + '<div class="button-bar">'
+                    + '<button class="button button-positive button-outline">{{\'Get_small_hint\' | translate}}</button>' 
+                    + '<button class="button button-positive button-outline">{{\'Get_big_hint\' | translate}}</button>'
+                    + '</div>'
+                    + '<button class="button button-positive button-full">{{\'Get_answer\' | translate}}</button>'
+                    + '<p class="text-center">{{\'Points\'|translate}}: {{data.points+data.extra}}</p>'
+                    + '{{\'Not_enough\' | translate}}<br><br>'
+                    + '<div class="button-bar">'
+                    + '<button class="button button-positive button-outline" ng-click="addExtra();">{{\'Buy\' | translate}}</button>'
+                    + '<button class="button button-positive button-outline">{{\'Ad\' | translate}}</button>'
+                    + '</div>';
 
             factory.clear = function () {
                 $window.localStorage["points"] = JSON.stringify(0);
@@ -26,27 +37,22 @@ angular.module('starter.factories.Help', [])
                 var translate = $filter('translate');
                 factory.initPoints();
 
-                $timeout(function() {document.getElementById("calc-input").onfocus = function() {
-                    document.getElementById("calc-input").blur();
-                }}, 400); //Cancel standart input
-
-
-                //init poput scope
+                //init popup scope
                 $scope = factory.scope;
                 $scope.data = {};
+                $scope.data.points = parseInt($window.localStorage["points"]);
                 $scope.data.extra = 0;
-
                 $scope.addExtra = function () {
                     $scope.data.extra += 100;
                 }
 
+                //save and hide Keyboard;
+                var keyboardSave = $scope.Keyboard.save();
+                $scope.Keyboard.hide();
+
                 var isBought = false;
                 var myPopup = $ionicPopup.show({
-                    template: '<p>' + translate('Help_text') + '</p>' + '<div class="button-bar"><button class="button button-positive button-outline">' + translate('Get_small_hint') + '</button>' +
-                    '<button class="button button-positive button-outline">' + translate('Get_big_hint') + '</button>' +
-                    '</div> <button class="button button-positive button-full">' + translate('Get_answer') + '</button> <p class="text-center">' + translate('Points') + ': ' + factory.points
-                    + '</p>' + translate('Not_enough') + '<br><br><div class="button-bar"><button class="button button-positive button-outline" ng-click="addExtra();">' + translate('Buy') + '</button>' +
-                    '<button class="button button-positive button-outline">' + translate('Ad') + '</button> </div>',
+                    template: factory.template,
                     title: translate('Help'),
                     scope: $scope,
                     buttons: [
@@ -58,6 +64,8 @@ angular.module('starter.factories.Help', [])
                 }).then(function (res) {
                         var points = JSON.parse($window.localStorage["points"] || 0);
                         $window.localStorage["points"] = JSON.stringify(eval(points)+eval($scope.data.extra));
+                        $scope.Keyboard.show($scope);
+                        $scope.Keyboard.load(keyboardSave);
                 });
             };
 
