@@ -21,7 +21,7 @@
                     <button class="button button-positive button-outline" ng-click="showCalc('');">
                         <i class="icon ion-calculator"></i>
                     </button>
-                </div><br>
+                </div>
                 <div class="button-bar">
                     <button id="button_ask" class="button button-positive button-outline" ng-click="add();">{{'Ask' | translate}}
                     </button>
@@ -29,8 +29,7 @@
                         {{'Answer' | translate}}
                     </button>
                 </div>
-                <br>
-                <h4 style="font-size: 1rem" class="text-center">{{'Attempts_done' | translate}}: {{stats.moves}}</h4>
+                <h4 style="font-size: 1rem;" class="text-center">{{'Attempts_done' | translate}}: {{stats.moves}}</h4>
             </ion-item>
             <ion-item class="attempt"  ng-repeat="attempt in attempts" >
                 <table style="width: 100%;">
