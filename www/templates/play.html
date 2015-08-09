@@ -1,4 +1,12 @@
-<ion-view view-title="{{'Level' | translate}} {{level}}">
+<ion-view>
+    <ion-nav-title>
+        {{'Level' | translate}} {{level}}
+    </ion-nav-title>
+    <ion-nav-buttons>
+        <button class="button button-positive help-button" ng-click="showHelp('');">
+                        <i class="icon ion-help-circled"></i>
+        </button>
+    </ion-nav-buttons>
     <div class="bar bar-subheader">
         <h1 class="text-center phrase">{{phrases[numPhrase]}}</h1>
     </div>
@@ -12,9 +20,6 @@
                            ng-model="model.input">
                     <button class="button button-positive button-outline" ng-click="showCalc('');">
                         <i class="icon ion-calculator"></i>
-                    </button>
-                    <button class="button button-positive button-outline" ng-click="showHelp('');">
-                        <i class="icon ion-help-circled"></i>
                     </button>
                 </div><br>
                 <div class="button-bar">

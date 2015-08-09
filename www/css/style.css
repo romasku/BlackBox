@@ -235,3 +235,18 @@
 .button-hint {
     font-size: 1rem;
 }
+
+ion-header-bar {
+    padding-left: 80px;
+    padding-right: 80px;
+}
+.help-button {
+    border-width: 0;
+    position: absolute;
+    top: 7px;
+    right: 16px;
+    min-width: 34px;
+    min-height: 34px;
+    font-size: 18px;
+    line-height: 32px; 
+}
