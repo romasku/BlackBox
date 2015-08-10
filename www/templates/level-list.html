@@ -8,7 +8,7 @@
                             ng-init="j = l * levelsOnScreen + i * levelsInLine + t">
                             <a class="button button-positive"
                                href="#/header/play/{{levels[j].level}}">
-                                {{levels[j].level}}<br>
+                                {{levels[j].numInChapter}}<br>
                                 <i ng-repeat="star in [] | range: levels[j].stars" class="icon ion-android-star"></i>
                                 <i ng-repeat="star in [] | range: 3-levels[j].stars" class="icon ion-android-star-outline"></i><br>
                                 <h5 style="color: white;">{{'Points' | translate}}: {{levels[j].points}}</h5>

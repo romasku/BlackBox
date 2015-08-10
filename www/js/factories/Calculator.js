@@ -53,7 +53,7 @@ angular.module('starter.factories.Calculator', [])
                 buttons: [
                     {
                         type: 'button_ok',
-                        text: 'OK'
+                        text: translate('Back')
                     }
                 ]
             }).then(function (res) {

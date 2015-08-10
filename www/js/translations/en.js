@@ -57,6 +57,20 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Get_answer: 'Get answer!',
         Not_enough: 'Not enough points? You can get more!',
         Buy: 'Buy',
-        Ad: 'Ad*'
+        Ad: 'Ad*',
+        Back: 'Back',
+        Oops: 'Oops',
+        No_points: 'Unfortunately you don\'t have enough points.',
+        Price: 'Price',
+        Hint_arithmetic: 'Think about simple arithmetic operations',
+        Hint_number: 'The solution is connected with number ',
+        Hint_numbers: 'Take a closer look at the digits of the given number',
+        Hint_count: 'You have to count something',
+        Hint_order: 'Think about the order of digits of the given number',
+        Hint_parity: 'The solution is connected with parity',
+        Hint_sort: 'You should sort something',
+        Hint_close: 'You should find the closest number to the given',
+        Hint: 'hint',
+        Solution: 'Solution'
     });
 });

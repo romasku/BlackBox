@@ -62,7 +62,7 @@ starter.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             }
         })
         .state('header.level-list', {
-            url: '/level-list',
+            url: '/level-list/:chapter',
             views: {
                 'main': {
                     templateUrl: 'templates/level-list.html',

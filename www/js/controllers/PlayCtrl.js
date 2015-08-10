@@ -3,7 +3,17 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
     .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $Keyboard, $timeout, $translate, $Calculator, $Help) {
         var translate = $filter('translate');
 
-        $scope.level = $state.params.level;
+        $scope.levelInfo = $state.params.level;
+        $scope.level = '';
+        $scope.chapter = '';
+        for (var i = $scope.levelInfo.length-1; i >= 0; i--) {
+            if ($scope.levelInfo[i] != '-') $scope.level = $scope.levelInfo[i] + $scope.level;
+            else break;
+        }
+        for (var j = i-1; j >= 0; j--) {
+            $scope.chapter = $scope.levelInfo[j] + $scope.chapter;
+        }
+
         $scope.language = $translate.use();
         $scope.phrases = [];
         $scope.phrases.push(translate('Go'));
@@ -35,18 +45,24 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         $scope.stats = $LevelFactory.getLevel($scope.level);
         if (!$scope.stats) {
             $scope.stats = {
+                level: $scope.chapter + '-' + $scope.level,
+                chapter: $scope.chapter,
+                numInChapter: $scope.level,
                 isCompleted: false,
                 moves: 0,
                 penalty: 0,
                 stars: 0,
-                points: 0
+                points: 0,
+                smallHint: false,
+                bigHint: false,
+                solution: false
             }
         }
 
         $scope.attempts = [];
         var url = '/';
         if (ionic.Platform.isAndroid()) url = '/android_asset/www/';
-        $http.get(url + 'js/levels/' + $scope.level + '.js').then(
+        $http.get(url + 'js/levels/' + $scope.chapter + '/' + $scope.level + '.js').then(
             function (resp) {
                 var fn = resp.data;
                 while (1) {
@@ -144,7 +160,6 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
 
         $scope.points = $Help.points;
 
-        //init calc
         $Calculator.scope = $scope;
         $Calculator.Keyboard = $Keyboard;
         $Calculator.setResult = function(val) {
@@ -153,7 +168,9 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         $scope.showCalc = $Calculator.show;
 
         $Help.scope = $scope;
-        $scope.showHelp = $Help.show;
+        $scope.showHelp = function () {
+            $Help.show($scope.level, $scope.levelsData, $scope.language);
+        }
 
         $scope.showPopup = function (title, task, num) {
             $scope.data = {};

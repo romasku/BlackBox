@@ -11,7 +11,7 @@ angular.module('starter.controllers.SettingsCtrl', ['starter.factories.LevelFact
                         isConnected=false;
                     });
         $scope.reset = function () {
-            $LevelFactory.clear(24);
+            $LevelFactory.clear();
             $Help.clear();
             window.history.back();
         }
