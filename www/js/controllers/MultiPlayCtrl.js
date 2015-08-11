@@ -78,7 +78,7 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
         $scope.attempts = [];
         var url = '/';
         if (ionic.Platform.isAndroid()) url = '/android_asset/www/';
-        $http.get(url + 'js/levels/' + $scope.level + '.js').then(
+        $http.get(url + 'js/levels/2/' + $scope.level + '.js').then(
             function (resp) {
                 var fn = resp.data;
                 while (1) {

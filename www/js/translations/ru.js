@@ -69,6 +69,7 @@ angular.module('starter.translations.ru', ['pascalprecht.translate']).config(fun
         Hint_order: 'Подумай о порядке цифр заданного числа',
         Hint_sort: 'Нужно что-то отсортировать',
         Hint_close: 'Нужно найти ближайшее число к данному',
+        Hint_parity: 'Подумай о соотношении',
         Hint: 'подсказка',
         Solution: 'Ответ'
     });
