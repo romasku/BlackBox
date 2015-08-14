@@ -1,5 +1,10 @@
 <ion-view view-title="{{'Multiplayer' | translate}}">
-    <ion-content class="padding game">
+    <div class="bar bar-subheader">
+        <h1 class="opponent-state" id="opponent_state">
+            {{opState | translate}}
+        </h1>
+    </div>
+    <ion-content class="padding game has-subheader">
         <ion-list>
             <ion-item>
                 <div class="button-bar">
@@ -35,7 +40,4 @@
             </ion-item>
         </ion-list>
     </ion-content>
-    <p class="opponent-state" id="opponent_state">
-    {{opState | translate}}
-    </p>
 </ion-view>
