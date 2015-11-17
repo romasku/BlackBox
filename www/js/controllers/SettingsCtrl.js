@@ -19,7 +19,7 @@ angular.module('starter.controllers.SettingsCtrl', ['starter.factories.LevelFact
             return $translate.use() == language;
         }
         $scope.setName = function(name) {
-            $http.get("http://blackboxgame.ddns.net:8888/set_name", {params : {
+            $http.get("http://blackboxservermobile.azurewebsites.net/set_name", {params : {
                 id : $window.localStorage["id"],
                 username : name
             }})

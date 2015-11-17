@@ -31,7 +31,7 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
             $scope.opState ="Opponent_won";
         }
         $scope.submitReplay = function() {
-            $http.get("http://blackboxgame.ddns.net:8888/upload_replay", {params:{
+            $http.get("http://blackboxservermobile.azurewebsites.net/upload_replay", {params:{
                 players_id : $window.localStorage["id"],
                 time_won : $scope.time_won,
                 log : $scope.log,

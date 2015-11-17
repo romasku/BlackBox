@@ -1,9 +1,9 @@
 angular.module('starter.controllers.SearchCtrl', ['starter.factories.LevelFactory'])
 
     .controller('SearchCtrl', function ($scope, $LevelFactory, $http) {
-    	$http.get("http://blackboxgame.ddns.net:8888/find_replay")
+    	$http.get("http://blackboxservermobile.azurewebsites.net/find_replay")
     	.success(function(data) {
-        	$http.get("http://blackboxgame.ddns.net:8888/get_username", {params : {id : data["players_id"]}})
+        	$http.get("http://blackboxservermobile.azurewebsites.net/get_username", {params : {id : data["players_id"]}})
         	.success(function(name) {
         		var search_text = angular.element(document.getElementById("search_text"));
         		search_text.css("visibility","hidden");
