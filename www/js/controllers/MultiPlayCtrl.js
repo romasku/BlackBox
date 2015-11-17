@@ -1,6 +1,6 @@
-angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFactory'])
+angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFactory', 'starter.factories.Calculator', 'starter.factories.Keyboard'])
 
-    .controller('MultiPlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $window, $timeout) {
+    .controller('MultiPlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $window, $timeout, $Calculator, $Keyboard) {
         $scope.level = $state.params.level;
         var log =$state.params.log;
         var pr = 0;
@@ -8,6 +8,20 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
         $scope.timeWon = -1;
         $scope.opState = "Opponent_guessing";
         $scope.timeBeg = (new Date()).getTime();
+        $scope.Keyboard = $Keyboard;
+        $scope.input = document.getElementById("play-input");
+        $scope.input.onfocus = function () {
+            $scope.input.blur();
+        };
+
+        //init calc
+        $Calculator.scope = $scope;
+        $Calculator.Keyboard = $Keyboard;
+        $Calculator.setResult = function(val){
+            $scope.data.ans = val;
+        }
+        $scope.showCalc = $Calculator.show;
+
         $scope.changeOpState = function() {
             if ($scope.opState == "Opponent_guessing") {
                 $scope.opState = "Opponent_answering";
@@ -45,8 +59,17 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
         $scope.input = document.getElementById("play-input");
 
         $scope.showKeyboard = function () {
-            if (window.cordova && cordova.plugins && cordova.plugins.Focus)
-                cordova.plugins.Focus.focus($scope.input);
+            console.log("showKeyboard");
+            $Keyboard.setValue = function (value){
+                console.log(value);
+                $scope.model.input = parseInt(value);
+            }
+            $Keyboard.getValue = function () {
+                return $scope.model.input.toString();
+            }
+            $Keyboard.button = angular.element(document.getElementById("button_ask"));
+            console.log($Keyboard.button);
+            $Keyboard.show($scope);
         };
 
         $timeout($scope.showKeyboard, 400);
@@ -55,7 +78,7 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
         $scope.attempts = [];
         var url = '/';
         if (ionic.Platform.isAndroid()) url = '/android_asset/www/';
-        $http.get(url + 'js/levels/' + $scope.level + '.js').then(
+        $http.get(url + 'js/levels/2/' + $scope.level + '.js').then(
             function (resp) {
                 var fn = resp.data;
                 while (1) {
@@ -66,7 +89,7 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
                 $scope.fn = fn;
             }
         );
-        $http.get(url + 'js/levels/levelsData.json').success(
+        $http.get(url + 'js/data/levelsData.json').success(
             function (data) {
                 var levelsData = data;
                 $scope.levelsData = levelsData;
@@ -137,16 +160,18 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
 
         $scope.showPopup = function (title, task, num) {
             $scope.data = {}; 
+            $scope.task = task;
             var canceled = true;
             var myPopup = $ionicPopup.show({
-                template: '<p style="text-align: center;">' + task + '</p><input type="number" ng-model="data.ans" autofocus>',
+                template: '<p style="text-align: center;">' + task + '</p><div class="button-bar"><input id="popup-input" type="number" style="width: 90%; font-size: 1rem;" ng-model="data.ans">' +
+                '<button class="button button-positive button-outline" ng-click="showCalc(task);"> <i class="icon ion-calculator"></i></button></div>',
                 title: title,
                 scope: $scope,
                 buttons: [
                     {text: translate('Cancel')},
                     {
                         text: '<b>' + translate('Answer') + '</b>',
-                        type: 'button-positive',
+                        type: 'button-positive button_ok',
                         onTap: function (e) {
                             if (!$scope.data.ans && $scope.data.ans !== 0) {
                                 e.preventDefault();
@@ -161,15 +186,11 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
             }).then(function (res) {
                 if (canceled) {
                     $scope.newState();
-                    if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
-                        cordova.plugins.Keyboard.close();
                 }
                 else {
                     $scope.answer(num + 1, task, $scope.data.ans);
                 }
             });
-            if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
-                cordova.plugins.Keyboard.show();
             //return '';
         };
         $scope.newState = function() {
@@ -179,13 +200,23 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
             $scope.log += 'a';
         }
         $scope.answer = function (num, ptask, pans) {
+
+            $Keyboard.setValue = function(value){
+                $scope.data.ans = parseInt(value);
+            }
+            $Keyboard.getValue = function(){
+                if (!$scope.data.ans) $scope.data.ans="";
+                return $scope.data.ans.toString();
+            }
+            $timeout(function() {$Keyboard.button=angular.element(document.getElementsByClassName("button_ok")[0]);}, 400);
+            $timeout(function() {document.getElementById("popup-input").onfocus = function() {
+                document.getElementById("popup-input").blur();
+            }}, 400);
             if (ptask == '') $scope.newState();
             if (ptask != '') {
                 var correctAns = $scope.calc(ptask);
                 if (pans != correctAns) {
                     $scope.newState();
-                    if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
-                        cordova.plugins.Keyboard.close();
                     setTimeout(function () {
                         $ionicPopup.alert({
                             title: translate('Wrong_answer'),
@@ -205,8 +236,6 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
                 var time = (new Date()).getTime();
                 $scope.time_won = (-$scope.timeBeg + time);
                 $scope.submitReplay();
-                if (window.cordova && cordova.plugins && cordova.plugins.Keyboard)
-                    cordova.plugins.Keyboard.close();
                 var msg = "Lose";
                 if ($scope.time_won < $state.params.time_won) msg = "Won";
                 setTimeout(function () {

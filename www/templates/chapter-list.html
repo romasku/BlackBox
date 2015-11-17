@@ -1,19 +1,9 @@
 <ion-view view-title="{{'Select_chapter' | translate}}">
     <ion-content scroll="false" style="background-color: white;">
         <ion-slide-box class="chapters">
-            <ion-slide>
-                <a href="#/header/level-list" class="button button-positive">
-                    <h1>{{'Chapter_1' | translate}}</h1>
-                </a>
-            </ion-slide>
-            <ion-slide>
-                <a class="button button-positive">
-                    <h1>{{'Chapter_2' | translate}}</h1>
-                </a>
-            </ion-slide>
-            <ion-slide>
-                <a class="button button-positive">
-                    <h1>{{'Chapter_3' | translate}}</h1>
+            <ion-slide ng-repeat="number in [] | range: 3">
+                <a href="#/header/level-list/{{number+1}}" class="button button-positive">
+                    <h1>{{'Chapter_' + (number+1) + '' | translate}}</h1>
                 </a>
             </ion-slide>
         </ion-slide-box>

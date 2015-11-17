@@ -1,0 +1,12 @@
+<ion-view view-title="{{'Leaderboard' | translate}}">
+    <ion-content class="leaderboard" style="background-color: white;">
+        <div id="content">
+        	<table>
+        		<tr ng-repeat="i in [] | range: table.length">
+        			<td id="{{i}}_name">{{table[i]["username"]}}</td>
+        			<td id="{{i}}_score">{{table[i]["score"]}}</td>
+        		</tr>
+        	</table>
+        </div>
+    </ion-content>
+</ion-view>

@@ -11,7 +11,10 @@ angular.module('starter.controllers.MainCtrl', ['starter.factories.LevelFactory'
     		$http.get("http://blackboxservermobile.azurewebsites.net/get_username", {params : {id :$window.localStorage["id"]}})
     			.success(function(data){
     				window.localStorage["name"] = data;
-    			});
+    			})
+                .error(function(data){
+                        console.log(data);
+                });
     	}
     });
       

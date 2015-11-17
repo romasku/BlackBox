@@ -62,7 +62,7 @@ starter.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             }
         })
         .state('header.level-list', {
-            url: '/level-list',
+            url: '/level-list/:chapter',
             views: {
                 'main': {
                     templateUrl: 'templates/level-list.html',
@@ -84,6 +84,15 @@ starter.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
             views : {
                 'main': {
                     templateUrl: 'templates/chapter-list.html'
+                }
+            }
+        })
+        .state('header.leaderboard', {
+            url : '/leaderboard',
+            views : {
+                'main': {
+                    templateUrl: 'templates/leaderboard.html',
+                    controller: "LeaderboardCtrl"
                 }
             }
         })

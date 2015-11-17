@@ -1,18 +1,24 @@
-<ion-view view-title="{{'Main_menu' | translate}}">
+<ion-view>
+    <ion-nav-title>
+        {{'Main_menu' | translate}}
+    </ion-nav-title>
     <ion-content class="padding">
         <div style="width: 100%; margin: 0; text-align: center;">
             <img style="width: 50%; height: 50%;  margin: 0 auto" src="img/logo.png"> <br/>
             <a href="#/header/chapter-list" class="button button-positive button-large button-block">
-                {{'Play' | translate}}
+            {{'Play' | translate}}
             </a>
-               <a href="#/header/opponent-search" class="button button-positive button-large button-block">
-                {{'Multiplayer' | translate}}
+            <a href="#/header/opponent-search" class="button button-positive button-large button-block">
+            {{'Multiplayer' | translate}}
+            </a>
+            <a href="#/header/leaderboard" class="button button-positive button-large button-block">
+                {{'Leaderboard' | translate}}
             </a>
             <a href="#/header/settings" class="button button-positive button-large button-block">
-                {{'Settings' | translate}}
+            {{'Settings' | translate}}
             </a>
             <a onclick="ionic.Platform.exitApp();" class="button button-positive button-large button-block">
-                {{'Quit' | translate}}
+            {{'Quit' | translate}}
             </a>
         </div>
     </ion-content>

@@ -35,65 +35,226 @@
 .levelscreen {
     height: 100%;
 }
-.levelscreen ion-slide{
-    padding-right: 10px;
-    padding-left: 10px;
-    padding-top: 10px;
+
+.levelscreen ion-slide {
+    padding: 10px;
+    padding-bottom: 20px;
 }
-.levelscreen .button{
+
+.levelscreen .button {
     border-radius: 5px;
-    line-height: 4.6em;
+    line-height: 2.1em;
     height: 100%;
     width: 100%;
     font-weight: 700;
     margin: 0;
 }
-.levelscreen table{
+
+.levelscreen table {
     width: 100%;
-    text-align: center; 
+    text-align: center;
     min-height: 95%;
     max-height: 95%;
 }
-.levelscreen td{
+
+.levelscreen td {
     padding: 10px;
 }
-.levelscreen a{
+
+.levelscreen a {
 }
-.levelsreen i{
+
+.levelsreen i {
     font-size: 0.1rem;
+}
+
+.attempt {
+    border-width: 1px 1px 0px 1px;
+    margin: 0 -1px 0 -1px;
+    padding: 7px 0;
+}
+.attempt:last-child{
+    border-width: 1px;
 }
 
 .toggle {
     margin-top: 2px;
 }
-.spinner svg{
-    margin-top:25vh;
+
+.spinner svg {
+    margin-top: 25vh;
     width: 15vh;
     height: 15vh;
 }
-.progress-text{
+
+.progress-text {
     position: absolute;
     width: 95.4%;
     text-align: center;
-    margin : 0;
+    margin: 0;
     padding: 0;
     padding-top: 7vh;
     font-size: 5vh;
 }
+
 .hidden {
     visibility: hidden;
 }
+
 .button-accept {
-    top:15vh;
+    top: 15vh;
     vertical-align: none;
     width: 100%;
 }
-.opponent-state{
+
+.opponent-state {
     position: absolute;
     font-size: 1.2em;
-    margin:8px;
-    bottom: 0;
+    margin: 8px;
+    bottom: 40vh;
 }
-.warning{
-    color : red;
+
+.warning {
+    color: red;
+}
+
+.popup {
+    width: 90% !important;
+}
+
+.keyboard {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 35vh;
+    text-align: center;
+    border-collapse: separate;
+}
+
+.keyboard td {
+    width: 33%;
+    border-style: solid;
+    vertical-align: middle;
+    border-width: 1px 1px 0px 0px;
+    margin: 0px;
+    padding: 0px;
+    border-color: #387ef5;
+    background: #FFFFFF;
+    font-size: 4.5vh;
+    font-weight: 200;
+}
+
+.keyboard td:last-child {
+    border-right: 0px;
+}
+
+.keyboard td.activated {
+    background: #387ef5 !important;
+    color: #FFFFFF;
+}
+
+.keyboard-showing {
+    pointer-events: all !important;
+}
+
+.keyboard-showing .backdrop {
+    height: 65% !important;
+}
+
+.keyboard-showing .popup-container {
+    height: 65% !important;
+}
+
+.keyboard-showing .game {
+    bottom: 35vh;
+}
+
+.button_ok {
+}
+
+.game {
+}
+.game .button-bar{
+    margin-bottom: 10px;
+}
+
+.leaderboard div {
+    background: #BFF1FF;
+}
+
+.leaderboard table {
+    width: 80%;
+    margin: auto;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+.leaderboard td {
+    background: #00FF00;
+    font-size: 1.5em;
+    padding: 0.5em;
+    width: 50%;
+    margin: 0.2em;
+    border-style: solid;
+    transition: all;
+    transition-duration: 0.5s;
+}
+
+.leaderboard td:first-child {
+    border-radius: 100px 0 0 100px;
+    border-width: 0 1px 0 0;
+    text-align: right;
+}
+
+.leaderboard td:last-child {
+    border-radius: 0 100px 100px 0;
+    border-width: 0 0 0 1px;
+}
+
+.leaderboard tr:nth-child(-n+12) td {
+    background: #80FF00;
+}
+
+.leaderboard tr:nth-child(-n+9) td {
+    background: #FF0;
+}
+
+.leaderboard tr:nth-child(-n+6) td {
+    background: #FF8000;
+}
+
+.leaderboard tr:nth-child(-n+3) td {
+    background: #F00;
+}
+
+.is-updating {
+    color: rgba(0, 0, 0, 0);
+}
+
+.phrase {
+    font-size: 1rem;
+    padding: 0.5em;
+}
+
+.button-full {
+    width: 100%;
+}
+
+.button-hint {
+    font-size: 1rem;
+}
+
+ion-header-bar {
+    padding-left: 80px;
+    padding-right: 80px;
+}
+.help-button {
+    border-width: 0;
+    position: absolute;
+    top: 7px;
+    right: 16px;
+    min-width: 34px;
+    min-height: 34px;
+    font-size: 18px;
+    line-height: 32px; 
 }

@@ -1,5 +1,16 @@
-<ion-view view-title="{{'Level' | translate}} {{level}}">
-    <ion-content class="padding">
+<ion-view>
+    <ion-nav-title>
+        {{'Level' | translate}} {{level}}
+    </ion-nav-title>
+    <ion-nav-buttons>
+        <button class="button button-positive help-button" ng-click="showHelp('');">
+                        <i class="icon ion-help-circled"></i>
+        </button>
+    </ion-nav-buttons>
+    <div class="bar bar-subheader">
+        <h1 class="text-center phrase">{{phrases[numPhrase]}}</h1>
+    </div>
+    <ion-content class="padding game has-subheader">
         <ion-list>
             <ion-item>
                 <div class="button-bar">
@@ -10,19 +21,17 @@
                     <button class="button button-positive button-outline" ng-click="showCalc('');">
                         <i class="icon ion-calculator"></i>
                     </button>
-                </div><br>
+                </div>
                 <div class="button-bar">
-                    <button class="button button-positive button-outline" ng-click="add();">{{'Ask' | translate}}
+                    <button id="button_ask" class="button button-positive button-outline" ng-click="add();">{{'Ask' | translate}}
                     </button>
                     <button class="button button-positive button-outline" ng-click="answer(0, '', '')">
                         {{'Answer' | translate}}
                     </button>
                 </div>
-                <br>
-                <h4 style="font-size: 1rem" class="text-center">{{'Attempts_done' | translate}}: {{stats.moves}}</h4>
-                <h4 style="font-size: 1rem" class="text-center">{{'Penalty' | translate}}: {{stats.penalty}}</h4>
+                <h4 style="font-size: 1rem;" class="text-center">{{'Attempts_done' | translate}}: {{stats.moves}}</h4>
             </ion-item>
-            <ion-item style="width: 100%;" ng-repeat="attempt in attempts">
+            <ion-item class="attempt"  ng-repeat="attempt in attempts" >
                 <table style="width: 100%;">
                     <tbody>
                     <tr>
