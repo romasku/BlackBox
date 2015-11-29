@@ -94,11 +94,11 @@ angular.module('starter.factories.Help', [])
                     if ($scope.levelData.bigHint) {
                         var hint = '';
                         if (levelsData[level-1].bigHintType == 'template') hint = translate(levelsData[level-1].bigHint);
-                        else {
-                            if (language == 'en') hint = levelsData[level-1].enBigHint;
-                            else if (language == 'ru') hint = levelsData[level-1].ruBigHint;
-                            else hint = levelsData[level-1].uaBigHint;
-                        }
+                        else hint = translate('Big_' + $LevelFactory.levels[level-1].chapter + '_' + level);
+                        if (levelsData[level-1].hasConst && levelsData[level-1].bigHintType == "template")
+                            if (levelsData[level-1].bigHint == "Hint_number") hint += levelsData[level-1].const;
+                        if (levelsData[level-1].hasRand && levelsData[level-1].bigHintType == "template")
+                            if (levelsData[level-1].bigHint == "Hint_number") hint += $LevelFactory.levels[level-1].RAND % levelsData[level-1].maxRand + 1;
                         $ionicPopup.alert({
                             title: translate('Get_big_hint') + ' ' + translate('Hint'),
                             template: '<p class="text-center">' + hint + '</p>'
@@ -117,11 +117,11 @@ angular.module('starter.factories.Help', [])
                         $window.localStorage[$scope.lvl] = JSON.stringify($scope.levelData);
                         var hint = '';
                         if (levelsData[level-1].bigHintType == 'template') hint = translate(levelsData[level-1].bigHint);
-                        else {
-                            if (language == 'en') hint = levelsData[level-1].enBigHint;
-                            else if (language == 'ru') hint = levelsData[level-1].ruBigHint;
-                            else hint = levelsData[level-1].uaBigHint;
-                        }
+                        else hint = translate('Big_' + $LevelFactory.levels[level-1].chapter + '_' + level);
+                        if (levelsData[level-1].hasConst && levelsData[level-1].bigHintType == "template")
+                            if (levelsData[level-1].bigHint == "Hint_number") hint += levelsData[level-1].const;
+                        if (levelsData[level-1].hasRand && levelsData[level-1].bigHintType == "template")
+                            if (levelsData[level-1].bigHint == "Hint_number") hint += $LevelFactory.levels[level-1].RAND % levelsData[level-1].maxRand + 1;
                         $ionicPopup.alert({
                             title: translate('Get_big_hint') + ' ' + translate('Hint'),
                             template: '<p class="text-center">' + hint + '</p>'
@@ -132,9 +132,8 @@ angular.module('starter.factories.Help', [])
                 $scope.getSolution = function () {
                     if ($scope.levelData.solution) {
                         var hint = '';
-                        if (language == 'en') hint = levelsData[level-1].enSolution;
-                        else if (language == 'ru') hint = levelsData[level-1].ruSolution;
-                        else hint = levelsData[level-1].uaSolution;
+                        hint = translate('Sol_' + $LevelFactory.levels[level-1].chapter + '_' + level);
+                        hint = hint.replace('RAND', '' + ($LevelFactory.levels[level-1].RAND % levelsData[level-1].maxRand + 1));
                         $ionicPopup.alert({
                             title: translate('Solution'),
                             template: '<p class="text-center">' + hint + '</p>'
@@ -152,9 +151,8 @@ angular.module('starter.factories.Help', [])
                         $scope.levelData.solution = true;
                         $window.localStorage[$scope.lvl] = JSON.stringify($scope.levelData);
                         var hint = '';
-                        if (language == 'en') hint = levelsData[level-1].enSolution;
-                        else if (language == 'ru') hint = levelsData[level-1].ruSolution;
-                        else hint = levelsData[level-1].uaSolution;
+                        hint = translate('Sol_' + $LevelFactory.levels[level-1].chapter + '_' + level);
+                        hint = hint.replace('RAND', '' + ($LevelFactory.levels[level-1].RAND % levelsData[level-1].maxRand + 1));
                         $ionicPopup.alert({
                             title: translate('Solution'),
                             template: '<p class="text-center">' + hint + '</p>'

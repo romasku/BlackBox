@@ -12,6 +12,7 @@ angular.module('starter.factories.LevelFactory', [])
                         level: chapter + '-' + (i + 1),
                         chapter: chapter,
                         numInChapter: i + 1,
+                        RAND: Math.floor(Math.random() * 1e9),
                         isCompleted: false,
                         moves: 0,
                         penalty: 0,

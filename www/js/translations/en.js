@@ -62,6 +62,9 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Oops: 'Oops',
         No_points: 'Unfortunately you don\'t have enough points.',
         Price: 'Price',
+        Hint: 'hint',
+        Solution: 'Solution',
+
         Hint_arithmetic: 'Think about simple arithmetic operations',
         Hint_number: 'The solution is connected with number ',
         Hint_numbers: 'Take a closer look at the digits of the given number',
@@ -70,7 +73,21 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Hint_parity: 'The solution is connected with parity',
         Hint_sort: 'You should sort something',
         Hint_close: 'You should find the closest number to the given',
-        Hint: 'hint',
-        Solution: 'Solution'
+
+        Big_1_11: 'Look at the shape of some digits',
+        Big_1_12: 'These numbers are defined recursively by the formula',
+
+        Sol_1_1: 'You have to add 1 to the given number',
+        Sol_1_2: 'You have to multiply the given number by 2',
+        Sol_1_3: 'You have to subtract from the given number RAND',
+        Sol_1_4: 'You have to divide the given number by RAND',
+        Sol_1_5: 'You have to count the remainder of the division by RAND',
+        Sol_1_6: 'You have to count the number of digits in the given number',
+        Sol_1_7: 'You have to reverse the given number',
+        Sol_1_8: 'You have to count the sum of digits of the given number',
+        Sol_1_9: 'If the given number is even you should add RAND, otherwise subtract',
+        Sol_1_10: 'You have to sort digits of the given number',
+        Sol_1_11: 'You have to count oval or circle elements in digits of the given number. They are in digits: 0,6,8,9',
+        Sol_1_12: 'You need to find the nearest to the given number Fibonacci number'
     });
 });
