@@ -2,7 +2,7 @@ angular.module('starter.controllers.LeaderboardCtrl', ['starter.factories.LevelF
     .controller('LeaderboardCtrl', function ($scope, $http, $window, $ionicPopup, $filter, $timeout, $ionicHistory) {
         var translateText = $filter('translate');
         var title;
-        $http.get("http://blackboxgame.ddns.net:8888/leaderboardgame")
+        $http.get("http://blackboxservermobile.azurewebsites.net/leaderboardgame")
             .success(function(data){
                 $scope.table = data;
                 $timeout($scope.update,1000);
@@ -17,7 +17,7 @@ angular.module('starter.controllers.LeaderboardCtrl', ['starter.factories.LevelF
                     });
             });
         $scope.update = function(){
-            $http.get("http://blackboxgame.ddns.net:8888/leaderboardgame")
+            $http.get("http://blackboxservermobile.azurewebsites.net/leaderboardgame")
             .success(function(data){
                 for (var i = 0; i < $scope.table.length; i++){
                     if ($scope.table[i]["username"]!=data[i]["username"]){

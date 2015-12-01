@@ -2,10 +2,19 @@ angular.module('starter.controllers.SettingsCtrl', ['starter.factories.LevelFact
 
     .controller('SettingsCtrl', function ($scope, $LevelFactory, $translate, $ionicPopup, $window, $filter, $http, $Help) {
         var isConnected=false;
-        $http.get("http://blackboxgame.ddns.net:8888/get_username", {params : {id :$window.localStorage["id"]}})
+        $http.get("http://blackboxservermobile.azurewebsites.net/get_username", {params : {id :$window.localStorage["id"]}})
             .success(function(data){
+                        if (data === "User not found")
+                        {
+                            $http.get("http://blackboxservermobile.azurewebsites.net/register")
+                                .success(function(data){
+                                    $window.localStorage["id"] = data;
+                                });
+                            data = "Username";
+                        }
                         window.localStorage["name"] = data;
                         isConnected=true;
+                        console.log(window.localStorage["id"]);
                     })
             .error(function(data){
                         isConnected=false;
