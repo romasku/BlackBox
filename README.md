@@ -1,8 +1,6 @@
 BlackBox-ionic
 ==============
 
-[![build status](http://ci.gitlab.prostoksi.com/projects/14/status.png?ref=master)](http://ci.gitlab.prostoksi.com/projects/14?ref=master)
-
 This is a logic game of figuring out a hidden rules of number transformations.
 
 It is written in JS and packaged with Cordova/Ionic, so it can run on most mobile platforms.
