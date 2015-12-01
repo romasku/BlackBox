@@ -18,9 +18,9 @@ angular.module('starter.factories.Keyboard', [])
             +'<td id="button_9" ng-click="Keyboard.click(9);">9</td>'
         +'</tr>'
         +'<tr>'
-            +'<td id="button_del" ng-click="Keyboard.click(\'del\');">del</td>'
+            +'<td id="button_del" ng-click="Keyboard.click(\'del\');"><i class="icon ion-backspace"></i></td>'
             +'<td id="button_0" ng-click="Keyboard.click(0);">0</td>'
-            +'<td id="button_ok" ng-click="Keyboard.click(\'ok\');">ok</td>'
+            +'<td id="button_ok" ng-click="Keyboard.click(\'ok\');"><i class="icon ion-checkmark"></i></td>'
         +'</tr>'
         +'</table>';
         factory.submit = function(){
@@ -63,10 +63,10 @@ angular.module('starter.factories.Keyboard', [])
             else {
                 console.log(factory.getValue());
                 if (!factory.getValue()) factory.setValue("");
-                var value=factory.getValue();
-                if (value=="NaN") value=0;
+                var value = factory.getValue();
+                if (value == "NaN") value=0;
                 console.log(value);
-                value += char;
+                value = value + '' + char;
                 factory.setValue(value);
             }
         }

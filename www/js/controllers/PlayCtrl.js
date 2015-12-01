@@ -66,7 +66,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             function (resp) {
                 var fn = resp.data;
                 while (1) {
-                    var fn2 = fn.replace('RAND', '' + Math.floor(Math.random() * 1e9));
+                    var fn2 = fn.replace('RAND', '' + $LevelFactory.levels[$scope.level-1].RAND);
                     if (fn2 == fn) break;
                     fn = fn2;
                 }

@@ -1,3 +1,3 @@
 function calc(a) {
-    return a - (RAND % 49) + 1;
+    return a - ((RAND % 49) + 1);
 }

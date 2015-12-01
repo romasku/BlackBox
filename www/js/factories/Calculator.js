@@ -41,7 +41,7 @@ angular.module('starter.factories.Calculator', [])
                 else $scope.data.calc += sign;
             }
             $scope.calculate = function () {
-                $scope.data.calc = eval($scope.data.calc);
+                $scope.data.calc = Math.floor(eval($scope.data.calc));
             };
             $scope.lines = 2;
             $scope.signs = [['+','%'],['-','('],['*',')'],['/','C']];
