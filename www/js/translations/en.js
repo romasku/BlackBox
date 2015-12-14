@@ -73,6 +73,8 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Hint_parity: 'The solution is connected with parity',
         Hint_sort: 'You should sort something',
         Hint_close: 'You should find the closest number to the given',
+        Hint_num_system: 'You should transfer the number to another numeral system',
+        Hint_divisibility: 'The solution is connected with the divisibility',
 
         Big_1_11: 'Look at the shape of some digits',
         Big_1_12: 'These numbers are defined recursively by the formula',
@@ -88,6 +90,19 @@ angular.module('starter.translations.en', ['pascalprecht.translate']).config(fun
         Sol_1_9: 'If the given number is even you should add RAND, otherwise subtract',
         Sol_1_10: 'You have to sort digits of the given number',
         Sol_1_11: 'You have to count oval or circle elements in digits of the given number. They are in digits: 0,6,8,9',
-        Sol_1_12: 'You need to find the nearest to the given number Fibonacci number'
+        Sol_1_12: 'You need to find the nearest to the given number Fibonacci number',
+
+        Sol_2_1: 'You have to swap the first and the last digits of the given number',
+        Sol_2_2: 'You have to count the number of digits in the binary system that equals one',
+        Sol_2_3: 'You have to calculate the difference between the first and the last digits of the given number',
+        Sol_2_4: 'You have to calculate the difference between the given number and its reflection',
+        Sol_2_5: 'You have to multiply all digits of the given number',
+        Sol_2_6: 'You have to calculate the sum of differences between adjacent digits of the given number',
+        Sol_2_7: 'You have to find the maximum power of two, which divides the given number',
+        Sol_2_8: 'You have to count the sum of multiplications of digits and theirs indexes in the given number',
+        Sol_2_9: 'You have to find the nearest to the given number square',
+        Sol_2_10: 'You have to multiply the first digit by the rest of the given number',
+        Sol_2_11: 'You have to complete to nine every digit of the given number',
+        Sol_2_12: 'You have to count the sum of squares of digits of the given number'
     });
 });

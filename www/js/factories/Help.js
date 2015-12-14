@@ -34,30 +34,30 @@ angular.module('starter.factories.Help', [])
                 $window.localStorage["points"] = JSON.stringify(points+val);
             };
 
-            factory.show = function (level, levelsData, language) {
+            factory.show = function (level, chapter, levelsData, language) {
                 var translate = $filter('translate');
                 factory.initPoints();
                 //init popup scope
                 $scope = factory.scope;
                 $scope.data = {};
                 $scope.data.points = parseInt($window.localStorage["points"]);
-                $scope.lvl = levelsData[level-1].level;
+                $scope.lvl = levelsData[chapter - 1][level - 1].level;
                 $scope.levelData = JSON.parse($window.localStorage[$scope.lvl]);
 
                 $scope.change = function (val) {
                     var points = JSON.parse($window.localStorage["points"] || 0);
-                    $window.localStorage["points"] = JSON.stringify(eval(points)+eval(val));
+                    $window.localStorage["points"] = JSON.stringify(eval(points) + eval(val));
                     $scope.data.points = parseInt($window.localStorage["points"]);
                 }
 
                 $scope.getSmallHint = function () {
                     var hint = '';
-                    if (levelsData[level-1].smallHintType == 'template') hint = translate(levelsData[level-1].smallHint);
-                    else hint = translate('Small_' + $LevelFactory.levels[level-1].chapter + '_' + level);
-                    if (levelsData[level-1].hasConst && levelsData[level-1].smallHintType == "template")
-                        if (levelsData[level-1].smallHint == "Hint_number") hint += levelsData[level-1].const;
-                    if (levelsData[level-1].hasRand && levelsData[level-1].smallHintType == "template")
-                        if (levelsData[level-1].smallHint == "Hint_number") hint += $LevelFactory.levels[level-1].RAND % levelsData[level-1].maxRand + 1;
+                    if (levelsData[chapter - 1][level - 1].smallHintType == 'template') hint = translate(levelsData[chapter - 1][level - 1].smallHint);
+                    else hint = translate('Small_' + $LevelFactory.levels[level - 1].chapter + '_' + level);
+                    if (levelsData[chapter - 1][level - 1].hasConst && levelsData[chapter - 1][level - 1].smallHintType == "template")
+                        if (levelsData[chapter - 1][level - 1].smallHint == "Hint_number") hint += levelsData[chapter - 1][level - 1].const;
+                    if (levelsData[chapter - 1][level - 1].hasRand && levelsData[chapter - 1][level - 1].smallHintType == "template")
+                        if (levelsData[chapter - 1][level - 1].smallHint == "Hint_number") hint += $LevelFactory.levels[level - 1].RAND % levelsData[chapter - 1][level - 1].maxRand + 1;
                     if ($scope.levelData.smallHint) {
                         $ionicPopup.alert({
                             title: translate('Get_small_hint') + ' ' + translate('Hint'),
@@ -84,12 +84,12 @@ angular.module('starter.factories.Help', [])
 
                 $scope.getBigHint = function () {
                     var hint = '';
-                    if (levelsData[level-1].bigHintType == 'template') hint = translate(levelsData[level-1].bigHint);
-                    else hint = translate('Big_' + $LevelFactory.levels[level-1].chapter + '_' + level);
-                    if (levelsData[level-1].hasConst && levelsData[level-1].bigHintType == "template")
-                        if (levelsData[level-1].bigHint == "Hint_number") hint += levelsData[level-1].const;
-                    if (levelsData[level-1].hasRand && levelsData[level-1].bigHintType == "template")
-                        if (levelsData[level-1].bigHint == "Hint_number") hint += $LevelFactory.levels[level-1].RAND % levelsData[level-1].maxRand + 1;
+                    if (levelsData[chapter - 1][level - 1].bigHintType == 'template') hint = translate(levelsData[chapter - 1][level - 1].bigHint);
+                    else hint = translate('Big_' + $LevelFactory.levels[level - 1].chapter + '_' + level);
+                    if (levelsData[chapter - 1][level - 1].hasConst && levelsData[chapter - 1][level - 1].bigHintType == "template")
+                        if (levelsData[chapter - 1][level - 1].bigHint == "Hint_number") hint += levelsData[chapter - 1][level - 1].const;
+                    if (levelsData[chapter - 1][level - 1].hasRand && levelsData[chapter - 1][level - 1].bigHintType == "template")
+                        if (levelsData[chapter - 1][level - 1].bigHint == "Hint_number") hint += $LevelFactory.levels[level - 1].RAND % levelsData[chapter - 1][level - 1].maxRand + 1;
                     if ($scope.levelData.bigHint) {
                         $ionicPopup.alert({
                             title: translate('Get_big_hint') + ' ' + translate('Hint'),
@@ -116,8 +116,8 @@ angular.module('starter.factories.Help', [])
 
                 $scope.getSolution = function () {
                     var hint = '';
-                    hint = translate('Sol_' + $LevelFactory.levels[level-1].chapter + '_' + level);
-                    hint = hint.replace('RAND', '' + ($LevelFactory.levels[level-1].RAND % levelsData[level-1].maxRand + 1));
+                    hint = translate('Sol_' + $LevelFactory.levels[level - 1].chapter + '_' + level);
+                    hint = hint.replace('RAND', '' + ($LevelFactory.levels[level - 1].RAND % levelsData[chapter - 1][level - 1].maxRand + 1));
                     if ($scope.levelData.solution) {
                         $ionicPopup.alert({
                             title: translate('Solution'),

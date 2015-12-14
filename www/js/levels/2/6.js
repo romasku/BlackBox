@@ -1,9 +1,8 @@
 function calc(a) {
-    a = a.toString();
-    var ans = '';
-    for (var i = a.length - 1; i >= 0; i--) {
-        ans += a[i];
+    s = a.toString();
+    var ans = 0;
+    for( var i = 0; i < s.length - 1; i++) {
+        ans += Math.abs(s.charAt(i) - s.charAt(i + 1));
     }
-    if (ans >= a) return parseInt(ans-a);
-    else return parseInt(a-ans);
+    return ans;
 }

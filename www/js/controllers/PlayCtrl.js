@@ -91,15 +91,15 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         };
 
         $scope.countStars = function (userData) {
-            var good = $scope.levelsData[$scope.level - 1].good;
-            var exellent = $scope.levelsData[$scope.level - 1].exellent;
+            var good = $scope.levelsData[$scope.chapter - 1][$scope.level - 1].good;
+            var exellent = $scope.levelsData[$scope.chapter - 1][$scope.level - 1].exellent;
             if (userData.moves <= exellent) return 3;
             if (userData.moves <= good) return 2;
             return 1;
         };
 
         $scope.countPenalty = function (num) {
-            var complexity = $scope.levelsData[$scope.level - 1].complexity;
+            var complexity = $scope.levelsData[$scope.chapter - 1][$scope.level - 1].complexity;
             return (11 - complexity) * (4 - num);
         };
 
@@ -169,7 +169,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
 
         $Help.scope = $scope;
         $scope.showHelp = function () {
-            $Help.show($scope.level, $scope.levelsData, $scope.language);
+            $Help.show($scope.level, $scope.chapter, $scope.levelsData, $scope.language);
         }
 
         $scope.showPopup = function (title, task, num) {
