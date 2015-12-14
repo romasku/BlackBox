@@ -60,8 +60,7 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         }
 
         $scope.attempts = [];
-        var url = '/';
-        if (ionic.Platform.isAndroid()) url = '/android_asset/www/';
+        var url = cordova.file.applicationDirectory + "/www/";
         $http.get(url + 'js/levels/' + $scope.chapter + '/' + $scope.level + '.js').then(
             function (resp) {
                 var fn = resp.data;

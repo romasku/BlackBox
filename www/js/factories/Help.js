@@ -142,7 +142,7 @@ angular.module('starter.factories.Help', [])
                     }
                 }
 
-                //save and hide Keyboard;
+                //save and hide Keyboard
                 var keyboardSave = $scope.Keyboard.save();
                 $scope.Keyboard.hide();
 
