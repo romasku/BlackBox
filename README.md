@@ -45,7 +45,7 @@ To create Xcode project run
 ```bash
 $ ionic build ios
 ```
-project will appear in platform/ios
+project will appear in platforms/ios
 
 Desktop:
 ```bash
