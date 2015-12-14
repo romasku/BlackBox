@@ -37,6 +37,16 @@ Android:
 $ ionic run android
 ```
 
+IOS:
+```bash
+$ ionic run ios
+```
+To create Xcode project run
+```bash
+$ ionic build ios
+```
+project will appear in platform/ios
+
 Desktop:
 ```bash
 $ ionic serve
