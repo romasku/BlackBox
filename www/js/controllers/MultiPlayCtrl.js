@@ -76,7 +76,8 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
 
 
         $scope.attempts = [];
-        var url = cordova.file.applicationDirectory + "/www/";
+        var url = "/";
+        if (window.cordova) url = cordova.file.applicationDirectory + "/www/";
         $http.get(url + 'js/levels/2/' + $scope.level + '.js').then(
             function (resp) {
                 var fn = resp.data;
