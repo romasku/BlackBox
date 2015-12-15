@@ -3,10 +3,12 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
     .controller('MultiPlayCtrl', function ($scope, $rootScope, $http, $ionicPopup, $state, $filter, $LevelFactory, $window, $timeout, $Calculator, $Keyboard) {
     
         levelInfoArr = $rootScope.levelnum.split("-");
-        $scope.level = levelInfoArr[0];
-        $scope.chapter = levelInfoArr[1];
+        $scope.level = levelInfoArr[1];
+        $scope.chapter = levelInfoArr[0];
 
         var log = $rootScope.log;
+        $scope.askCnt = 0;
+        $scope.ansCnt = 0;
         $scope.log = "";
         $scope.timeWon = -1;
         $scope.opState = "Opponent_guessing";
@@ -166,6 +168,7 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
 
                 //add ask to log (not best way, but saving $scope.calc(val) is ugly)
                 logAsk(val, $scope.calc(val));
+                $scope.askCnt++;
 
                 $scope.attempts.unshift({question: val, answer: $scope.calc(val)});
             }
@@ -238,6 +241,7 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
 
                 //add ans to log
                 logAns(ptask, pans, correctAns);
+                $scope.ansCnt++;
 
                 if (pans != correctAns) {
                     setTimeout(function () {
@@ -264,7 +268,20 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
                 var time = (new Date()).getTime();
                 $scope.time_won = (-$scope.timeBeg + time);
                 var msg = "Lose";
-                if ($scope.time_won < $scope.timeOpWon) msg = "Won";
+                if ($scope.time_won < $scope.timeOpWon) 
+                {
+                    msg = "Won";
+                    //add score to user
+                    var wtime = $scope.time_won;
+                    score = 60 * ( 1 - (2 * Math.atan(wtime/1000))/Math.PI);
+                    score += 10 * ( 1 - (2 * Math.atan($scope.askCnt))/Math.PI);
+                    score += 30 * ( 1 - (2 * Math.atan($scope.ansCnt - 3))/Math.PI);
+                    score *= Math.pow($scope.timeOpWon / wtime, 1.0/2.0);
+                    $http.get("http://blackboxservermobile.azurewebsites.net/add_score", {params:{
+                            id : $window.localStorage["id"],
+                            score : score  
+                    }});
+                }
                 setTimeout(function () {
                     $ionicPopup.alert({
                         title: translate('Congratulations') + '!',

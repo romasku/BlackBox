@@ -4,8 +4,8 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         var translate = $filter('translate');
 
         levelInfoArr = $state.params.level.split("-");
-        $scope.level = levelInfoArr[0];
-        $scope.chapter = levelInfoArr[1];
+        $scope.level = levelInfoArr[1];
+        $scope.chapter = levelInfoArr[0];
 
         $scope.language = $translate.use();
         $scope.phrases = [];
