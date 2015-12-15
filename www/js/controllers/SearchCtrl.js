@@ -1,6 +1,6 @@
 angular.module('starter.controllers.SearchCtrl', ['starter.factories.LevelFactory'])
 
-    .controller('SearchCtrl', function ($scope, $LevelFactory, $http) {
+    .controller('SearchCtrl', function ($scope, $rootScope, $LevelFactory, $http) {
     	$http.get("http://blackboxservermobile.azurewebsites.net/find_replay")
     	.success(function(data) {
         	$http.get("http://blackboxservermobile.azurewebsites.net/get_username", {params : {id : data["players_id"]}})
@@ -14,9 +14,9 @@ angular.module('starter.controllers.SearchCtrl', ['starter.factories.LevelFactor
         		opponent_name.css("visibility","visible");
         		var button_accept = angular.element(document.getElementById("button_accept"));
         		button_accept.css("visibility","visible");
-        		$scope.levelnum = data["game_id"];
-        		$scope.log = data["log"];
-        		$scope.time_won = data["time_won"];
+        		$rootScope.levelnum = data["game_id"];
+        		$rootScope.log = data["log"];
+                $rootScope.rand = data["rand"];
         	})
         	.error(function(data){
 

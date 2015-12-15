@@ -1,18 +1,11 @@
 angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory', 'starter.factories.Keyboard', 'starter.factories.Calculator', 'starter.factories.Help'])
 
-    .controller('PlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $Keyboard, $timeout, $translate, $Calculator, $Help) {
+    .controller('PlayCtrl', function ($scope, $window, $http, $ionicPopup, $state, $filter, $LevelFactory, $Keyboard, $timeout, $translate, $Calculator, $Help) {
         var translate = $filter('translate');
 
-        $scope.levelInfo = $state.params.level;
-        $scope.level = '';
-        $scope.chapter = '';
-        for (var i = $scope.levelInfo.length-1; i >= 0; i--) {
-            if ($scope.levelInfo[i] != '-') $scope.level = $scope.levelInfo[i] + $scope.level;
-            else break;
-        }
-        for (var j = i-1; j >= 0; j--) {
-            $scope.chapter = $scope.levelInfo[j] + $scope.chapter;
-        }
+        levelInfoArr = $state.params.level.split("-");
+        $scope.level = levelInfoArr[0];
+        $scope.chapter = levelInfoArr[1];
 
         $scope.language = $translate.use();
         $scope.phrases = [];
@@ -24,13 +17,51 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         $scope.input.onfocus = function () {
             $scope.input.blur();
         };
+
+        //init log
+        $scope.log = "";
+        $scope.timeBeg = (new Date()).getTime();
+        $scope.answering = false;
+        // log functions
+        logGuesingMode = function() {
+            var time = (new Date()).getTime();
+            time = time - $scope.timeBeg;
+            $scope.log += time + " guesingMode\n";
+        }
+        logAnsweringMode = function() {
+            var time = (new Date()).getTime();
+            time = time - $scope.timeBeg;
+            $scope.log += time + " answeringMode\n";
+        }
+        logAsk = function(num, ans) {
+            var time = (new Date()).getTime();
+            time = time - $scope.timeBeg;
+            $scope.log += time + " ask " + num + " " + ans + "\n";
+        }
+        logAns = function(num, pans, cans) {
+            var time = (new Date()).getTime();
+            time = time - $scope.timeBeg;
+            $scope.log += time + " ask " + num + " " + pans + " " + cans + "\n";
+        }
+        logWon = function() {
+            var time = (new Date()).getTime();
+            time = time - $scope.timeBeg;
+            $scope.log += time + " won\n";
+            //It must be last loging command, so send to server it
+            $http.get("http://blackboxservermobile.azurewebsites.net/upload_replay", {params:{
+                players_id : $window.localStorage["id"],
+                log : $scope.log,
+                game_id : $state.params.level,
+                is_multiplay : "false",
+                rand : $LevelFactory.levels[$scope.level-1].RAND
+            }});
+        }
+        // end log functions
         
         $scope.Keyboard = $Keyboard;
 
         $scope.showKeyboard = function () {
-            console.log("showKeyboard");
             $Keyboard.setValue = function (value){
-                console.log(value);
                 $scope.model.input = parseInt(value);
             }
             $Keyboard.getValue = function () {
@@ -146,6 +177,10 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 $scope.showError('Please_valid_number');
             }
             else {
+
+                //add ask to log (not best way, but saving $scope.calc(val) is ugly)
+                logAsk(val, $scope.calc(val));
+
                 $scope.attempts.unshift({question: val, answer: $scope.calc(val)});
                 if (!$scope.stats.isCompleted) {
                     $scope.stats.moves++;
@@ -201,6 +236,9 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                 if (canceled) {
                     $Keyboard.hide();
                     $scope.showKeyboard();
+                    //Log return to guesing
+                    logGuesingMode();
+                    $scope.answering = false;
                 }
                 else {
                     $scope.answer(num + 1, task, $scope.data.ans);
@@ -210,6 +248,14 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
         };
 
         $scope.answer = function (num, ptask, pans) {
+            
+            //Log answering mode
+            if (!$scope.answering)
+            {
+                logAnsweringMode();
+                $scope.answering = true;
+            }
+
             $Keyboard.setValue = function(value){
                 $scope.data.ans = parseInt(value);
             }
@@ -221,8 +267,13 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
             $timeout(function() {document.getElementById("popup-input").onfocus = function() {
                 document.getElementById("popup-input").blur();
             }}, 400);
+
             if (ptask != '') {
                 var correctAns = $scope.calc(ptask);
+
+                //add ans to log
+                logAns(ptask, pans, correctAns);
+
                 if (pans != correctAns) {
                     $Keyboard.hide();
                     if (!$scope.stats.isCompleted) {
@@ -237,6 +288,11 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                             setTimeout($scope.showKeyboard, 400);
                         });
                     }, 100);
+
+                    //Log return to guesing
+                    logGuesingMode();
+                    $scope.answering = false;
+
                     return;
                 }
             }
@@ -252,7 +308,6 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                     $scope.stats.points = $scope.countPoints($scope.stats);
                     $Help.addPoints($scope.stats.points);
                 }
-                console.log($scope.stats);
                 $LevelFactory.setLevel($scope.stats);
                 setTimeout(function () {
                     $ionicPopup.alert({
@@ -262,6 +317,9 @@ angular.module('starter.controllers.PlayCtrl', ['starter.factories.LevelFactory'
                         window.history.back();
                     });
                 }, 100);
+
+                //log won
+                logWon();
             }
         }
     });

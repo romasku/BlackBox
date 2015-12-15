@@ -1,9 +1,12 @@
 angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFactory', 'starter.factories.Calculator', 'starter.factories.Keyboard'])
 
-    .controller('MultiPlayCtrl', function ($scope, $http, $ionicPopup, $state, $filter, $LevelFactory, $window, $timeout, $Calculator, $Keyboard) {
-        $scope.level = $state.params.level;
-        var log =$state.params.log;
-        var pr = 0;
+    .controller('MultiPlayCtrl', function ($scope, $rootScope, $http, $ionicPopup, $state, $filter, $LevelFactory, $window, $timeout, $Calculator, $Keyboard) {
+    
+        levelInfoArr = $rootScope.levelnum.split("-");
+        $scope.level = levelInfoArr[0];
+        $scope.chapter = levelInfoArr[1];
+
+        var log = $rootScope.log;
         $scope.log = "";
         $scope.timeWon = -1;
         $scope.opState = "Opponent_guessing";
@@ -32,43 +35,76 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
                 angular.element(document.getElementById("opponent_state")).removeClass("warning");
             }
         }
-        for (var i = 0; i<log.length; i++)
-        {
-            if (log.charAt(i)=='a')
-            {
-                var time = parseInt(log.substr(pr,i-pr));
-                $timeout($scope.changeOpState,time);
-                pr = i + 1; 
-            }
-        }
         $scope.setOpWon = function(){
             $scope.opState ="Opponent_won";
         }
-        $scope.submitReplay = function() {
+
+        //parse log
+        var logList = log.split("\n");
+
+        for (var i = 0; i < logList.length; i++)
+        {
+            logEntry = logList[i].split(" ");
+            time = parseInt(logEntry[0]);
+            if (logEntry[1] === "guesingMode") $timeout($scope.changeOpState, time);
+            if (logEntry[1] === "answeringMode") $timeout($scope.changeOpState, time);
+            if (logEntry[1] === "won") 
+            {
+                $timeout($scope.setOpWon, time);
+                $scope.timeOpWon = time;
+            }
+        }
+
+        //init log
+        $scope.log = "";
+        $scope.timeBeg = (new Date()).getTime();
+        $scope.answering = false;
+        // log functions
+        logGuesingMode = function() {
+            var time = (new Date()).getTime();
+            time = time - $scope.timeBeg;
+            $scope.log += time + " guesingMode\n";
+        }
+        logAnsweringMode = function() {
+            var time = (new Date()).getTime();
+            time = time - $scope.timeBeg;
+            $scope.log += time + " answeringMode\n";
+        }
+        logAsk = function(num, ans) {
+            var time = (new Date()).getTime();
+            time = time - $scope.timeBeg;
+            $scope.log += time + " ask " + num + " " + ans + "\n";
+        }
+        logAns = function(num, pans, cans) {
+            var time = (new Date()).getTime();
+            time = time - $scope.timeBeg;
+            $scope.log += time + " ask " + num + " " + pans + " " + cans + "\n";
+        }
+        logWon = function() {
+            var time = (new Date()).getTime();
+            time = time - $scope.timeBeg;
+            $scope.log += time + " won\n";
+            //It must be last loging command, so send to server it
             $http.get("http://blackboxservermobile.azurewebsites.net/upload_replay", {params:{
                 players_id : $window.localStorage["id"],
-                time_won : $scope.time_won,
                 log : $scope.log,
-                game_id : $scope.level 
-            }})
-            .success(function(data){
-            });
+                game_id : $rootScope.levelnum,
+                is_multiplay : "true",
+                rand : $rootScope.rand   
+            }});
         }
-        $timeout($scope.setOpWon,$state.params.time_won);
+        // end log functions
      
         $scope.input = document.getElementById("play-input");
 
         $scope.showKeyboard = function () {
-            console.log("showKeyboard");
             $Keyboard.setValue = function (value){
-                console.log(value);
                 $scope.model.input = parseInt(value);
             }
             $Keyboard.getValue = function () {
                 return $scope.model.input.toString();
             }
             $Keyboard.button = angular.element(document.getElementById("button_ask"));
-            console.log($Keyboard.button);
             $Keyboard.show($scope);
         };
 
@@ -78,11 +114,11 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
         $scope.attempts = [];
         var url = "/";
         if (window.cordova) url = cordova.file.applicationDirectory + "/www/";
-        $http.get(url + 'js/levels/2/' + $scope.level + '.js').then(
+        $http.get(url + 'js/levels/' + $scope.chapter + '/' + $scope.level + '.js').then(
             function (resp) {
                 var fn = resp.data;
                 while (1) {
-                    var fn2 = fn.replace('RAND', '' + Math.floor(Math.random() * 1e9));
+                    var fn2 = fn.replace('RAND', '' + $rootScope.rand);
                     if (fn2 == fn) break;
                     fn = fn2;
                 }
@@ -98,28 +134,6 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
 
         $scope.calc = function (val) {
             return eval($scope.fn + 'calc(' + val + ')');
-        };
-
-        $scope.countStars = function (userData) {
-            var good = $scope.levelsData[$scope.level - 1].good;
-            var exellent = $scope.levelsData[$scope.level - 1].exellent;
-            if (userData.moves <= exellent) return 3;
-            if (userData.moves <= good) return 2;
-            return 1;
-        };
-
-        $scope.countPenalty = function (num) {
-            var complexity = $scope.levelsData[$scope.level - 1].complexity;
-            return (11 - complexity) * (4 - num);
-        };
-
-        $scope.countPoints = function (userData) {
-            var ans = 0;
-            if (userData.stars == 3) ans = 100 - userData.penalty;
-            else if (userData.stars == 2) ans = 75 - userData.penalty;
-            else ans = 50 - userData.penalty;
-            if (ans < 0) ans = 0;
-            return ans;
         };
 
         var translate = $filter('translate');
@@ -149,6 +163,10 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
                 $scope.showError('Please_valid_number');
             }
             else {
+
+                //add ask to log (not best way, but saving $scope.calc(val) is ugly)
+                logAsk(val, $scope.calc(val));
+
                 $scope.attempts.unshift({question: val, answer: $scope.calc(val)});
             }
             $scope.showKeyboard();
@@ -185,7 +203,9 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
                 ]
             }).then(function (res) {
                 if (canceled) {
-                    $scope.newState();
+                    //Log return to guesing
+                    logGuesingMode();
+                    $scope.answering = false;
                 }
                 else {
                     $scope.answer(num + 1, task, $scope.data.ans);
@@ -193,13 +213,14 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
             });
             //return '';
         };
-        $scope.newState = function() {
-            var time = (new Date()).getTime();
-            time = time - $scope.timeBeg;
-            $scope.log += time;
-            $scope.log += 'a';
-        }
         $scope.answer = function (num, ptask, pans) {
+
+            //Log answering mode
+            if (!$scope.answering)
+            {
+                logAnsweringMode();
+                $scope.answering = true;
+            }
 
             $Keyboard.setValue = function(value){
                 $scope.data.ans = parseInt(value);
@@ -212,11 +233,13 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
             $timeout(function() {document.getElementById("popup-input").onfocus = function() {
                 document.getElementById("popup-input").blur();
             }}, 400);
-            if (ptask == '') $scope.newState();
             if (ptask != '') {
                 var correctAns = $scope.calc(ptask);
+
+                //add ans to log
+                logAns(ptask, pans, correctAns);
+
                 if (pans != correctAns) {
-                    $scope.newState();
                     setTimeout(function () {
                         $ionicPopup.alert({
                             title: translate('Wrong_answer'),
@@ -225,6 +248,11 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
                             setTimeout($scope.showKeyboard, 400);
                         });
                     }, 100);
+
+                    //Log return to guesing
+                    logGuesingMode();
+                    $scope.answering = false;
+                    
                     return;
                 }
             }
@@ -235,9 +263,8 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
             else {
                 var time = (new Date()).getTime();
                 $scope.time_won = (-$scope.timeBeg + time);
-                $scope.submitReplay();
                 var msg = "Lose";
-                if ($scope.time_won < $state.params.time_won) msg = "Won";
+                if ($scope.time_won < $scope.timeOpWon) msg = "Won";
                 setTimeout(function () {
                     $ionicPopup.alert({
                         title: translate('Congratulations') + '!',
@@ -246,6 +273,9 @@ angular.module('starter.controllers.MultiPlayCtrl', ['starter.factories.LevelFac
                         window.history.back();
                     });
                 }, 100);
+
+                //log won, even if player losed
+                logWon();
             }
         }
     });

@@ -42,7 +42,6 @@ angular.module('starter.factories.Keyboard', [])
             var body = document.getElementsByTagName("body");
             body = body[0];
             body = angular.element(body);
-            console.log(body);
             body.removeClass("keyboard-showing");
             var keyboard = angular.element(document.getElementById("keyboard"));
             keyboard.remove();
@@ -61,11 +60,9 @@ angular.module('starter.factories.Keyboard', [])
             }
             else if (char == 'ok') factory.submit();
             else {
-                console.log(factory.getValue());
                 if (!factory.getValue()) factory.setValue("");
                 var value = factory.getValue();
                 if (value == "NaN") value=0;
-                console.log(value);
                 value = value + '' + char;
                 factory.setValue(value);
             }
