@@ -1,0 +1,8 @@
+﻿.keyboard {
+    position: absolute;
+    bottom: 4vh;
+    width: 100%;
+    height: 31vh;
+    text-align: center;
+    border-collapse: separate;
+}

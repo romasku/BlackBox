@@ -145,6 +145,7 @@
     background: #FFFFFF;
     font-size: 4.5vh;
     font-weight: 200;
+    line-height: 7.5vh;
 }
 
 .keyboard td:last-child {

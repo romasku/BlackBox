@@ -4,7 +4,7 @@
             <ion-slide ng-repeat="l in [] | range: levelCount / levelsOnScreen">
                 <table>
                     <tr ng-repeat="i in [] | range: levelsOnScreen / levelsInLine">
-                        <td ng-repeat="t in [] | range: levelsInLine"
+                        <td style="width: 30%" ng-repeat="t in [] | range: levelsInLine"
                             ng-init="j = l * levelsOnScreen + i * levelsInLine + t">
                             <a class="button button-positive"
                                href="#/header/play/{{levels[j].level}}">
